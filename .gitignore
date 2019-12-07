@@ -1,0 +1,13 @@
+.idea
+target
+*iml
+.DS_Store
+.gradle
+build
+gradle
+gradlew
+gradlew.bat
+.classpath
+.project
+bin/
+.settings/
