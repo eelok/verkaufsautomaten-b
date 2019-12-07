@@ -4,16 +4,16 @@ import automat.apps.console.StringUtils;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
-import automat.mainlib.Verwaltung;
+import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
 import automat.mainlib.kuchen.KuchenParser;
 
 public class AddModeInputListener implements InputEventListener {
 
-    private Verwaltung verwaltung;
+    private Automat automat;
 
-    public AddModeInputListener(Verwaltung verwaltung) {
-        this.verwaltung = verwaltung;
+    public AddModeInputListener(Automat automat) {
+        this.automat = automat;
     }
 
     @Override
@@ -22,8 +22,8 @@ public class AddModeInputListener implements InputEventListener {
             System.out.println("add mode active");
             ConsoleReader consoleReader = new ConsoleReader();
             InputEventHandler eventHandler = new InputEventHandler();
-            eventHandler.add(new AddManufacturerInputListener(new StringUtils(), verwaltung));
-            eventHandler.add(new AddKuchenInputListener(new KuchenParser(), verwaltung));
+            eventHandler.add(new AddManufacturerInputListener(new StringUtils(), automat));
+            eventHandler.add(new AddKuchenInputListener(new KuchenParser(), automat));
 
             consoleReader.setHandler(eventHandler);
             consoleReader.start();

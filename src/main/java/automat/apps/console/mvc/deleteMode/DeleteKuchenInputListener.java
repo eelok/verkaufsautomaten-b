@@ -2,16 +2,16 @@ package automat.apps.console.mvc.deleteMode;
 
 import automat.mainlib.EinlagerungEntry;
 import automat.apps.console.StringUtils;
-import automat.mainlib.Verwaltung;
+import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 
 public class DeleteKuchenInputListener implements InputEventListener {
-    private Verwaltung verwaltung;
+    private Automat automat;
     private StringUtils stringUtils;
 
-    public DeleteKuchenInputListener(StringUtils stringUtils, Verwaltung verwaltung) {
-        this.verwaltung = verwaltung;
+    public DeleteKuchenInputListener(StringUtils stringUtils, Automat automat) {
+        this.automat = automat;
         this.stringUtils = stringUtils;
     }
 
@@ -19,7 +19,7 @@ public class DeleteKuchenInputListener implements InputEventListener {
     public void onInputEvent(InputEvent event) {
         if (event.getText().matches("^f.[0-9]*$")) {
             int fachNum = stringUtils.extractFachNumberFromString(event.getText());
-            EinlagerungEntry[] einlagerungList = verwaltung.getEinlagerungList();
+            EinlagerungEntry[] einlagerungList = automat.getEinlagerungList();
             if (fachNum > einlagerungList.length - 1) {
                 System.out.println(String.format("Fach %s doesn't exist", fachNum));
                 return;
@@ -28,7 +28,7 @@ public class DeleteKuchenInputListener implements InputEventListener {
                 System.out.println(String.format("Fach %s is empty", fachNum));
                 return;
             }
-            verwaltung.removeKuchenFromAutomat(einlagerungList[fachNum].getKuchen());
+            automat.removeKuchenFromAutomat(einlagerungList[fachNum].getKuchen());
         }
     }
 

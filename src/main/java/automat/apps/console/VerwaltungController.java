@@ -8,7 +8,7 @@ import automat.mainlib.kuchen.KuchenParser;
 import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
 import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
 import automat.mainlib.EinlagerungEntry;
-import automat.mainlib.Verwaltung;
+import automat.mainlib.Automat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,21 +18,21 @@ import java.util.stream.Collectors;
 
 public class VerwaltungController {
 
-    private Verwaltung verwaltung;
+    private Automat automat;
     private KuchenParser kuchenParser;
     private StringUtils stringUtils;
 
-    public VerwaltungController(Verwaltung verwaltung, KuchenParser kuchenParser, StringUtils stringUtils) {
-        this.verwaltung = verwaltung;
+    public VerwaltungController(Automat automat, KuchenParser kuchenParser, StringUtils stringUtils) {
+        this.automat = automat;
         this.kuchenParser = kuchenParser;
         this.stringUtils = stringUtils;
     }
 
     public void run() {
-        verwaltung.registerAddNewHerstellerObserver(new AddNewHerstellerObserver());
-        verwaltung.registerAddNewKuchenObserver(new AddNewKuchenObserver());
-        verwaltung.registerRemoveKuchenObserver(new RemoveKuchenObserver());
-        verwaltung.registerRemoveHarstellerObserver(new RemoveHarstellerObserver());
+        automat.registerAddNewHerstellerObserver(new AddNewHerstellerObserver());
+        automat.registerAddNewKuchenObserver(new AddNewKuchenObserver());
+        automat.registerRemoveKuchenObserver(new RemoveKuchenObserver());
+        automat.registerRemoveHarstellerObserver(new RemoveHarstellerObserver());
         mainMenu();
     }
 
@@ -101,7 +101,7 @@ public class VerwaltungController {
                 continue;
             }
             if (userInput.equalsIgnoreCase("manufacturer")) {
-                Set<Hersteller> herstellerList = verwaltung.getHerstellerList();
+                Set<Hersteller> herstellerList = automat.getHerstellerList();
                 List<String> herstellerKuchenCount = getHerstellerKuchenCount(herstellerList);
                 herstellerKuchenCount.forEach(System.out::println);
                 userInput = getUserInput(scanner);
@@ -132,7 +132,7 @@ public class VerwaltungController {
             }
             if (userInput.matches("^f.[0-9]*$")) {
                 int fachNum = stringUtils.extractFachNumberFromString(userInput);
-                EinlagerungEntry[] einlagerungList = verwaltung.getEinlagerungList();
+                EinlagerungEntry[] einlagerungList = automat.getEinlagerungList();
                 if (fachNum > einlagerungList.length - 1) {
                     System.out.println(String.format("Fach %s doesn't exist", fachNum));
                     continue;
@@ -141,10 +141,10 @@ public class VerwaltungController {
                     System.out.println(String.format("Fach %s is empty", fachNum));
                     continue;
                 }
-                verwaltung.removeKuchenFromAutomat(einlagerungList[fachNum].getKuchen());
+                automat.removeKuchenFromAutomat(einlagerungList[fachNum].getKuchen());
             } else {
                 try {
-                    verwaltung.deleteHersteller(userInput.trim());
+                    automat.deleteHersteller(userInput.trim());
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
@@ -153,9 +153,9 @@ public class VerwaltungController {
     }
 
     private List<String> getKuchenAndFach() {
-        return verwaltung.getAllEingelagertenKuchen().stream()
+        return automat.getAllEingelagertenKuchen().stream()
                 .map(kuchen -> {
-                    int fachnummerZuBestimmtenKuchen = verwaltung.getFachnummerZuBestimmtenKuchen(kuchen);
+                    int fachnummerZuBestimmtenKuchen = automat.getFachnummerZuBestimmtenKuchen(kuchen);
                     return String.format("%s : f%s", kuchen, fachnummerZuBestimmtenKuchen);
                 })
                 .collect(Collectors.toList());
@@ -165,7 +165,7 @@ public class VerwaltungController {
     private List<String> getHerstellerKuchenCount(Set<Hersteller> herstellerList) {
         return herstellerList.stream()
                 .map(hersteller -> {
-                    long anzahlKuchenZuHersteller = verwaltung.getAnzahlKuchenZuHersteller(hersteller.getName());
+                    long anzahlKuchenZuHersteller = automat.getAnzahlKuchenZuHersteller(hersteller.getName());
                     return hersteller.getName() + " : " + anzahlKuchenZuHersteller;
                 })
                 .collect(Collectors.toList());
@@ -180,7 +180,7 @@ public class VerwaltungController {
 
     private void addKuchen(String userInput) {
         try {
-            verwaltung.addKuchen(kuchenParser.getKuchenInfo(userInput), LocalDateTime.now());
+            automat.addKuchen(kuchenParser.getKuchenInfo(userInput), LocalDateTime.now());
         } catch (IllegalArgumentException e) {
             System.out.println(String.format("Can not add kuchen, reason: %s", e.getMessage()));
         }
@@ -188,6 +188,6 @@ public class VerwaltungController {
 
     private void addManufacturer(String userInput) {
         Hersteller hersteller = new HerstellerImplementation(userInput);
-        verwaltung.addHersteller(hersteller);
+        automat.addHersteller(hersteller);
     }
 }

@@ -9,7 +9,7 @@ import automat.mainlib.hersteller.observer.AddNewHerstellerObserver;
 import automat.mainlib.hersteller.observer.RemoveHarstellerObserver;
 import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
 import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
-import automat.mainlib.Verwaltung;
+import automat.mainlib.Automat;
 
 public class AppMvc {
 
@@ -22,15 +22,15 @@ public class AppMvc {
     }
 
     private static InputEventHandler initializeEventHandler() {
-        Verwaltung verwaltung = new Verwaltung(3);
-        verwaltung.registerAddNewHerstellerObserver(new AddNewHerstellerObserver());
-        verwaltung.registerAddNewKuchenObserver(new AddNewKuchenObserver());
-        verwaltung.registerRemoveHarstellerObserver(new RemoveHarstellerObserver());
-        verwaltung.registerRemoveKuchenObserver(new RemoveKuchenObserver());
+        Automat automat = new Automat(3);
+        automat.registerAddNewHerstellerObserver(new AddNewHerstellerObserver());
+        automat.registerAddNewKuchenObserver(new AddNewKuchenObserver());
+        automat.registerRemoveHarstellerObserver(new RemoveHarstellerObserver());
+        automat.registerRemoveKuchenObserver(new RemoveKuchenObserver());
         InputEventHandler eventHandler = new InputEventHandler();
-        eventHandler.add(new AddModeInputListener(verwaltung));
-        eventHandler.add(new ListModeInputListener(verwaltung));
-        eventHandler.add(new DeleteModeInputListener(verwaltung));
+        eventHandler.add(new AddModeInputListener(automat));
+        eventHandler.add(new ListModeInputListener(automat));
+        eventHandler.add(new DeleteModeInputListener(automat));
 
         return eventHandler;
     }

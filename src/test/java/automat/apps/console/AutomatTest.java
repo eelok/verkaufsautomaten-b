@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import automat.mainlib.Verwaltung;
+import automat.mainlib.Automat;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -25,9 +25,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class VerwaltungTest {
+class AutomatTest {
 
-    private Verwaltung verwaltung;
+    private Automat automat;
 
     private Hersteller romashka;
     private Hersteller herstellerMandarin;
@@ -40,7 +40,7 @@ class VerwaltungTest {
 
     @BeforeEach
     void setUp() {
-        verwaltung = new Verwaltung(4);
+        automat = new Automat(4);
 
         romashka = new HerstellerImplementation("romashka");
         herstellerMandarin = new HerstellerImplementation("herstellerMandarin");
@@ -50,20 +50,20 @@ class VerwaltungTest {
     void should_add_hersteller() {
         Hersteller newHersteller = mock(Hersteller.class);
 
-        verwaltung.addHersteller(newHersteller);
+        automat.addHersteller(newHersteller);
 
-        assertThat(verwaltung.getHerstellerList()).hasSize(1);
+        assertThat(automat.getHerstellerList()).hasSize(1);
     }
 
 
     @Test
     void should_delete_the_hersteller() {
-        verwaltung.addHersteller(romashka);
-        verwaltung.addHersteller(herstellerMandarin);
+        automat.addHersteller(romashka);
+        automat.addHersteller(herstellerMandarin);
 
-        verwaltung.deleteHersteller("romashka");
+        automat.deleteHersteller("romashka");
 
-        assertThat(verwaltung.getHerstellerList()).hasSize(1);
+        assertThat(automat.getHerstellerList()).hasSize(1);
     }
 
 
@@ -73,9 +73,9 @@ class VerwaltungTest {
         Kuchen kuchen = mock(Kuchen.class);
         when(kuchen.getHersteller()).thenReturn(romashka);
 
-        verwaltung.addKuchen(kuchen, LocalDateTime.now());
+        automat.addKuchen(kuchen, LocalDateTime.now());
 
-        assertThat(verwaltung.getEinlagerungList()[0].getKuchen()).isEqualTo(kuchen);
+        assertThat(automat.getEinlagerungList()[0].getKuchen()).isEqualTo(kuchen);
     }
 
     @Test
@@ -84,7 +84,7 @@ class VerwaltungTest {
         Kuchen kuchen = mock(Kuchen.class);
         when(kuchen.getHersteller()).thenReturn(romashka);
 
-        assertThat(verwaltung.addKuchen(kuchen, LocalDateTime.now()).getFachnummer()).isEqualTo(0);
+        assertThat(automat.addKuchen(kuchen, LocalDateTime.now()).getFachnummer()).isEqualTo(0);
     }
 
     @Test
@@ -95,21 +95,21 @@ class VerwaltungTest {
 
         LocalDateTime date = LocalDateTime.now();
 
-        assertThat(verwaltung.addKuchen(kuchen, date).getEinlagerungsDatum()).isEqualTo(date);
+        assertThat(automat.addKuchen(kuchen, date).getEinlagerungsDatum()).isEqualTo(date);
     }
 
     @Test
     void should_add_kuchen_when_only_one_place_left(){
-        verwaltung = new Verwaltung(2);
+        automat = new Automat(2);
         addHerstellers();
 
         when(kuchen.getHersteller()).thenReturn(romashka);
         when(kremKuchen.getHersteller()).thenReturn(herstellerMandarin);
 
-        verwaltung.addKuchen(kuchen, LocalDateTime.now());
-        verwaltung.addKuchen(kremKuchen, LocalDateTime.now());
+        automat.addKuchen(kuchen, LocalDateTime.now());
+        automat.addKuchen(kremKuchen, LocalDateTime.now());
 
-        assertThat(verwaltung.getAllEingelagertenKuchen()).isEqualTo(
+        assertThat(automat.getAllEingelagertenKuchen()).isEqualTo(
                 Arrays.asList(kuchen, kremKuchen)
         );
     }
@@ -122,7 +122,7 @@ class VerwaltungTest {
         Kuchen kremKuchen = mock(Kremkuchen.class);
         when(kremKuchen.getHersteller()).thenReturn(new HerstellerImplementation("apple"));
 
-        assertThatThrownBy(() -> verwaltung.addKuchen(kremKuchen, LocalDateTime.now()))
+        assertThatThrownBy(() -> automat.addKuchen(kremKuchen, LocalDateTime.now()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(String.format(
                         "No such manufacturer %s. Please add manufacturer %s.",
@@ -140,20 +140,20 @@ class VerwaltungTest {
         when(kremKuchen1.getHersteller()).thenReturn(herstellerMandarin);
         when(obstKuchen.getHersteller()).thenReturn(romashka);
 
-        verwaltung.addKuchen(kuchen, LocalDateTime.now());
-        verwaltung.addKuchen(kremKuchen, LocalDateTime.now());
-        verwaltung.addKuchen(kremKuchen1, LocalDateTime.now());
-        verwaltung.addKuchen(obstKuchen, LocalDateTime.now());
+        automat.addKuchen(kuchen, LocalDateTime.now());
+        automat.addKuchen(kremKuchen, LocalDateTime.now());
+        automat.addKuchen(kremKuchen1, LocalDateTime.now());
+        automat.addKuchen(obstKuchen, LocalDateTime.now());
 
-        verwaltung.removeKuchenFromAutomat(kremKuchen);
-        verwaltung.removeKuchenFromAutomat(obstKuchen);
+        automat.removeKuchenFromAutomat(kremKuchen);
+        automat.removeKuchenFromAutomat(obstKuchen);
 
         Kuchen newKucnen = mock(Kuchen.class);
         when(newKucnen.getHersteller()).thenReturn(romashka);
 
-        verwaltung.addKuchen(newKucnen, LocalDateTime.now());
+        automat.addKuchen(newKucnen, LocalDateTime.now());
 
-        assertThat(verwaltung.getAllEingelagertenKuchen()).isEqualTo(Arrays.asList(kuchen, newKucnen, kremKuchen1));
+        assertThat(automat.getAllEingelagertenKuchen()).isEqualTo(Arrays.asList(kuchen, newKucnen, kremKuchen1));
     }
 
 
@@ -161,11 +161,11 @@ class VerwaltungTest {
     @Test
     void addKuchen_should_throw_exception_when_no_place_left() {
 
-        verwaltung = new Verwaltung(0);
+        automat = new Automat(0);
         addHerstellers();
         when(kremKuchen.getHersteller()).thenReturn(herstellerMandarin);
 
-        assertThatThrownBy(() -> verwaltung.addKuchen(kremKuchen, LocalDateTime.now()))
+        assertThatThrownBy(() -> automat.addKuchen(kremKuchen, LocalDateTime.now()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Der Automat ist voll");
     }
@@ -173,16 +173,16 @@ class VerwaltungTest {
 
     @Test
     void should_return_all_kuchen_in_automat(){
-        verwaltung = new Verwaltung(2);
+        automat = new Automat(2);
         addHerstellers();
 
         when(kuchen.getHersteller()).thenReturn(romashka);
         when(kremKuchen.getHersteller()).thenReturn(herstellerMandarin);
 
-        verwaltung.addKuchen(kuchen, LocalDateTime.now());
-        verwaltung.addKuchen(kremKuchen, LocalDateTime.now());
+        automat.addKuchen(kuchen, LocalDateTime.now());
+        automat.addKuchen(kremKuchen, LocalDateTime.now());
 
-        assertThat(verwaltung.getAllEingelagertenKuchen()).isEqualTo(Arrays.asList(
+        assertThat(automat.getAllEingelagertenKuchen()).isEqualTo(Arrays.asList(
             kuchen, kremKuchen
         ));
     }
@@ -190,18 +190,18 @@ class VerwaltungTest {
 
     @Test
     void should_get_list_with_kuchen_of_certain_type() {
-        verwaltung = new Verwaltung(3);
+        automat = new Automat(3);
         addHerstellers();
 
         when(kuchen.getHersteller()).thenReturn(romashka);
         when(kremKuchen.getHersteller()).thenReturn(herstellerMandarin);
         when(kremKuchen.getHersteller()).thenReturn(herstellerMandarin);
 
-        verwaltung.addKuchen(kuchen, LocalDateTime.now());
-        verwaltung.addKuchen(kremKuchen, LocalDateTime.now());
-        verwaltung.addKuchen(kremKuchen, LocalDateTime.now());
+        automat.addKuchen(kuchen, LocalDateTime.now());
+        automat.addKuchen(kremKuchen, LocalDateTime.now());
+        automat.addKuchen(kremKuchen, LocalDateTime.now());
 
-        assertThat(verwaltung.getKuchenOfType(Kremkuchen.class)).isEqualTo(Arrays.asList(kremKuchen, kremKuchen));
+        assertThat(automat.getKuchenOfType(Kremkuchen.class)).isEqualTo(Arrays.asList(kremKuchen, kremKuchen));
     }
 
     @Test
@@ -209,25 +209,25 @@ class VerwaltungTest {
         Hersteller romashka = new HerstellerImplementation("romashka");
         Hersteller mandarin = new HerstellerImplementation("herstellerMandarin");
 
-        verwaltung.addHersteller(romashka);
-        verwaltung.addHersteller(mandarin);
+        automat.addHersteller(romashka);
+        automat.addHersteller(mandarin);
 
         List<Kuchen> kuchens = Arrays.asList(kuchen, kremKuchen, kremKuchen1);
         kuchens.forEach(k -> when(k.getHersteller()).thenReturn(romashka));
-        kuchens.forEach(k -> verwaltung.addKuchen(k, LocalDateTime.now()));
+        kuchens.forEach(k -> automat.addKuchen(k, LocalDateTime.now()));
 
         when(obstKuchen.getHersteller()).thenReturn(mandarin);
 
-        assertThat(verwaltung.getAnzahlKuchenZuHersteller("romashka")).isEqualTo(3);
+        assertThat(automat.getAnzahlKuchenZuHersteller("romashka")).isEqualTo(3);
     }
 
     @Test
     void should_return_fachnum() {
         when(obstKuchen.getHersteller()).thenReturn(herstellerMandarin);
-        verwaltung.addHersteller(herstellerMandarin);
-        verwaltung.addKuchen(obstKuchen, LocalDateTime.now());
+        automat.addHersteller(herstellerMandarin);
+        automat.addKuchen(obstKuchen, LocalDateTime.now());
 
-        assertThat(verwaltung.getFachnummerZuBestimmtenKuchen(obstKuchen)).isEqualTo(0);
+        assertThat(automat.getFachnummerZuBestimmtenKuchen(obstKuchen)).isEqualTo(0);
     }
 
 
@@ -240,9 +240,9 @@ class VerwaltungTest {
         when(obstKuchen.getHaltbarkeit()).thenReturn(Duration.ofDays(4L));
         LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0, 0));
 
-        verwaltung.addKuchen(obstKuchen, now.minusDays(2L));
+        automat.addKuchen(obstKuchen, now.minusDays(2L));
 
-        assertThat(verwaltung.getRestHaltbarkeitZuBestimmtenKuchen(obstKuchen, now))
+        assertThat(automat.getRestHaltbarkeitZuBestimmtenKuchen(obstKuchen, now))
                 .isEqualTo(Duration.ofDays(2));
     }
 
@@ -253,12 +253,12 @@ class VerwaltungTest {
         when(kuchen.getHersteller()).thenReturn(romashka);
         when(kremKuchen.getHersteller()).thenReturn(romashka);
 
-        verwaltung.addKuchen(kuchen, LocalDateTime.now());
-        verwaltung.addKuchen(kremKuchen, LocalDateTime.now());
+        automat.addKuchen(kuchen, LocalDateTime.now());
+        automat.addKuchen(kremKuchen, LocalDateTime.now());
 
-        verwaltung.removeKuchenFromAutomat(kremKuchen);
+        automat.removeKuchenFromAutomat(kremKuchen);
 
-        assertThat(verwaltung.getAllEingelagertenKuchen()).isEqualTo(Arrays.asList(kuchen));
+        assertThat(automat.getAllEingelagertenKuchen()).isEqualTo(Arrays.asList(kuchen));
     }
 
 
@@ -278,7 +278,7 @@ class VerwaltungTest {
         when(kremKuchen1.getAllergenes()).thenReturn(Arrays.asList(Allergen.Gluten));
         when(obstKuchen.getAllergenes()).thenReturn(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
 
-        assertThat(verwaltung.getAllergenenInAutomat()).isEqualTo(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
+        assertThat(automat.getAllergenenInAutomat()).isEqualTo(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
     }
 
     @Test
@@ -296,16 +296,16 @@ class VerwaltungTest {
         when(kremKuchen1.getAllergenes()).thenReturn(Arrays.asList(Allergen.Gluten));
         when(obstKuchen.getAllergenes()).thenReturn(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
 
-        assertThat(verwaltung.getAllergenenNotInAutomat()).isEqualTo(Arrays.asList(Allergen.Erdnuss, Allergen.Sesamsamen));
+        assertThat(automat.getAllergenenNotInAutomat()).isEqualTo(Arrays.asList(Allergen.Erdnuss, Allergen.Sesamsamen));
     }
 
     private void addHerstellers() {
-        verwaltung.addHersteller(romashka);
-        verwaltung.addHersteller(herstellerMandarin);
+        automat.addHersteller(romashka);
+        automat.addHersteller(herstellerMandarin);
     }
 
     private void addKuchenToVerwaltung(List<Kuchen> kuchenList) {
-        kuchenList.forEach(kuchen -> verwaltung.addKuchen(kuchen, LocalDateTime.now()));
+        kuchenList.forEach(kuchen -> automat.addKuchen(kuchen, LocalDateTime.now()));
     }
 
 }

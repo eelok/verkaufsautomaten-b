@@ -1,7 +1,7 @@
 package automat.mvc.addMode;
 
 import automat.apps.console.mvc.addMode.AddKuchenInputListener;
-import automat.mainlib.Verwaltung;
+import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
 import automat.mainlib.kuchen.Kuchen;
 import automat.mainlib.kuchen.KuchenParser;
@@ -17,9 +17,9 @@ class AddKuchenInputListenerTest {
 
     @Test
     void should_call_addKuchen(){
-        Verwaltung verwaltung = mock(Verwaltung.class);
+        Automat automat = mock(Automat.class);
         KuchenParser kuchenParser = mock(KuchenParser.class);
-        AddKuchenInputListener addKuchenInputListener = new AddKuchenInputListener(kuchenParser, verwaltung);
+        AddKuchenInputListener addKuchenInputListener = new AddKuchenInputListener(kuchenParser, automat);
         InputEvent inputEvent = mock(InputEvent.class);
         Kuchen kuchen = mock(Kuchen.class);
         when(kuchenParser.getKuchenInfo("text")).thenReturn(kuchen);
@@ -27,7 +27,7 @@ class AddKuchenInputListenerTest {
 
         addKuchenInputListener.onInputEvent(inputEvent);
 
-        verify(verwaltung).addKuchen(eq(kuchen), any(LocalDateTime.class));
+        verify(automat).addKuchen(eq(kuchen), any(LocalDateTime.class));
     }
 
 }
