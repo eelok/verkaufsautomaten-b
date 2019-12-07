@@ -2,16 +2,16 @@ package automat.apps.console.mvc.listMode;
 
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
-import automat.mainlib.Verwaltung;
+import automat.mainlib.Automat;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListKuchenInputListener implements InputEventListener {
-    private Verwaltung verwaltung;
+    private Automat automat;
 
-    public ListKuchenInputListener(Verwaltung verwaltung) {
-        this.verwaltung = verwaltung;
+    public ListKuchenInputListener(Automat automat) {
+        this.automat = automat;
     }
 
     @Override
@@ -26,9 +26,9 @@ public class ListKuchenInputListener implements InputEventListener {
     }
 
     private List<String> getKuchenAndFach() {
-        return verwaltung.getAllEingelagertenKuchen().stream()
+        return automat.getAllEingelagertenKuchen().stream()
                 .map(kuchen -> {
-                    int fachnummerZuBestimmtenKuchen = verwaltung.getFachnummerZuBestimmtenKuchen(kuchen);
+                    int fachnummerZuBestimmtenKuchen = automat.getFachnummerZuBestimmtenKuchen(kuchen);
                     return String.format("%s : f%s", kuchen, fachnummerZuBestimmtenKuchen);
                 })
                 .collect(Collectors.toList());

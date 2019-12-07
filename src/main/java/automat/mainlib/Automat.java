@@ -16,13 +16,31 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Verwaltung extends Observable {
+public class Automat extends Observable {
 
     private EinlagerungEntry[] storage;
     private HashSet<Hersteller> allHersteller = new HashSet<>();
+    private String automatName;
 
-    public Verwaltung(int platzImAutomat) {
+    public Automat(int platzImAutomat) {
         storage = new EinlagerungEntry[platzImAutomat];
+    }
+
+    public void setName(String automatName) {
+        this.automatName = automatName;
+    }
+
+    public String getName() {
+        return this.automatName;
+    }
+
+    public boolean isFull() {
+        for (EinlagerungEntry entry : storage) {
+            if (entry == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Set<Hersteller> getHerstellerList() {
@@ -122,6 +140,14 @@ public class Verwaltung extends Observable {
                 .collect(Collectors.toList());
     }
 
+    public Kuchen findKuchenWithSmallestHaltbarkeit() {
+        List<Kuchen> allEingelagertenKuchen = getAllEingelagertenKuchen();
+
+        return allEingelagertenKuchen.stream()
+                .min(Comparator.comparing(kuchen -> kuchen.getHaltbarkeit()))
+                .orElse(null);
+    }
+
     public EinlagerungEntry[] getEinlagerungList() {
         return storage;
     }
@@ -164,4 +190,5 @@ public class Verwaltung extends Observable {
 
         return einlagerungEntry.getKuchen().equals(kuchen);
     }
+
 }

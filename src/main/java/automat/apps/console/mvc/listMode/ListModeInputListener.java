@@ -4,14 +4,14 @@ import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
-import automat.mainlib.Verwaltung;
+import automat.mainlib.Automat;
 
 public class ListModeInputListener implements InputEventListener {
 
-    private Verwaltung verwaltung;
+    private Automat automat;
 
-    public ListModeInputListener(Verwaltung verwaltung) {
-        this.verwaltung = verwaltung;
+    public ListModeInputListener(Automat automat) {
+        this.automat = automat;
     }
 
     @Override
@@ -20,8 +20,8 @@ public class ListModeInputListener implements InputEventListener {
             System.out.println("list mode active");
             ConsoleReader consoleReader = new ConsoleReader();
             InputEventHandler eventHandler = new InputEventHandler();
-            eventHandler.add(new ListManufacturerInputListener(verwaltung));
-            eventHandler.add(new ListKuchenInputListener(verwaltung));
+            eventHandler.add(new ListManufacturerInputListener(automat));
+            eventHandler.add(new ListKuchenInputListener(automat));
 
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
