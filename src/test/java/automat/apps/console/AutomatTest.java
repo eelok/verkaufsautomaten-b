@@ -66,6 +66,7 @@ class AutomatTest {
         assertThat(automat.getHerstellerList()).hasSize(1);
     }
 
+    //TODO: make it work
 
 //    @Test
 //    void should_add_kuchen() {
@@ -131,6 +132,7 @@ class AutomatTest {
                 );
     }
 
+    //TODO: make it work
 //    @Test
 //    void should_add_kuchen_after_a_kuchen_was_deleted(){
 //        addHerstellers();
@@ -246,6 +248,7 @@ class AutomatTest {
                 .isEqualTo(Duration.ofDays(2));
     }
 
+    //TODO: make it work
 //    @Test
 //    void should_remove_kuchen() {
 //        addHerstellers();
