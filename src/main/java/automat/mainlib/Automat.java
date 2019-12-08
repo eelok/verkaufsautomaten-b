@@ -6,24 +6,35 @@ import automat.mainlib.hersteller.observer.AddNewHerstellerMessage;
 import automat.mainlib.hersteller.observer.RemoveHerstellerMessage;
 import automat.mainlib.kuchen.Allergen;
 import automat.mainlib.kuchen.Kuchen;
-import automat.mainlib.kuchen.observer.AddNewKuchenMessage;
-import automat.mainlib.kuchen.observer.RemoveKuchenMessage;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Automat extends Observable {
 
-    private EinlagerungEntry[] storage;
-    private HashSet<Hersteller> allHersteller = new HashSet<>();
+    private final int platzImAutomat;
+
+    private List<EinlagerungEntry> storage;
+    private List<Hersteller> allHersteller;
     private String automatName;
 
+    public Automat(int platzImAutomat, List<EinlagerungEntry> storage, List<Hersteller> herstellersList) {
+        this.platzImAutomat = platzImAutomat;
+        this.storage = storage;
+        this.allHersteller = herstellersList;
+    }
+
     public Automat(int platzImAutomat) {
-        storage = new EinlagerungEntry[platzImAutomat];
+        this.platzImAutomat = platzImAutomat;
+        this.storage = new ArrayList<>();
+        this.allHersteller = new ArrayList<>();
     }
 
     public void setName(String automatName) {
@@ -43,7 +54,7 @@ public class Automat extends Observable {
         return true;
     }
 
-    public Set<Hersteller> getHerstellerList() {
+    public List<Hersteller> getHerstellerList() {
         return allHersteller;
     }
 
@@ -70,24 +81,21 @@ public class Automat extends Observable {
         if (!herstellerExists(newKuchen.getHersteller().getName())) {
             throw new IllegalArgumentException(
                     String.format(
-                            "No such manufacturer %s. Please add manufacturer %s.",
+                            "No such manufacturer: %s. Please add manufacturer: %s.",
                             newKuchen.getHersteller().getName(), newKuchen.getHersteller().getName()
                     )
             );
         }
         int cell = findEmptyCell();
         EinlagerungEntry einlagerungEntry = new EinlagerungEntry(date, newKuchen, cell);
-        storage[cell] = einlagerungEntry;
-        int storageCapacity = getEinlagerungList().length;
-        int numberOfKuchenInStorage = getAllEingelagertenKuchen().size();
-        notifyAddNewKuchenObservers(new AddNewKuchenMessage(einlagerungEntry, storageCapacity, numberOfKuchenInStorage));
+        storage.add(einlagerungEntry);
 
-        return storage[cell];
+        return einlagerungEntry;
     }
 
 
     public List<Kuchen> getAllEingelagertenKuchen() {
-        return Arrays.stream(storage)
+        return storage.stream()
                 .filter(einlagerungEntry -> einlagerungEntry != null)
                 .map(einlagerungEntry -> einlagerungEntry.getKuchen())
                 .collect(Collectors.toList());
@@ -106,23 +114,22 @@ public class Automat extends Observable {
     }
 
     public int getFachnummerZuBestimmtenKuchen(Kuchen theKuchen) {
-        return storage[findIndexOfEinlagerungsEntry(theKuchen)].getFachnummer();
+        return storage.get(findIndexOfEinlagerungsEntry(theKuchen)).getFachnummer();
     }
 
     public Duration getRestHaltbarkeitZuBestimmtenKuchen(Kuchen theKuchen, LocalDateTime now) {
         int indexOfEinlagerungsEntry = findIndexOfEinlagerungsEntry(theKuchen);
-
-        LocalDateTime datumVonEinlagerung = storage[indexOfEinlagerungsEntry].getEinlagerungsDatum();
+        LocalDateTime datumVonEinlagerung = storage.get(indexOfEinlagerungsEntry).getEinlagerungsDatum();
         LocalDateTime deadLine = datumVonEinlagerung.plus(theKuchen.getHaltbarkeit());
 
         return Duration.ofDays(ChronoUnit.DAYS.between(now, deadLine));
     }
 
 
-    public void removeKuchenFromAutomat(Kuchen kuchen) {
-        int indexOfEinlagerungsEntry = findIndexOfEinlagerungsEntry(kuchen);
-        storage[indexOfEinlagerungsEntry] = null;
-        notifyRemoveKuchenObservers(new RemoveKuchenMessage(kuchen));
+    public void removeKuchenFromAutomat(int fachNummer) {
+        int indexOfEinlagerungsEntry = findIndex(fachNummer);
+
+        storage.remove(indexOfEinlagerungsEntry);
     }
 
     public List<Allergen> getAllergenenInAutomat() {
@@ -140,15 +147,19 @@ public class Automat extends Observable {
                 .collect(Collectors.toList());
     }
 
-    public Kuchen findKuchenWithSmallestHaltbarkeit() {
-        List<Kuchen> allEingelagertenKuchen = getAllEingelagertenKuchen();
-
-        return allEingelagertenKuchen.stream()
-                .min(Comparator.comparing(kuchen -> kuchen.getHaltbarkeit()))
+    public EinlagerungEntry findKuchenWithSmallestHaltbarkeit() {
+        return storage.stream()
+                .min(Comparator.comparing(einlagerungEntry -> einlagerungEntry.getKuchen().getHaltbarkeit()))
                 .orElse(null);
     }
 
-    public EinlagerungEntry[] getEinlagerungList() {
+    public int findKuchenFachnummerWithSmallestHaltbarkeit() {
+        EinlagerungEntry kuchenWithSmallestHaltbarkeit = findKuchenWithSmallestHaltbarkeit();
+
+        return kuchenWithSmallestHaltbarkeit.getFachnummer();
+    }
+
+    public List<EinlagerungEntry> getEinlagerungList() {
         return storage;
     }
 
@@ -164,8 +175,9 @@ public class Automat extends Observable {
     }
 
     private int findEmptyCell() {
-        for (int i = 0; i < storage.length; i++) {
-            if (storage[i] == null) {
+        for (int i = 0; i < platzImAutomat; i++) {
+            int finalI = i;
+            if (storage.stream().noneMatch(einlagerungEntry -> einlagerungEntry.getFachnummer() == finalI)) {
                 return i;
             }
         }
@@ -173,9 +185,19 @@ public class Automat extends Observable {
         throw new IllegalArgumentException("Der Automat ist voll");
     }
 
+    private int findIndex(int fachNummer) {
+        for (int i = 0; i < storage.size(); i++) {
+            if (storage.get(i).getFachnummer() == fachNummer) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     private int findIndexOfEinlagerungsEntry(Kuchen kuchen) {
-        for (int i = 0; i < storage.length; i++) {
-            if (containsKuchen(kuchen, storage[i])) {
+        for (int i = 0; i < storage.size(); i++) {
+            if (containsKuchen(kuchen, storage.get(i))) {
                 return i;
             }
         }

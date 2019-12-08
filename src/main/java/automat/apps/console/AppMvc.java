@@ -11,6 +11,8 @@ import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
 import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
 import automat.mainlib.Automat;
 
+import java.util.ArrayList;
+
 public class AppMvc {
 
     public static void main(String[] args) {
@@ -22,7 +24,7 @@ public class AppMvc {
     }
 
     private static InputEventHandler initializeEventHandler() {
-        Automat automat = new Automat(3);
+        Automat automat = new Automat(3, new ArrayList<>(), new ArrayList<>());
         automat.registerAddNewHerstellerObserver(new AddNewHerstellerObserver());
         automat.registerAddNewKuchenObserver(new AddNewKuchenObserver());
         automat.registerRemoveHarstellerObserver(new RemoveHarstellerObserver());

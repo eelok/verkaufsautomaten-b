@@ -3,6 +3,7 @@ package automat.apps.simulation;
 
 
 import automat.mainlib.Automat;
+import automat.mainlib.EinlagerungEntry;
 import automat.mainlib.kuchen.Kuchen;
 
 import java.time.LocalDateTime;
@@ -42,8 +43,10 @@ public class StorageImpl implements Storage {
     }
 
     private void umlagernKuchen() {
-        Kuchen kuchenWithSmallestHaltbarkeit = freshKuchenAutomat.findKuchenWithSmallestHaltbarkeit();
-        freshKuchenAutomat.removeKuchenFromAutomat(kuchenWithSmallestHaltbarkeit);
+        //TODO optimize
+        Kuchen kuchenWithSmallestHaltbarkeit = freshKuchenAutomat.findKuchenWithSmallestHaltbarkeit().getKuchen();
+        int fachnummer = freshKuchenAutomat.findKuchenFachnummerWithSmallestHaltbarkeit();
+        freshKuchenAutomat.removeKuchenFromAutomat(fachnummer);
 
         System.out.println(String.format("%s {haltbarkeit in days: %s} form %s wird in anderer Automat umgelagert",
                 kuchenWithSmallestHaltbarkeit,

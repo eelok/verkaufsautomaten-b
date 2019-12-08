@@ -1,5 +1,6 @@
 package automat.apps.console;
 
+import automat.mainlib.Automat;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.hersteller.observer.AddNewHerstellerObserver;
@@ -7,13 +8,10 @@ import automat.mainlib.hersteller.observer.RemoveHarstellerObserver;
 import automat.mainlib.kuchen.KuchenParser;
 import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
 import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
-import automat.mainlib.EinlagerungEntry;
-import automat.mainlib.Automat;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class VerwaltungController {
@@ -101,7 +99,7 @@ public class VerwaltungController {
                 continue;
             }
             if (userInput.equalsIgnoreCase("manufacturer")) {
-                Set<Hersteller> herstellerList = automat.getHerstellerList();
+                List<Hersteller> herstellerList = automat.getHerstellerList();
                 List<String> herstellerKuchenCount = getHerstellerKuchenCount(herstellerList);
                 herstellerKuchenCount.forEach(System.out::println);
                 userInput = getUserInput(scanner);
@@ -132,16 +130,8 @@ public class VerwaltungController {
             }
             if (userInput.matches("^f.[0-9]*$")) {
                 int fachNum = stringUtils.extractFachNumberFromString(userInput);
-                EinlagerungEntry[] einlagerungList = automat.getEinlagerungList();
-                if (fachNum > einlagerungList.length - 1) {
-                    System.out.println(String.format("Fach %s doesn't exist", fachNum));
-                    continue;
-                }
-                if (einlagerungList[fachNum] == null) {
-                    System.out.println(String.format("Fach %s is empty", fachNum));
-                    continue;
-                }
-                automat.removeKuchenFromAutomat(einlagerungList[fachNum].getKuchen());
+                //TODO: Test
+                automat.removeKuchenFromAutomat(fachNum);
             } else {
                 try {
                     automat.deleteHersteller(userInput.trim());
@@ -162,7 +152,7 @@ public class VerwaltungController {
     }
 
 
-    private List<String> getHerstellerKuchenCount(Set<Hersteller> herstellerList) {
+    private List<String> getHerstellerKuchenCount(List<Hersteller> herstellerList) {
         return herstellerList.stream()
                 .map(hersteller -> {
                     long anzahlKuchenZuHersteller = automat.getAnzahlKuchenZuHersteller(hersteller.getName());

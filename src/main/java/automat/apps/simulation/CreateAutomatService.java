@@ -5,10 +5,12 @@ import automat.mainlib.Automat;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
 
+import java.util.ArrayList;
+
 public class CreateAutomatService {
 
     public Automat createAutomat(int place) {
-        Automat automat = new Automat(place);
+        Automat automat = new Automat(place, new ArrayList<>(), new ArrayList<>());
         addManufacturer(automat);
 
         return automat;
