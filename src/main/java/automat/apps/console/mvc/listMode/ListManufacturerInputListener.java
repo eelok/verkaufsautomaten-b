@@ -19,13 +19,13 @@ public class ListManufacturerInputListener implements InputEventListener {
     @Override
     public void onInputEvent(InputEvent event) {
         if (event.getText().equals("manufacturer")) {
-            Set<Hersteller> herstellerList = automat.getHerstellerList();
+            List<Hersteller> herstellerList = automat.getHerstellerList();
             List<String> herstellerKuchenCount = getHerstellerKuchenCount(herstellerList);
             herstellerKuchenCount.forEach(System.out::println);
         }
     }
 
-    private List<String> getHerstellerKuchenCount(Set<Hersteller> herstellerList) {
+    private List<String> getHerstellerKuchenCount(List<Hersteller> herstellerList) {
         return herstellerList.stream()
                 .map(hersteller -> {
                     long anzahlKuchenZuHersteller = automat.getAnzahlKuchenZuHersteller(hersteller.getName());

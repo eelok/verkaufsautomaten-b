@@ -6,6 +6,8 @@ import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 
+import java.util.List;
+
 public class DeleteKuchenInputListener implements InputEventListener {
     private Automat automat;
     private StringUtils stringUtils;
@@ -17,19 +19,20 @@ public class DeleteKuchenInputListener implements InputEventListener {
 
     @Override
     public void onInputEvent(InputEvent event) {
-        if (event.getText().matches("^f.[0-9]*$")) {
-            int fachNum = stringUtils.extractFachNumberFromString(event.getText());
-            EinlagerungEntry[] einlagerungList = automat.getEinlagerungList();
-            if (fachNum > einlagerungList.length - 1) {
-                System.out.println(String.format("Fach %s doesn't exist", fachNum));
-                return;
-            }
-            if (einlagerungList[fachNum] == null) {
-                System.out.println(String.format("Fach %s is empty", fachNum));
-                return;
-            }
-            automat.removeKuchenFromAutomat(einlagerungList[fachNum].getKuchen());
-        }
+        //TODO: optimize
+//        if (event.getText().matches("^f.[0-9]*$")) {
+//            int fachNum = stringUtils.extractFachNumberFromString(event.getText());
+//            List<EinlagerungEntry> einlagerungList = automat.getEinlagerungList();
+//            if (fachNum > einlagerungList.size() - 1) {
+//                System.out.println(String.format("Fach %s doesn't exist", fachNum));
+//                return;
+//            }
+//            if (einlagerungList[fachNum] == null) {
+//                System.out.println(String.format("Fach %s is empty", fachNum));
+//                return;
+//            }
+//            automat.removeKuchenFromAutomat(einlagerungList[fachNum].getKuchen());
+//        }
     }
 
 }
