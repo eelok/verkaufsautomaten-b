@@ -2,11 +2,13 @@ package automat.mainlib.kuchen;
 
 import automat.mainlib.hersteller.Hersteller;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
+import java.util.Objects;
 
-public class KremkuchenImplementation implements Kremkuchen {
+public class KremkuchenImplementation implements Kremkuchen, Serializable {
 
     private BigDecimal price;
     private Hersteller hersteller;
@@ -65,5 +67,23 @@ public class KremkuchenImplementation implements Kremkuchen {
     @Override
     public String toString() {
         return "Kremkuchen";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        KremkuchenImplementation that = (KremkuchenImplementation) o;
+        return naehrwert == that.naehrwert &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(hersteller, that.hersteller) &&
+                Objects.equals(allergens, that.allergens) &&
+                Objects.equals(haltbarkeit, that.haltbarkeit) &&
+                Objects.equals(kremsorte, that.kremsorte);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(price, hersteller, allergens, naehrwert, haltbarkeit, kremsorte);
     }
 }

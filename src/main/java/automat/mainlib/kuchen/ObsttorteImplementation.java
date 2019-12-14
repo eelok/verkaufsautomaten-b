@@ -2,11 +2,13 @@ package automat.mainlib.kuchen;
 
 import automat.mainlib.hersteller.Hersteller;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
+import java.util.Objects;
 
-public class ObsttorteImplementation implements Obsttorte {
+public class ObsttorteImplementation implements Obsttorte, Serializable {
 
     private BigDecimal price;
     private Hersteller hersteller;
@@ -72,5 +74,24 @@ public class ObsttorteImplementation implements Obsttorte {
 
     public String toString(){
         return "Obsttorte";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ObsttorteImplementation that = (ObsttorteImplementation) o;
+        return naehrwert == that.naehrwert &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(hersteller, that.hersteller) &&
+                Objects.equals(allergens, that.allergens) &&
+                Objects.equals(haltbarkeit, that.haltbarkeit) &&
+                Objects.equals(obstsorte, that.obstsorte) &&
+                Objects.equals(kremsorte, that.kremsorte);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(price, hersteller, allergens, naehrwert, haltbarkeit, obstsorte, kremsorte);
     }
 }

@@ -8,6 +8,10 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.graphics', 'javafx.fxml' ]
 }
 
+test {
+    useJUnitPlatform()
+}
+
 group 'verkaufautomaten'
 version '1.0-SNAPSHOT'
 
