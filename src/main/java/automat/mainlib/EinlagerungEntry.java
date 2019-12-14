@@ -2,9 +2,11 @@ package automat.mainlib;
 
 import automat.mainlib.kuchen.Kuchen;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-public class EinlagerungEntry {
+public class EinlagerungEntry implements Serializable {
 
     private LocalDateTime einlagerungsDatum;
     private Kuchen kuchen;
@@ -26,5 +28,20 @@ public class EinlagerungEntry {
 
     public int getFachnummer() {
         return this.fachnummer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EinlagerungEntry that = (EinlagerungEntry) o;
+        return fachnummer == that.fachnummer &&
+                Objects.equals(einlagerungsDatum, that.einlagerungsDatum) &&
+                Objects.equals(kuchen, that.kuchen);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(einlagerungsDatum, kuchen, fachnummer);
     }
 }

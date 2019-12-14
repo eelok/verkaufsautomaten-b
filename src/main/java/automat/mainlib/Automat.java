@@ -7,17 +7,15 @@ import automat.mainlib.hersteller.observer.RemoveHerstellerMessage;
 import automat.mainlib.kuchen.Allergen;
 import automat.mainlib.kuchen.Kuchen;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Automat extends Observable {
+public class Automat extends Observable implements Serializable {
 
     private final int platzImAutomat;
 
@@ -213,4 +211,19 @@ public class Automat extends Observable {
         return einlagerungEntry.getKuchen().equals(kuchen);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Automat automat = (Automat) o;
+        return platzImAutomat == automat.platzImAutomat &&
+                Objects.equals(storage, automat.storage) &&
+                Objects.equals(allHersteller, automat.allHersteller) &&
+                Objects.equals(automatName, automat.automatName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(platzImAutomat, storage, allHersteller, automatName);
+    }
 }

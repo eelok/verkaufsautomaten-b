@@ -1,8 +1,9 @@
 package automat.mainlib.hersteller;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class HerstellerImplementation implements Hersteller {
+public class HerstellerImplementation implements Hersteller, Serializable {
 
     private String name;
 
