@@ -6,16 +6,21 @@ import java.io.*;
 
 public class AutomatRepository {
     //serialize
-    public static void saveToFile(String fileName, Automat automat) {
-        try (FileOutputStream file = new FileOutputStream(fileName)) {
-            try (ObjectOutputStream out = new ObjectOutputStream(file)) {
-                out.writeObject(automat);
-            }
-        } catch (FileNotFoundException exception) {
-            System.out.println("FileNotFoundException is caught");
-        } catch (IOException ex) {
-            System.out.println("IOException is caught");
+    public static void saveToFile(ObjectOutput out, Automat automat) {
+        try {
+            out.writeObject(automat);
+        } catch (IOException e) {
+            throw new IllegalArgumentException();
         }
+//        try (FileOutputStream file = new FileOutputStream(fileName)) {
+//            try (ObjectOutputStream out = new ObjectOutputStream(file)) {
+//                out.writeObject(automat);
+//            }
+//        } catch (FileNotFoundException exception) {
+//            System.out.println("FileNotFoundException is caught");
+//        } catch (IOException ex) {
+//            System.out.println("IOException is caught");
+//        }
     }
 
     //deserialize

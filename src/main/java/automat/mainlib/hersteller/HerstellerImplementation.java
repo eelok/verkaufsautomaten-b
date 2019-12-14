@@ -7,7 +7,14 @@ public class HerstellerImplementation implements Hersteller, Serializable {
 
     private String name;
 
+    public HerstellerImplementation() {
+    }
+
     public HerstellerImplementation(String name) {
+        this.name = name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
