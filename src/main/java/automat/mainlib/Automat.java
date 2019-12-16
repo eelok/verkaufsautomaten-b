@@ -20,11 +20,6 @@ public class Automat extends Observable implements Serializable {
     private int platzImAutomat;
     private List<EinlagerungEntry> storage;
     private List<Hersteller> allHersteller;
-
-    public List<Hersteller> getAllHersteller() {
-        return allHersteller;
-    }
-
     private String automatName;
 
     public Automat() {
@@ -54,7 +49,7 @@ public class Automat extends Observable implements Serializable {
         return allHersteller;
     }
 
-    public void setAllHersteller(List<Hersteller> allHersteller) {
+    public void setHerstellerList(List<Hersteller> allHersteller) {
         this.allHersteller = allHersteller;
     }
 
@@ -75,6 +70,7 @@ public class Automat extends Observable implements Serializable {
     }
 
     public boolean isFull() {
+        //TODO не правильно переделать
         for (EinlagerungEntry entry : storage) {
             if (entry == null) {
                 return false;
@@ -83,9 +79,16 @@ public class Automat extends Observable implements Serializable {
         return true;
     }
 
+
     public boolean addHersteller(Hersteller hersteller) {
-        if (allHersteller.add(hersteller)) {
+//        TODO: удалить этот код после того как теста console part
+//        if (allHersteller.add(hersteller)) {
+//            notifyAddNewHerstellerObservers(new AddNewHerstellerMessage(hersteller.getName()));
+//            return true;
+//        }
+        if(!herstellerExists(hersteller.getName())){
             notifyAddNewHerstellerObservers(new AddNewHerstellerMessage(hersteller.getName()));
+            allHersteller.add(hersteller);
             return true;
         }
 
@@ -102,6 +105,7 @@ public class Automat extends Observable implements Serializable {
     }
 
 
+    ///TODO сделать все тесты
     public EinlagerungEntry addKuchen(Kuchen newKuchen, LocalDateTime date) {
         if (!herstellerExists(newKuchen.getHersteller().getName())) {
             throw new IllegalArgumentException(
@@ -153,8 +157,12 @@ public class Automat extends Observable implements Serializable {
 
     public void removeKuchenFromAutomat(int fachNummer) {
         int indexOfEinlagerungsEntry = findIndex(fachNummer);
+        if(indexOfEinlagerungsEntry != -1){
+            storage.remove(indexOfEinlagerungsEntry);
+            return;
+        }
 
-        storage.remove(indexOfEinlagerungsEntry);
+        throw new IllegalArgumentException("fachnumber does not exist");
     }
 
     public List<Allergen> getAllergenenInAutomat() {
@@ -199,9 +207,12 @@ public class Automat extends Observable implements Serializable {
                 .orElse(null);
     }
 
+
+    ///не понимаю как работает??
     private int findEmptyCell() {
         for (int i = 0; i < platzImAutomat; i++) {
             int finalI = i;
+            //TODO переделать на обычный луп
             if (storage.stream().noneMatch(einlagerungEntry -> einlagerungEntry.getFachnummer() == finalI)) {
                 return i;
             }
