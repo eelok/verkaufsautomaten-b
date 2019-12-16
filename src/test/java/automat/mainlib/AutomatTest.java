@@ -1,5 +1,6 @@
 package automat.mainlib;
 
+import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.kuchen.*;
@@ -9,6 +10,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,16 +29,16 @@ class AutomatTest {
         automat.addHersteller(newHersteller);
 
         assertThat(automat.getHerstellerList()).isEqualTo(Arrays.asList(newHersteller));
-    ////подойдет ли этот assert большое, чем предыдущий
     }
 
     @Test
     void should_throw_exception_when_add_the_same_hersteller() {
         Automat automat = new Automat(3);
         Hersteller donna = mock(Hersteller.class);
+        ArrayList<Hersteller> allHersteller = new ArrayList<>();
+        allHersteller.add(donna);
+        automat.setHerstellerList(allHersteller);
         when(donna.getName()).thenReturn("donna");
-
-        automat.addHersteller(donna);
 
         assertThatThrownBy(() -> automat.addHersteller(donna)).isInstanceOf(IllegalArgumentException.class);
     }
@@ -57,13 +59,9 @@ class AutomatTest {
         assertThat(automat.getHerstellerList()).isEqualTo(Arrays.asList(donna));
     }
 
-    @Test///мб нужно в следующие тесте тестировать findHersteller?
+    @Test
     void should_throw_exception_when_delete_nonexistenting_hersteller() {
         Automat automat = new Automat(1);
-        Hersteller alex = mock(Hersteller.class);
-
-        when(alex.getName()).thenReturn("alex");
-        automat.addHersteller(alex);
 
         assertThatThrownBy(() -> automat.deleteHersteller("donna")).isInstanceOf(IllegalArgumentException.class);
     }
@@ -79,14 +77,12 @@ class AutomatTest {
         when(kuchen.getHersteller()).thenReturn(alex);
         automat.addKuchen(kuchen, LocalDateTime.now());
 
-        assertThat(automat.getEinlagerungList().get(0).getKuchen()).isEqualTo(kuchen);
+        assertThat(automat.getStorage().get(0).getKuchen()).isEqualTo(kuchen);
     }
 
     @Test
     void addKuchen_should_throw_exception_when_no_hersteller() {
         Automat automat = new Automat(1);
-        Hersteller apple = mock(HerstellerImplementation.class);
-        when(apple.getName()).thenReturn("apple");
         Kuchen kremKuchen = mock(Kremkuchen.class);
 
         when(kremKuchen.getHersteller()).thenReturn(new HerstellerImplementation("apple"));
@@ -97,74 +93,37 @@ class AutomatTest {
 
     @Test
     void addKuchen_should_assign_fachnummer() {
-        Automat automat = new Automat(2);
-        Hersteller alex = mock(HerstellerImplementation.class);
-        when(alex.getName()).thenReturn("alex");
-        automat.addHersteller(alex);
-        Kuchen kuchen = mock(KuchenImplementation.class);
-        Kuchen kremkuchen = mock(KremkuchenImplementation.class);
-
-        when(kuchen.getHersteller()).thenReturn(alex);
-        when(kremkuchen.getHersteller()).thenReturn(alex);
-        automat.addKuchen(kuchen, LocalDateTime.now());
-        automat.addKuchen(kremkuchen, LocalDateTime.now());
-
-        assertThat(automat.getStorage().get(1).getFachnummer()).isEqualTo(1);
-    }
-
-    @Test
-    void addKuchen_should_throw_exception_when_no_place_left() {
         Automat automat = new Automat(1);
         Hersteller alex = mock(HerstellerImplementation.class);
         when(alex.getName()).thenReturn("alex");
         automat.addHersteller(alex);
+        Kuchen kuchen = mock(KuchenImplementation.class);
+
+        when(kuchen.getHersteller()).thenReturn(alex);
+        automat.addKuchen(kuchen, LocalDateTime.now());
+
+        assertThat(automat.getStorage().get(0).getFachnummer()).isEqualTo(0);
+    }
+
+    @Test
+    void addKuchen_should_throw_exception_when_no_place_left() {
+        Automat automat = new Automat(0);
+        Hersteller alex = mock(HerstellerImplementation.class);
+        when(alex.getName()).thenReturn("alex");
+
+        List<Hersteller> allhersteller = new ArrayList<>();
+        allhersteller.add(alex);
+        automat.setHerstellerList(allhersteller);
 
         Kuchen kuchen = mock(KuchenImplementation.class);
         when(kuchen.getHersteller()).thenReturn(alex);
 
-        automat.addKuchen(kuchen, LocalDateTime.now());
-
         assertThatThrownBy(() -> automat.addKuchen(kuchen, LocalDateTime.now()))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(AutomatIsFullException.class)
                 .hasMessage("Der Automat ist voll");
     }
 
-//    @Test
-//    void should_add_kuchen_after_a_kuchen_was_deleted(){
-//        Automat automat = new Automat(2);
-//        Hersteller alex = mock(HerstellerImplementation.class);
-//        when(alex.getName()).thenReturn("alex");
-//        automat.addHersteller(alex);
-//
-//        Kuchen kuchen = mock(KuchenImplementation.class);
-//        when(kuchen.getHersteller()).thenReturn(alex);
-//        Kuchen kremKuchen = mock(KremkuchenImplementation.class);
-//        when(kremKuchen.getHersteller()).thenReturn(alex);
-//
-//        Kuchen obstkuchen = mock(ObstkuchenImplementation.class);
-//        when(obstkuchen.getHersteller()).thenReturn(alex);
-//
-//        automat.addKuchen(kuchen, LocalDateTime.now());
-//        automat.addKuchen(kremKuchen, LocalDateTime.now());
-//
-//        automat.removeKuchenFromAutomat(2);
-//
-//        assertThat(automat.getAllEingelagertenKuchen()).isEqualTo(Arrays.asList(kuchen, kremKuchen, obstkuchen));
-//    }
-
-//    @Test
-//    void should_return_true_when_automat_is_full(){
-//        Automat automat = new Automat(1);
-//        Hersteller alex = mock(Hersteller.class);
-//        Kuchen kuchen = mock(Kuchen.class);
-//
-//        when(alex.getName()).thenReturn("alex");
-//        when(kuchen.getHersteller()).thenReturn(alex);
-//        automat.addHersteller(alex);
-//        automat.addKuchen(kuchen, LocalDateTime.now());
-//
-//        assertThat(automat.isFull()).isTrue();
-//    }
+    //TODO добавить тест allocate Date
 
     @Test
     void should_return_all_kuchen_in_automat(){
@@ -185,7 +144,6 @@ class AutomatTest {
                 kuchen, kremKuchen
         ));
     }
-
 
     @Test
     void should_get_list_with_kuchen_of_certain_type() {
@@ -248,7 +206,7 @@ class AutomatTest {
     }
 
     @Test
-    void should_throw_exception_when_look_up_from_fachnummer_for_kuchen_which_is_not_in_Automat() {
+    void should_throw_exception_when_look_up_for_fachnummer_for_kuchen_which_is_not_in_Automat() {
         Automat automat = new Automat(1);
         Hersteller alex = mock(Hersteller.class);
         when(alex.getName()).thenReturn("alex");
@@ -261,7 +219,9 @@ class AutomatTest {
         Kuchen kremKuchen = mock(Kuchen.class);
         when(kremKuchen.getHersteller()).thenReturn(alex);
 
-        assertThatThrownBy(() -> automat.getFachnummerZuBestimmtenKuchen(kremKuchen)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> automat.getFachnummerZuBestimmtenKuchen(kremKuchen))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Der Kuchen gibt es nicht");
     }
 
     @Test
@@ -278,7 +238,6 @@ class AutomatTest {
         LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0, 0));
 
         automat.addKuchen(kuchen, now.minusDays(2L));
-
 
         assertThat(automat.getRestHaltbarkeitZuBestimmtenKuchen(kuchen, now))
                 .isEqualTo(Duration.ofDays(2));
@@ -322,7 +281,9 @@ class AutomatTest {
 
         int fachnummer = 10;
 
-        assertThatThrownBy(() -> automat.removeKuchenFromAutomat(fachnummer)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> automat.removeKuchenFromAutomat(fachnummer))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("fachnumber does not exist");
     }
 
     @Test
@@ -368,7 +329,7 @@ class AutomatTest {
     }
 
     @Test
-    void should_find_fachnummer_with_kuchen_with_smallest_haltbarkeit(){
+    void should_find_kuchen_with_smallest_haltbarkeit(){
         Automat automat = new Automat(2);
         Hersteller alex = mock(Hersteller.class);
         when(alex.getName()).thenReturn("alex");
@@ -383,13 +344,29 @@ class AutomatTest {
 
         automat.addKuchen(kuchen, LocalDateTime.now());
         automat.addKuchen(kremKuchen, LocalDateTime.now());
-        automat.findKuchenFachnummerWithSmallestHaltbarkeit();
 
-        assertThat(automat.findKuchenFachnummerWithSmallestHaltbarkeit()).isEqualTo(1);
+        assertThat(automat.findKuchenWithSmallestHaltbarkeit().getKuchen()).isEqualTo(kremKuchen);
     }
 
+    @Test
+    void should_return_true_when_automat_is_full(){
+        Automat automat = new Automat(1);
+        Hersteller alex = mock(Hersteller.class);
+        when(alex.getName()).thenReturn("alex");
+        automat.addHersteller(alex);
 
+        Kuchen kuchen = mock(Kuchen.class);
+        when(kuchen.getHersteller()).thenReturn(alex);
+        automat.addKuchen(kuchen, LocalDateTime.now());
 
+        assertThat(automat.isFull()).isTrue();
+    }
 
+    @Test
+    void should_return_false_when_automat_is_not_full(){
+        Automat automat = new Automat(1);
+
+        assertThat(automat.isFull()).isFalse();
+    }
 
 }

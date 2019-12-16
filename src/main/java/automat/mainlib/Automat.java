@@ -1,6 +1,7 @@
 package automat.mainlib;
 
 import automat.apps.console.Observable;
+import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.observer.AddNewHerstellerMessage;
 import automat.mainlib.hersteller.observer.RemoveHerstellerMessage;
@@ -70,42 +71,34 @@ public class Automat extends Observable implements Serializable {
     }
 
     public boolean isFull() {
-        //TODO не правильно переделать
-        for (EinlagerungEntry entry : storage) {
-            if (entry == null) {
-                return false;
-            }
+        try{
+            findEmptyCell();
+        } catch(AutomatIsFullException ex){
+            return true;
         }
+        return false;
+    }
+
+    public boolean addHersteller(Hersteller hersteller) {
+        if (herstellerExists(hersteller.getName())) {
+            throw new IllegalArgumentException(String.format("Manufacturer %s already exists", hersteller.getName()));
+        }
+
+        notifyAddNewHerstellerObservers(new AddNewHerstellerMessage(hersteller.getName()));
+        allHersteller.add(hersteller);
+
         return true;
     }
 
-
-    public boolean addHersteller(Hersteller hersteller) {
-//        TODO: удалить этот код после того как теста console part
-//        if (allHersteller.add(hersteller)) {
-//            notifyAddNewHerstellerObservers(new AddNewHerstellerMessage(hersteller.getName()));
-//            return true;
-//        }
-        if(!herstellerExists(hersteller.getName())){
-            notifyAddNewHerstellerObservers(new AddNewHerstellerMessage(hersteller.getName()));
-            allHersteller.add(hersteller);
-            return true;
-        }
-
-        throw new IllegalArgumentException(String.format("Manufacturer %s already exists", hersteller.getName()));
-    }
-
     public void deleteHersteller(String name) {
-        if (!herstellerExists(name)) {
+        Hersteller hersteller = findHersteller(name);
+        if (hersteller == null) {
             throw new IllegalArgumentException(String.format("Hersteller %s does not exist", name));
         }
-        Hersteller hersteller = findHersteller(name);
         allHersteller.remove(hersteller);
         notifyRemoveHerstellerObserver(new RemoveHerstellerMessage(name));
     }
 
-
-    ///TODO сделать все тесты
     public EinlagerungEntry addKuchen(Kuchen newKuchen, LocalDateTime date) {
         if (!herstellerExists(newKuchen.getHersteller().getName())) {
             throw new IllegalArgumentException(
@@ -125,7 +118,6 @@ public class Automat extends Observable implements Serializable {
 
     public List<Kuchen> getAllEingelagertenKuchen() {
         return storage.stream()
-                .filter(einlagerungEntry -> einlagerungEntry != null)
                 .map(einlagerungEntry -> einlagerungEntry.getKuchen())
                 .collect(Collectors.toList());
     }
@@ -157,12 +149,10 @@ public class Automat extends Observable implements Serializable {
 
     public void removeKuchenFromAutomat(int fachNummer) {
         int indexOfEinlagerungsEntry = findIndex(fachNummer);
-        if(indexOfEinlagerungsEntry != -1){
-            storage.remove(indexOfEinlagerungsEntry);
-            return;
+        if (indexOfEinlagerungsEntry == -1) {
+            throw new IllegalArgumentException("fachnumber does not exist");
         }
-
-        throw new IllegalArgumentException("fachnumber does not exist");
+        storage.remove(indexOfEinlagerungsEntry);
     }
 
     public List<Allergen> getAllergenenInAutomat() {
@@ -186,16 +176,6 @@ public class Automat extends Observable implements Serializable {
                 .orElse(null);
     }
 
-    public int findKuchenFachnummerWithSmallestHaltbarkeit() {
-        EinlagerungEntry kuchenWithSmallestHaltbarkeit = findKuchenWithSmallestHaltbarkeit();
-
-        return kuchenWithSmallestHaltbarkeit.getFachnummer();
-    }
-
-    public List<EinlagerungEntry> getEinlagerungList() {
-        return storage;
-    }
-
     private boolean herstellerExists(String name) {
         return findHersteller(name) != null;
     }
@@ -207,7 +187,6 @@ public class Automat extends Observable implements Serializable {
                 .orElse(null);
     }
 
-
     ///не понимаю как работает??
     private int findEmptyCell() {
         for (int i = 0; i < platzImAutomat; i++) {
@@ -218,7 +197,7 @@ public class Automat extends Observable implements Serializable {
             }
         }
 
-        throw new IllegalArgumentException("Der Automat ist voll");
+        throw new AutomatIsFullException("Der Automat ist voll");
     }
 
     private int findIndex(int fachNummer) {
