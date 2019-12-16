@@ -123,7 +123,23 @@ class AutomatTest {
                 .hasMessage("Der Automat ist voll");
     }
 
-    //TODO добавить тест allocate Date
+    @Test
+    void addKuchen_should_allocate_date(){
+        Automat automat = new Automat(1);
+        Hersteller alex = mock(HerstellerImplementation.class);
+        when(alex.getName()).thenReturn("alex");
+        List<Hersteller> allhersteller = new ArrayList<>();
+        allhersteller.add(alex);
+        automat.setHerstellerList(allhersteller);
+
+        Kuchen kuchen = mock(KuchenImplementation.class);
+        when(kuchen.getHersteller()).thenReturn(alex);
+
+        LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0, 0));
+        automat.addKuchen(kuchen, now);
+        assertThat(automat.getStorage().get(0).getEinlagerungsDatum()).isEqualTo(now);
+    }
+
 
     @Test
     void should_return_all_kuchen_in_automat(){
