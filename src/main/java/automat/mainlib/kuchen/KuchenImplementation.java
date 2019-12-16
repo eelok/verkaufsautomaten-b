@@ -5,7 +5,9 @@ import automat.mainlib.hersteller.Hersteller;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 public class KuchenImplementation implements Kuchen, Serializable {
@@ -15,6 +17,9 @@ public class KuchenImplementation implements Kuchen, Serializable {
     private int naehrwert;
     private Collection<Allergen> allergenes;
     private Duration haltbarkeit;
+
+    public KuchenImplementation() {
+    }
 
     public KuchenImplementation(
             BigDecimal price,
@@ -53,6 +58,26 @@ public class KuchenImplementation implements Kuchen, Serializable {
     @Override
     public Duration getHaltbarkeit() {
         return haltbarkeit;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setHersteller(Hersteller hersteller) {
+        this.hersteller = hersteller;
+    }
+
+    public void setNaehrwert(int naehrwert) {
+        this.naehrwert = naehrwert;
+    }
+
+    public void setAllergenes(Collection<Allergen> allergenes) {
+        this.allergenes = allergenes;
+    }
+
+    public void setHaltbarkeit(Duration haltbarkeit) {
+        this.haltbarkeit = haltbarkeit;
     }
 
     public String toString(){

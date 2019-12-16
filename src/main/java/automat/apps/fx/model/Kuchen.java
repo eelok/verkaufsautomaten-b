@@ -10,10 +10,11 @@ import javafx.beans.property.StringProperty;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
+import java.util.List;
 
 public class Kuchen extends KuchenImplementation implements KuchenFx {
 
-    public Kuchen(BigDecimal price, Hersteller hersteller, Collection<Allergen> allergenes, int naehrwert, Duration haltbarkeit) {
+    public Kuchen(BigDecimal price, Hersteller hersteller, List<Allergen> allergenes, int naehrwert, Duration haltbarkeit) {
         super(price, hersteller, allergenes, naehrwert, haltbarkeit);
     }
 

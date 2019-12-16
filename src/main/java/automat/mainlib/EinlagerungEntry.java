@@ -12,6 +12,9 @@ public class EinlagerungEntry implements Serializable {
     private Kuchen kuchen;
     private int fachnummer;
 
+    public EinlagerungEntry() {
+    }
+
     public EinlagerungEntry(LocalDateTime einlagerungsDatum, Kuchen kuchen, int fachnummer) {
         this.einlagerungsDatum = einlagerungsDatum;
         this.kuchen = kuchen;
@@ -28,6 +31,18 @@ public class EinlagerungEntry implements Serializable {
 
     public int getFachnummer() {
         return this.fachnummer;
+    }
+
+    public void setEinlagerungsDatum(LocalDateTime einlagerungsDatum) {
+        this.einlagerungsDatum = einlagerungsDatum;
+    }
+
+    public void setKuchen(Kuchen kuchen) {
+        this.kuchen = kuchen;
+    }
+
+    public void setFachnummer(int fachnummer) {
+        this.fachnummer = fachnummer;
     }
 
     @Override

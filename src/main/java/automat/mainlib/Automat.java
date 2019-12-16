@@ -17,11 +17,18 @@ import java.util.stream.Stream;
 
 public class Automat extends Observable implements Serializable {
 
-    private final int platzImAutomat;
-
+    private int platzImAutomat;
     private List<EinlagerungEntry> storage;
     private List<Hersteller> allHersteller;
+
+    public List<Hersteller> getAllHersteller() {
+        return allHersteller;
+    }
+
     private String automatName;
+
+    public Automat() {
+    }
 
     public Automat(int platzImAutomat, List<EinlagerungEntry> storage, List<Hersteller> herstellersList) {
         this.platzImAutomat = platzImAutomat;
@@ -43,6 +50,30 @@ public class Automat extends Observable implements Serializable {
         return this.automatName;
     }
 
+    public List<Hersteller> getHerstellerList() {
+        return allHersteller;
+    }
+
+    public void setAllHersteller(List<Hersteller> allHersteller) {
+        this.allHersteller = allHersteller;
+    }
+
+    public List<EinlagerungEntry> getStorage() {
+        return storage;
+    }
+
+    public void setStorage(List<EinlagerungEntry> storage) {
+        this.storage = storage;
+    }
+
+    public int getPlatzImAutomat() {
+        return platzImAutomat;
+    }
+
+    public void setPlatzImAutomat(int platzImAutomat) {
+        this.platzImAutomat = platzImAutomat;
+    }
+
     public boolean isFull() {
         for (EinlagerungEntry entry : storage) {
             if (entry == null) {
@@ -50,10 +81,6 @@ public class Automat extends Observable implements Serializable {
             }
         }
         return true;
-    }
-
-    public List<Hersteller> getHerstellerList() {
-        return allHersteller;
     }
 
     public boolean addHersteller(Hersteller hersteller) {
@@ -209,6 +236,16 @@ public class Automat extends Observable implements Serializable {
         }
 
         return einlagerungEntry.getKuchen().equals(kuchen);
+    }
+
+    @Override
+    public String toString() {
+        return "Automat{" +
+                "platzImAutomat=" + platzImAutomat +
+                ", storage=" + storage +
+                ", allHersteller=" + allHersteller +
+                ", automatName='" + automatName + '\'' +
+                '}';
     }
 
     @Override
