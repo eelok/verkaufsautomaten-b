@@ -45,7 +45,7 @@ public class StorageImpl implements Storage {
     private void umlagernKuchen() {
         //TODO optimize
         Kuchen kuchenWithSmallestHaltbarkeit = freshKuchenAutomat.findKuchenWithSmallestHaltbarkeit().getKuchen();
-        int fachnummer = freshKuchenAutomat.findKuchenFachnummerWithSmallestHaltbarkeit();
+        int fachnummer = freshKuchenAutomat.findKuchenWithSmallestHaltbarkeit().getFachnummer();
         freshKuchenAutomat.removeKuchenFromAutomat(fachnummer);
 
         System.out.println(String.format("%s {haltbarkeit in days: %s} form %s wird in anderer Automat umgelagert",

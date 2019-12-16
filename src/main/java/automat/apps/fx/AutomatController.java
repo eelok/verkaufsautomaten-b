@@ -92,7 +92,7 @@ public class AutomatController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.automat = AutomatSingleton.getInstance();
         this.herstellerListView.setItems((ObservableList<Hersteller>) automat.getHerstellerList());
-        this.allKuchenTable.setItems((ObservableList<EinlagerungEntry>) automat.getEinlagerungList());
+        this.allKuchenTable.setItems((ObservableList<EinlagerungEntry>) automat.getStorage());
         initCellValueInKuchenTable();
 
         herstellerInput.setOnKeyPressed(new EventHandler<KeyEvent>() {
