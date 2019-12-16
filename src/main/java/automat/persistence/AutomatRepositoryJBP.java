@@ -20,11 +20,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-public class AutomatJBP {
+public class AutomatRepositoryJBP {
 
     public static void main(String[] args) {
-        HerstellerImplementation alex = new HerstellerImplementation("alex");
         Automat automat = new Automat(10);
+        HerstellerImplementation alex = new HerstellerImplementation("alex");
         automat.addHersteller(alex);
         var kuchen = new KuchenImplementation(
                 BigDecimal.valueOf(20),
@@ -61,7 +61,7 @@ public class AutomatJBP {
                 }
             });
             encoder.writeObject(automat);
-            encoder.writeObject(automat);
+//            encoder.writeObject(automat);
         } catch (Exception e) {
             e.printStackTrace();
         }
