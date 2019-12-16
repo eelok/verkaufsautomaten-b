@@ -187,11 +187,9 @@ public class Automat extends Observable implements Serializable {
                 .orElse(null);
     }
 
-    ///не понимаю как работает??
     private int findEmptyCell() {
         for (int i = 0; i < platzImAutomat; i++) {
             int finalI = i;
-            //TODO переделать на обычный луп
             if (storage.stream().noneMatch(einlagerungEntry -> einlagerungEntry.getFachnummer() == finalI)) {
                 return i;
             }
