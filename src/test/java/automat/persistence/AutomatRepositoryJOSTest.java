@@ -10,8 +10,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class AutomatRepositoryJOSTest {
 
@@ -39,6 +38,7 @@ class AutomatRepositoryJOSTest {
         ObjectOutput out = mock(ObjectOutput.class);
 
         Mockito.doThrow(new IOException()).when(out).writeObject(automat);
+
         assertThatThrownBy(() -> {
             automatRepositoryJOS.saveToFile(out, automat);
         }).isInstanceOf(IllegalArgumentException.class);
