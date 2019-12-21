@@ -10,7 +10,8 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class AutomatRepositoryJOSTest {
 
@@ -23,7 +24,7 @@ class AutomatRepositoryJOSTest {
 
 
     @Test
-    void should_save_to_file() throws IOException {
+    void should_call_write_object_on_object_output() throws IOException {
         Automat automat = mock(Automat.class);
         ObjectOutput out = mock(ObjectOutput.class);
 

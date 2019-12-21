@@ -3,10 +3,7 @@ package automat.persistence;
 import automat.mainlib.Automat;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
-import automat.mainlib.kuchen.Allergen;
-import automat.mainlib.kuchen.Kuchen;
-import automat.mainlib.kuchen.KuchenImplementation;
-import automat.mainlib.kuchen.ObstkuchenImplementation;
+import automat.mainlib.kuchen.*;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -20,8 +17,9 @@ import java.util.List;
 public class MainJBP {
 
     public static void main(String[] args) {
-        AutomatJBP automatJBP = new AutomatJBP();
+        AutomatRepositoryJBP automatRepositoryJBP = new AutomatRepositoryJBP();
         Automat automat = new Automat(2);
+        automat.setName("kuchen automat");
         File automatXML = new File("automat.xml");
 
         List<Allergen> allergens = new ArrayList<>();
@@ -30,12 +28,14 @@ public class MainJBP {
         Hersteller alex = new HerstellerImplementation("alex");
         automat.addHersteller(alex);
 
-        Kuchen kuchen = new KuchenImplementation(
+        Kuchen kuchen = new ObsttorteImplementation(
                 new BigDecimal(20),
                 alex,
                 allergens,
                 500,
-                Duration.ofDays(2)
+                Duration.ofDays(2),
+                "sahne",
+                "heidelbeeren"
         );
 
         automat.addKuchen(kuchen, LocalDateTime.now());
@@ -43,7 +43,7 @@ public class MainJBP {
         try {
             OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(automatXML));
             XMLEncoder encoder = new XMLEncoder(outputStream);
-            automatJBP.saveToFile(encoder, automat);
+            automatRepositoryJBP.saveToFile(encoder, automat);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -51,7 +51,9 @@ public class MainJBP {
         try {
             InputStream inputStream = new BufferedInputStream(new FileInputStream(automatXML));
             XMLDecoder decoder = new XMLDecoder(inputStream);
-            Automat automatFromFile = automatJBP.readFromFile(decoder);
+            Automat automatFromFile = automatRepositoryJBP.readFromFile(decoder);
+            System.out.println(automatFromFile.toString());
+            System.out.println(automat.getAllEingelagertenKuchen().toString());
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }

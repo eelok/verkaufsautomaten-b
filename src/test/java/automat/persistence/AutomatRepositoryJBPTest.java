@@ -10,32 +10,32 @@ import java.beans.XMLEncoder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class AutomatJBPTest {
+class AutomatRepositoryJBPTest {
 
-    private AutomatJBP automatJBP;
+    private AutomatRepositoryJBP automatRepositoryJBP;
 
     @BeforeEach
     void setUp() {
-        automatJBP = new AutomatJBP();
+        automatRepositoryJBP = new AutomatRepositoryJBP();
     }
 
     @Test
-    void should_saveToFile() {
+    void should_call_method_writeObject() {
         Automat automat = mock(Automat.class);
         XMLEncoder encoder = mock(XMLEncoder.class);
 
-        automatJBP.saveToFile(encoder, automat);
+        automatRepositoryJBP.saveToFile(encoder, automat);
 
         verify(encoder).writeObject(automat);
 
     }
 
     @Test
-    void readFromFile(){
+    void readFromFile_should_call_method_readObject(){
         Automat automat = mock(Automat.class);
         XMLDecoder decoder = mock(XMLDecoder.class);
 
-        automatJBP.readFromFile(decoder);
+        automatRepositoryJBP.readFromFile(decoder);
         verify(decoder).readObject();
     }
 

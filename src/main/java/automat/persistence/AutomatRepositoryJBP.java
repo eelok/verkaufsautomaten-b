@@ -7,16 +7,14 @@ import automat.persistence.persistenceDelegate.DurationPersistenceDelegate;
 import automat.persistence.persistenceDelegate.EnumPersistenceDelegate;
 import automat.persistence.persistenceDelegate.LocalDateTimePersistenceDelegate;
 
+import java.beans.Introspector;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class AutomatJBP {
+public class AutomatRepositoryJBP {
 
     public void saveToFile(XMLEncoder encoder, Automat automat){
         encoder.setPersistenceDelegate(BigDecimal.class, new BigDecimalPersistenceDelegate());
@@ -28,6 +26,8 @@ public class AutomatJBP {
     }
 
     public Automat readFromFile(XMLDecoder decoder) {
-        return (Automat) decoder.readObject();
+        Automat automat = (Automat) decoder.readObject();
+        decoder.close();
+        return automat;
     }
 }

@@ -18,6 +18,9 @@ public class KremkuchenImplementation implements Kremkuchen, Serializable {
 
     private String kremsorte;
 
+    public KremkuchenImplementation() {
+    }
+
     public KremkuchenImplementation(
             BigDecimal price,
             Hersteller hersteller,
@@ -68,6 +71,43 @@ public class KremkuchenImplementation implements Kremkuchen, Serializable {
     public String toString() {
         return "Kremkuchen";
     }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setHersteller(Hersteller hersteller) {
+        this.hersteller = hersteller;
+    }
+
+    public void setAllergens(Collection<Allergen> allergens) {
+        this.allergens = allergens;
+    }
+
+    public void setNaehrwert(int naehrwert) {
+        this.naehrwert = naehrwert;
+    }
+
+    public void setHaltbarkeit(Duration haltbarkeit) {
+        this.haltbarkeit = haltbarkeit;
+    }
+
+    public void setKremsorte(String kremsorte) {
+        this.kremsorte = kremsorte;
+    }
+
+//for test only
+//    @Override
+//    public String toString() {
+//        return String.format(
+//                        "kuchenInfo: price: %s," +
+//                        "hersteller: %s," +
+//                        "allergens: %s," +
+//                        "naehrwert: %s," +
+//                        "hatlbarkeit: %s," +
+//                        "kremsorte: %s"
+//                , getPrice(), getHersteller().toString(), getAllergenes().toString(), getNaehrwert(), getHaltbarkeit().toDays(), getKremsorte());
+//    }
 
     @Override
     public boolean equals(Object o) {

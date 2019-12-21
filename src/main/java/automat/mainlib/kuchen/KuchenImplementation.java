@@ -26,8 +26,7 @@ public class KuchenImplementation implements Kuchen, Serializable {
             Hersteller hersteller,
             Collection<Allergen> allergenes,
             int naehrwert,
-            Duration haltbarkeit)
-    {
+            Duration haltbarkeit) {
         this.price = price;
         this.hersteller = hersteller;
         this.naehrwert = naehrwert;
@@ -40,9 +39,17 @@ public class KuchenImplementation implements Kuchen, Serializable {
         return price;
     }
 
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     @Override
     public Hersteller getHersteller() {
         return hersteller;
+    }
+
+    public void setHersteller(Hersteller hersteller) {
+        this.hersteller = hersteller;
     }
 
     @Override
@@ -50,9 +57,17 @@ public class KuchenImplementation implements Kuchen, Serializable {
         return allergenes;
     }
 
+    public void setAllergenes(Collection<Allergen> allergenes) {
+        this.allergenes = allergenes;
+    }
+
     @Override
     public int getNaehrwert() {
         return naehrwert;
+    }
+
+    public void setNaehrwert(int naehrwert) {
+        this.naehrwert = naehrwert;
     }
 
     @Override
@@ -60,27 +75,11 @@ public class KuchenImplementation implements Kuchen, Serializable {
         return haltbarkeit;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public void setHersteller(Hersteller hersteller) {
-        this.hersteller = hersteller;
-    }
-
-    public void setNaehrwert(int naehrwert) {
-        this.naehrwert = naehrwert;
-    }
-
-    public void setAllergenes(Collection<Allergen> allergenes) {
-        this.allergenes = allergenes;
-    }
-
     public void setHaltbarkeit(Duration haltbarkeit) {
         this.haltbarkeit = haltbarkeit;
     }
 
-    public String toString(){
+    public String toString() {
         return "kuchen";
     }
 

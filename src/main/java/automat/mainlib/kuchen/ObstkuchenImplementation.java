@@ -18,6 +18,9 @@ public class ObstkuchenImplementation implements Obstkuchen, Serializable {
 
     private String obstsorte;
 
+    public ObstkuchenImplementation() {
+    }
+
     public ObstkuchenImplementation(
             BigDecimal price,
             Hersteller hersteller,
@@ -68,6 +71,30 @@ public class ObstkuchenImplementation implements Obstkuchen, Serializable {
 
     public String toString(){
         return "Obstkuchen";
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setHersteller(Hersteller hersteller) {
+        this.hersteller = hersteller;
+    }
+
+    public void setAllergens(Collection<Allergen> allergens) {
+        this.allergens = allergens;
+    }
+
+    public void setNaehrwert(int naehrwert) {
+        this.naehrwert = naehrwert;
+    }
+
+    public void setHaltbarkeit(Duration haltbarkeit) {
+        this.haltbarkeit = haltbarkeit;
+    }
+
+    public void setObstsorte(String obstsorte) {
+        this.obstsorte = obstsorte;
     }
 
     @Override
