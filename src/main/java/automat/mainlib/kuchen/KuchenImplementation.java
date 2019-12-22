@@ -12,11 +12,11 @@ import java.util.Objects;
 
 public class KuchenImplementation implements Kuchen, Serializable {
 
-    private BigDecimal price;
-    private Hersteller hersteller;
-    private int naehrwert;
-    private Collection<Allergen> allergenes;
-    private Duration haltbarkeit;
+    public BigDecimal price;
+    public Hersteller hersteller;
+    public int naehrwert;
+    public Collection<Allergen> allergenes;
+    public Duration haltbarkeit;
 
     public KuchenImplementation() {
     }
