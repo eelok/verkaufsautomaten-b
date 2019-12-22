@@ -1,10 +1,7 @@
 package automat.mainlib;
 
-import automat.apps.console.Observable;
 import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.hersteller.Hersteller;
-import automat.mainlib.hersteller.observer.AddNewHerstellerMessage;
-import automat.mainlib.hersteller.observer.RemoveHerstellerMessage;
 import automat.mainlib.kuchen.Allergen;
 import automat.mainlib.kuchen.Kuchen;
 
@@ -83,8 +80,6 @@ public class Automat extends Observable implements Serializable {
         if (herstellerExists(hersteller.getName())) {
             throw new IllegalArgumentException(String.format("Manufacturer %s already exists", hersteller.getName()));
         }
-
-        notifyAddNewHerstellerObservers(new AddNewHerstellerMessage(hersteller.getName()));
         allHersteller.add(hersteller);
 
         return true;
@@ -96,7 +91,6 @@ public class Automat extends Observable implements Serializable {
             throw new IllegalArgumentException(String.format("Hersteller %s does not exist", name));
         }
         allHersteller.remove(hersteller);
-        notifyRemoveHerstellerObserver(new RemoveHerstellerMessage(name));
     }
 
     public EinlagerungEntry addKuchen(Kuchen newKuchen, LocalDateTime date) {

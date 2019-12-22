@@ -10,7 +10,6 @@ import java.math.BigDecimal;
  */
 public class BigDecimalPersistenceDelegate extends DefaultPersistenceDelegate {
 
-
     protected boolean mutatesTo(Object oldInstance, Object newInstance) {
         return oldInstance.equals(newInstance);
     }

@@ -7,7 +7,6 @@ import automat.persistence.persistenceDelegate.DurationPersistenceDelegate;
 import automat.persistence.persistenceDelegate.EnumPersistenceDelegate;
 import automat.persistence.persistenceDelegate.LocalDateTimePersistenceDelegate;
 
-import java.beans.Introspector;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.math.BigDecimal;

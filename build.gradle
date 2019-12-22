@@ -3,10 +3,6 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.graphics', 'javafx.fxml' ]
-}
 
 test {
     useJUnitPlatform()
@@ -27,9 +23,5 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.2.0'
     // https://mvnrepository.com/artifact/org.assertj/assertj-core
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'
-    implementation files('lib/javafx.base.jar')
-    implementation files('lib/javafx.controls.jar')
-    implementation files('lib/javafx.graphics.jar')
-    implementation files('lib/javafx.fxml.jar')
 }
 
