@@ -96,6 +96,7 @@ public class LearRandom {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 }
