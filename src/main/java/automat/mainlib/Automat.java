@@ -155,6 +155,23 @@ public class Automat extends Observable implements Serializable {
         storage.remove(indexOfEinlagerungsEntry);
     }
 
+    public List<String> getHerstellerWithNumberOfKuchen(){
+        return this.allHersteller.stream()
+                .map(hersteller -> {
+                    long anzahlKuchenZuHersteller = getAnzahlKuchenZuHersteller(hersteller.getName());
+                    return hersteller.getName() + ": " + anzahlKuchenZuHersteller;
+                })
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getAllKuchenWithFachNum(){
+        List<String> listWithKuchenWithAllocatedFachNum = new ArrayList<>();
+        for (EinlagerungEntry each :storage){
+            listWithKuchenWithAllocatedFachNum.add(each.getKuchen() + ": " + each.getFachnummer());
+        }
+        return listWithKuchenWithAllocatedFachNum;
+    }
+
     public List<Allergen> getAllergenenInAutomat() {
         return getAllEingelagertenKuchen().stream()
                 .flatMap(kuchen -> kuchen.getAllergenes().stream())

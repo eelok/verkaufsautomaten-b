@@ -12,7 +12,6 @@ import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class VerwaltungController {
 
@@ -38,6 +37,7 @@ public class VerwaltungController {
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
         while (run) {
+            System.out.println("Enter command: :a<add> :l<list> :d<delete> :q<back to main menu>");
             System.out.print(">");
             String userInput = scanner.nextLine();
             if (userInput.equals(":q")) {
@@ -56,6 +56,7 @@ public class VerwaltungController {
                 break;
             case ":l":
                 System.out.println("list mode active");
+                System.out.println("Enter command: manufacturer<list of manufacturer> kuchen<list of kuchen>  :q<back to main menu>> ");
                 System.out.print(">");
                 commandListMode();
                 break;
@@ -99,16 +100,18 @@ public class VerwaltungController {
                 continue;
             }
             if (userInput.equalsIgnoreCase("manufacturer")) {
-                List<Hersteller> herstellerList = automat.getHerstellerList();
-                List<String> herstellerKuchenCount = getHerstellerKuchenCount(herstellerList);
-                herstellerKuchenCount.forEach(System.out::println);
+                List<String> herstellerWithNumberOfKuchen = automat.getHerstellerWithNumberOfKuchen();
+                if(herstellerWithNumberOfKuchen.isEmpty()){
+                    System.out.println("there is no manufacturer");
+                }
+                herstellerWithNumberOfKuchen.forEach(System.out::println);
                 userInput = getUserInput(scanner);
             } else if (userInput.equalsIgnoreCase("kuchen")) {
-                List<String> kuchenAndFach = getKuchenAndFach();
-                if (kuchenAndFach.isEmpty()) {
+                List<String> listWithKuchenWithAllocatedFachNum = automat.getAllKuchenWithFachNum();
+                if (listWithKuchenWithAllocatedFachNum.isEmpty()){
                     System.out.println("No Kuchen Available in the Automat");
                 }
-                kuchenAndFach.forEach(System.out::println);
+                listWithKuchenWithAllocatedFachNum.forEach(System.out::println);
                 userInput = getUserInput(scanner);
             } else {
                 System.out.println("List Mode input: expected format: manufacturer / kuchen");
@@ -119,7 +122,6 @@ public class VerwaltungController {
 
     private void commandRemoveMode() {
         Scanner scanner = new Scanner(System.in);
-
         boolean run = true;
         while (run) {
             String userInput = getUserInput(scanner);
@@ -130,8 +132,11 @@ public class VerwaltungController {
             }
             if (userInput.matches("^f.[0-9]*$")) {
                 int fachNum = stringUtils.extractFachNumberFromString(userInput);
-                //TODO: Test
-                automat.removeKuchenFromAutomat(fachNum);
+                try {
+                    automat.removeKuchenFromAutomat(fachNum);
+                } catch (IllegalArgumentException e){
+                    System.out.println(e.getMessage());
+                }
             } else {
                 try {
                     automat.deleteHersteller(userInput.trim());
@@ -140,25 +145,6 @@ public class VerwaltungController {
                 }
             }
         }
-    }
-
-    private List<String> getKuchenAndFach() {
-        return automat.getAllEingelagertenKuchen().stream()
-                .map(kuchen -> {
-                    int fachnummerZuBestimmtenKuchen = automat.getFachnummerZuBestimmtenKuchen(kuchen);
-                    return String.format("%s : f%s", kuchen, fachnummerZuBestimmtenKuchen);
-                })
-                .collect(Collectors.toList());
-    }
-
-
-    private List<String> getHerstellerKuchenCount(List<Hersteller> herstellerList) {
-        return herstellerList.stream()
-                .map(hersteller -> {
-                    long anzahlKuchenZuHersteller = automat.getAnzahlKuchenZuHersteller(hersteller.getName());
-                    return hersteller.getName() + " : " + anzahlKuchenZuHersteller;
-                })
-                .collect(Collectors.toList());
     }
 
     private String getUserInput(Scanner scanner) {
@@ -170,7 +156,7 @@ public class VerwaltungController {
 
     private void addKuchen(String userInput) {
         try {
-            automat.addKuchen(kuchenParser.getKuchenInfo(userInput), LocalDateTime.now());
+             automat.addKuchen(kuchenParser.getKuchenInfo(userInput), LocalDateTime.now());
         } catch (IllegalArgumentException e) {
             System.out.println(String.format("Can not add kuchen, reason: %s", e.getMessage()));
         }

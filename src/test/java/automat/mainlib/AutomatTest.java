@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -383,6 +384,61 @@ class AutomatTest {
         Automat automat = new Automat(1);
 
         assertThat(automat.isFull()).isFalse();
+    }
+
+    @Test
+    void should_return_herstelle_with_number_of_kuchen(){
+        Automat automat = new Automat(3);
+
+        Hersteller alex = mock(HerstellerImplementation.class);
+        when(alex.getName()).thenReturn("alex");
+        Hersteller donna = mock(HerstellerImplementation.class);
+        when(donna.getName()).thenReturn("donna");
+        List<Hersteller> allHersteller = Arrays.asList(alex, donna);
+        automat.setHerstellerList(allHersteller);
+
+        Kuchen kuchen = mock(KuchenImplementation.class);
+        when(kuchen.getHersteller()).thenReturn(alex);
+        Kuchen kremkuchen = mock(KremkuchenImplementation.class);
+        when(kremkuchen.getHersteller()).thenReturn(alex);
+        Obstkuchen obstkuchen = mock(ObstkuchenImplementation.class);
+        when(obstkuchen.getHersteller()).thenReturn(donna);
+
+        automat.addKuchen(kuchen, LocalDateTime.now());
+        automat.addKuchen(kremkuchen, LocalDateTime.now());
+        automat.addKuchen(obstkuchen, LocalDateTime.now());
+
+
+        assertThat(automat.getHerstellerWithNumberOfKuchen()).isEqualTo(
+                Arrays.asList("alex: 2", "donna: 1")
+        );
+    }
+
+    @Test
+    void should_return_kuchen_with_allocated_fachNumber(){
+        Automat automat = new Automat(3);
+
+        Hersteller alex = mock(HerstellerImplementation.class);
+        when(alex.getName()).thenReturn("alex");
+
+        List<Hersteller> allHersteller = Collections.singletonList(alex);
+        automat.setHerstellerList(allHersteller);
+
+        Kuchen kuchen = mock(KuchenImplementation.class);
+        when(kuchen.getHersteller()).thenReturn(alex);
+        Obstkuchen obstkuchen = mock(ObstkuchenImplementation.class);
+        when(obstkuchen.getHersteller()).thenReturn(alex);
+
+        automat.addKuchen(kuchen, LocalDateTime.now());
+        automat.addKuchen(kuchen, LocalDateTime.now());
+        automat.addKuchen(obstkuchen, LocalDateTime.now());
+
+        List<String> expected = Arrays.asList(
+                kuchen.toString()+": "+"0",
+                kuchen.toString()+": " + "1",
+                obstkuchen.toString()+": " + "2"
+        );
+        assertThat(automat.getAllKuchenWithFachNum()).isEqualTo(expected);
     }
 
 }
