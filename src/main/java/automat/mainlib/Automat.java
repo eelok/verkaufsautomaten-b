@@ -80,7 +80,7 @@ public class Automat extends Observable implements Serializable {
         return false;
     }
 
-    public boolean addHersteller(Hersteller hersteller) {
+    public boolean addHersteller(Hersteller hersteller) throws ManufacturerExistException {
         if (herstellerExists(hersteller.getName())) {
             throw  new ManufacturerExistException(String.format("Manufacturer %s already exists", hersteller.getName()));
         }

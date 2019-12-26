@@ -2,7 +2,6 @@ package automat.apps.console;
 
 import automat.mainlib.Automat;
 import automat.mainlib.exceptions.ManufacturerExistException;
-import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.hersteller.observer.AddNewHerstellerObserver;
 import automat.mainlib.hersteller.observer.RemoveHarstellerObserver;
@@ -82,9 +81,9 @@ public class VerwaltungController {
                 continue;
             }
             if (stringUtils.isOneWord(userInput)) {
-                try{
-                    addManufacturer(userInput.toLowerCase());
-                } catch (ManufacturerExistException ex){
+                try {
+                    automat.addHersteller(new HerstellerImplementation(userInput.toLowerCase().trim()));
+                } catch (ManufacturerExistException ex) {
                     System.out.println(ex.getMessage());
                 }
             } else {
@@ -106,14 +105,14 @@ public class VerwaltungController {
             }
             if (userInput.equalsIgnoreCase("manufacturer")) {
                 List<String> herstellerWithNumberOfKuchen = automat.getHerstellerWithNumberOfKuchen();
-                if(herstellerWithNumberOfKuchen.isEmpty()){
+                if (herstellerWithNumberOfKuchen.isEmpty()) {
                     System.out.println("there is no manufacturer");
                 }
                 herstellerWithNumberOfKuchen.forEach(System.out::println);
                 userInput = getUserInput(scanner);
             } else if (userInput.equalsIgnoreCase("kuchen")) {
                 List<String> listWithKuchenWithAllocatedFachNum = automat.getAllKuchenWithFachNum();
-                if (listWithKuchenWithAllocatedFachNum.isEmpty()){
+                if (listWithKuchenWithAllocatedFachNum.isEmpty()) {
                     System.out.println("No Kuchen Available in the Automat");
                 }
                 listWithKuchenWithAllocatedFachNum.forEach(System.out::println);
@@ -139,7 +138,7 @@ public class VerwaltungController {
                 int fachNum = stringUtils.extractFachNumberFromString(userInput);
                 try {
                     automat.removeKuchenFromAutomat(fachNum);
-                } catch (IllegalArgumentException e){
+                } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
             } else {
@@ -161,14 +160,9 @@ public class VerwaltungController {
 
     private void addKuchen(String userInput) {
         try {
-             automat.addKuchen(kuchenParser.getKuchenInfo(userInput), LocalDateTime.now());
+            automat.addKuchen(kuchenParser.getKuchenInfo(userInput), LocalDateTime.now());
         } catch (IllegalArgumentException e) {
             System.out.println(String.format("Can not add kuchen, reason: %s", e.getMessage()));
         }
-    }
-
-    private void addManufacturer(String userInput) {
-        Hersteller hersteller = new HerstellerImplementation(userInput);
-        automat.addHersteller(hersteller);
     }
 }
