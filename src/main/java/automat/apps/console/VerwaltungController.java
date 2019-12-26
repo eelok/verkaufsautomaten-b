@@ -3,11 +3,7 @@ package automat.apps.console;
 import automat.mainlib.Automat;
 import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.HerstellerImplementation;
-import automat.mainlib.hersteller.observer.AddNewHerstellerObserver;
-import automat.mainlib.hersteller.observer.RemoveHarstellerObserver;
 import automat.mainlib.kuchen.KuchenParser;
-import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
-import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,10 +22,8 @@ public class VerwaltungController {
     }
 
     public void run() {
-        automat.registerAddNewHerstellerObserver(new AddNewHerstellerObserver());
-        automat.registerAddNewKuchenObserver(new AddNewKuchenObserver());
-        automat.registerRemoveKuchenObserver(new RemoveKuchenObserver());
-        automat.registerRemoveHarstellerObserver(new RemoveHarstellerObserver());
+//        automat.registerAddNewKuchenObserver(new AddNewKuchenObserver());
+//        automat.registerRemoveKuchenObserver(new RemoveKuchenObserver());
         mainMenu();
     }
 
