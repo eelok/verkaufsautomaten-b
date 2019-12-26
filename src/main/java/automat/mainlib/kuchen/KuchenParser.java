@@ -20,7 +20,7 @@ public class KuchenParser {
                 case "kuchen":
                     return new KuchenImplementation(
                             new BigDecimal(split[1].trim()),
-                            new HerstellerImplementation(split[2].trim()),
+                            new HerstellerImplementation(split[2].toLowerCase().trim()),
                             getAllergeneInfo(split[3]),
                             Integer.parseInt(split[4].trim()),
                             Duration.ofHours(Long.parseLong(split[5].trim()))
@@ -28,7 +28,7 @@ public class KuchenParser {
                 case "kremkuchen":
                     return new KremkuchenImplementation(
                             new BigDecimal(split[1].trim()),
-                            new HerstellerImplementation(split[2].trim()),
+                            new HerstellerImplementation(split[2].toLowerCase().trim()),
                             getAllergeneInfo(split[3]),
                             Integer.parseInt(split[4].trim()),
                             Duration.ofHours(Long.parseLong(split[5].trim())),
@@ -37,7 +37,7 @@ public class KuchenParser {
                 case "obstkuchen":
                     return new ObstkuchenImplementation(
                             new BigDecimal(split[1].trim()),
-                            new HerstellerImplementation(split[2].trim()),
+                            new HerstellerImplementation(split[2].toLowerCase().trim()),
                             getAllergeneInfo(split[3]),
                             Integer.parseInt(split[4].trim()),
                             Duration.ofHours(Long.parseLong(split[5].trim())),
@@ -46,7 +46,7 @@ public class KuchenParser {
                 case "obsttorte":
                     return new ObsttorteImplementation(
                             new BigDecimal(split[1].trim()),
-                            new HerstellerImplementation(split[2].trim()),
+                            new HerstellerImplementation(split[2].toLowerCase().trim()),
                             getAllergeneInfo(split[3]),
                             Integer.parseInt(split[4].trim()),
                             Duration.ofHours(Long.parseLong(split[5].trim())),
@@ -71,16 +71,6 @@ public class KuchenParser {
         return Stream.of(str.split(","))
                 .map(item -> Allergen.valueOf(item.trim()))
                 .collect(Collectors.toList());
-    }
-
-    private boolean checkIfAnyNumberInString(String str) {
-        char[] charsOfInput = str.toCharArray();
-        for (char each : charsOfInput) {
-            if (Character.isDigit(each)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

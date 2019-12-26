@@ -1,6 +1,7 @@
 package automat.apps.console;
 
 import automat.mainlib.Automat;
+import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.hersteller.observer.AddNewHerstellerObserver;
@@ -56,12 +57,13 @@ public class VerwaltungController {
                 break;
             case ":l":
                 System.out.println("list mode active");
-                System.out.println("Enter command: manufacturer<list of manufacturer> kuchen<list of kuchen>  :q<back to main menu>> ");
+                System.out.println("Enter command: manufacturer<list of manufacturer> kuchen<list of kuchen>  :q<back to main menu> ");
                 System.out.print(">");
                 commandListMode();
                 break;
             case ":d":
                 System.out.println("delete mode active");
+                System.out.println("Enter command: f<fachnummer> / <name of manufacturer> / :q<back to main menu>");
                 commandRemoveMode();
                 break;
             default:
@@ -80,12 +82,15 @@ public class VerwaltungController {
                 continue;
             }
             if (stringUtils.isOneWord(userInput)) {
-                addManufacturer(userInput);
-                userInput = getUserInput(scanner);
+                try{
+                    addManufacturer(userInput.toLowerCase());
+                } catch (ManufacturerExistException ex){
+                    System.out.println(ex.getMessage());
+                }
             } else {
                 addKuchen(userInput);
-                userInput = getUserInput(scanner);
             }
+            userInput = getUserInput(scanner);
         }
     }
 
@@ -139,7 +144,7 @@ public class VerwaltungController {
                 }
             } else {
                 try {
-                    automat.deleteHersteller(userInput.trim());
+                    automat.deleteHersteller(userInput.toLowerCase().trim());
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }

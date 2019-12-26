@@ -2,6 +2,7 @@ package automat.mainlib;
 
 import automat.apps.console.Observable;
 import automat.mainlib.exceptions.AutomatIsFullException;
+import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.observer.AddNewHerstellerMessage;
 import automat.mainlib.hersteller.observer.RemoveHerstellerMessage;
@@ -81,7 +82,7 @@ public class Automat extends Observable implements Serializable {
 
     public boolean addHersteller(Hersteller hersteller) {
         if (herstellerExists(hersteller.getName())) {
-            throw new IllegalArgumentException(String.format("Manufacturer %s already exists", hersteller.getName()));
+            throw  new ManufacturerExistException(String.format("Manufacturer %s already exists", hersteller.getName()));
         }
 
         notifyAddNewHerstellerObservers(new AddNewHerstellerMessage(hersteller.getName()));
