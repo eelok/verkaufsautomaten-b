@@ -1,12 +1,12 @@
 package automat.apps.console.mvc.addMode;
 
-import automat.apps.console.StringUtils;
+import automat.apps.console.service.StringUtils;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
 import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
-import automat.mainlib.kuchen.KuchenParser;
+import automat.apps.console.service.KuchenParser;
 
 public class AddModeInputListener implements InputEventListener {
 

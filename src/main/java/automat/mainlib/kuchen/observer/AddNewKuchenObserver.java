@@ -1,24 +1,25 @@
 package automat.mainlib.kuchen.observer;
 
-import automat.apps.console.Message;
-import automat.apps.console.Observer;
+import automat.mainlib.Automat;
+import automat.mainlib.Beobachter;
 
-public class AddNewKuchenObserver implements Observer {
+public class AddNewKuchenObserver implements Beobachter {
+
+    private Automat automat;
+
+    public AddNewKuchenObserver(Automat automat) {
+        this.automat = automat;
+        this.automat.meldeAn(this);
+    }
 
     @Override
-    public void handleEvent(Message message) {
-        AddNewKuchenMessage addNewKuchenMessage = (AddNewKuchenMessage)message;
-        System.out.println(String.format(
-                "%s added for %s at f%s",
-                addNewKuchenMessage.getEinlagerungEntry().getKuchen(),
-                addNewKuchenMessage.getEinlagerungEntry().getKuchen().getHersteller().getName(),
-                addNewKuchenMessage.getEinlagerungEntry().getFachnummer()
-        ));
-        int storageCapacity = addNewKuchenMessage.getStorageCapacity();
-        int numberOfKuchenInStorage = addNewKuchenMessage.getNumberOfKuchenInStorage();
-        if((storageCapacity - numberOfKuchenInStorage) == 1){
-            System.out.println("only one place in Automat left");
+    public void aktualisiere() {
+        int automatCapacity = automat.getPlatzImAutomat();
+        int numberOfKuchenInAutomat = automat.getAllEingelagertenKuchen().size();
+        if (automatCapacity - numberOfKuchenInAutomat == 1) {
+            System.out.println("There is only one place available left");
         }
+        System.out.println(String.format("%s was added", automat.getMessage()));
     }
 
 }

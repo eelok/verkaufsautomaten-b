@@ -1,6 +1,6 @@
 package automat.apps.console.mvc.addMode;
 
-import automat.apps.console.StringUtils;
+import automat.apps.console.service.StringUtils;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.mainlib.Automat;

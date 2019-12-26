@@ -7,6 +7,8 @@ import automat.mainlib.hersteller.observer.DeleteHarstellerObserver;
 import automat.mainlib.kuchen.Allergen;
 import automat.mainlib.kuchen.Kuchen;
 import automat.mainlib.hersteller.observer.AddHerstellerObserver;
+import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
+import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
 
 import java.io.Serializable;
 import java.time.Duration;
@@ -123,7 +125,8 @@ public class Automat implements Subject, Serializable {
         int cell = findEmptyCell();
         EinlagerungEntry einlagerungEntry = new EinlagerungEntry(date, newKuchen, cell);
         storage.add(einlagerungEntry);
-
+        this.message = newKuchen.toString();
+        benachrichtige(AddNewKuchenObserver.class);
         return einlagerungEntry;
     }
 
@@ -165,6 +168,7 @@ public class Automat implements Subject, Serializable {
             throw new IllegalArgumentException("fachnumber does not exist");
         }
         storage.remove(indexOfEinlagerungsEntry);
+        benachrichtige(RemoveKuchenObserver.class);
     }
 
     public List<String> getHerstellerWithNumberOfKuchen(){

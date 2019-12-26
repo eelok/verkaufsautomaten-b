@@ -1,6 +1,6 @@
 package automat.apps.console.mvc.deleteMode;
 
-import automat.apps.console.StringUtils;
+import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEvent;

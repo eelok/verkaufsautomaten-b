@@ -2,7 +2,6 @@ package automat.mainlib.hersteller.observer;
 
 import automat.mainlib.Automat;
 import automat.mainlib.Beobachter;
-import automat.mainlib.Subject;
 
 public class AddHerstellerObserver implements Beobachter {
 

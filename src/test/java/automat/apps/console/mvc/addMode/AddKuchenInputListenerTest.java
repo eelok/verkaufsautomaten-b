@@ -4,7 +4,7 @@ import automat.apps.console.mvc.addMode.AddKuchenInputListener;
 import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
 import automat.mainlib.kuchen.Kuchen;
-import automat.mainlib.kuchen.KuchenParser;
+import automat.apps.console.service.KuchenParser;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
