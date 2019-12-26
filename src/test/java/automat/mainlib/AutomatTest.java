@@ -1,6 +1,7 @@
 package automat.mainlib;
 
 import automat.mainlib.exceptions.AutomatIsFullException;
+import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.kuchen.*;
@@ -41,7 +42,7 @@ class AutomatTest {
         automat.setHerstellerList(allHersteller);
         when(donna.getName()).thenReturn("donna");
 
-        assertThatThrownBy(() -> automat.addHersteller(donna)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> automat.addHersteller(donna)).isInstanceOf(ManufacturerExistException.class);
     }
 
 
