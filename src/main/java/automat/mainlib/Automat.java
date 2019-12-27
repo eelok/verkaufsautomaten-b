@@ -1,13 +1,14 @@
 package automat.mainlib;
 
-import automat.apps.console.Observable;
 import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.Hersteller;
-import automat.mainlib.hersteller.observer.AddNewHerstellerMessage;
-import automat.mainlib.hersteller.observer.RemoveHerstellerMessage;
+import automat.mainlib.hersteller.observer.DeleteHarstellerObserver;
 import automat.mainlib.kuchen.Allergen;
 import automat.mainlib.kuchen.Kuchen;
+import automat.mainlib.hersteller.observer.AddHerstellerObserver;
+import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
+import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
 
 import java.io.Serializable;
 import java.time.Duration;
@@ -17,12 +18,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Automat extends Observable implements Serializable {
+public class Automat implements Subject, Serializable {
+
+    private List<Beobachter> beobachterList = new ArrayList<>();
 
     private int platzImAutomat;
     private List<EinlagerungEntry> storage;
     private List<Hersteller> allHersteller;
     private String automatName;
+    private String message;
 
     public Automat() {
     }
@@ -71,6 +75,14 @@ public class Automat extends Observable implements Serializable {
         this.platzImAutomat = platzImAutomat;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public boolean isFull() {
         try{
             findEmptyCell();
@@ -85,9 +97,9 @@ public class Automat extends Observable implements Serializable {
             throw  new ManufacturerExistException(String.format("Manufacturer %s already exists", hersteller.getName()));
         }
 
-        notifyAddNewHerstellerObservers(new AddNewHerstellerMessage(hersteller.getName()));
         allHersteller.add(hersteller);
-
+        this.message = hersteller.getName();
+        benachrichtige(AddHerstellerObserver.class);
         return true;
     }
 
@@ -97,7 +109,8 @@ public class Automat extends Observable implements Serializable {
             throw new IllegalArgumentException(String.format("Hersteller %s does not exist", name));
         }
         allHersteller.remove(hersteller);
-        notifyRemoveHerstellerObserver(new RemoveHerstellerMessage(name));
+        this.message = name;
+        benachrichtige(DeleteHarstellerObserver.class);
     }
 
     public EinlagerungEntry addKuchen(Kuchen newKuchen, LocalDateTime date) {
@@ -112,7 +125,8 @@ public class Automat extends Observable implements Serializable {
         int cell = findEmptyCell();
         EinlagerungEntry einlagerungEntry = new EinlagerungEntry(date, newKuchen, cell);
         storage.add(einlagerungEntry);
-
+        this.message = newKuchen.toString();
+        benachrichtige(AddNewKuchenObserver.class);
         return einlagerungEntry;
     }
 
@@ -154,6 +168,7 @@ public class Automat extends Observable implements Serializable {
             throw new IllegalArgumentException("fachnumber does not exist");
         }
         storage.remove(indexOfEinlagerungsEntry);
+        benachrichtige(RemoveKuchenObserver.class);
     }
 
     public List<String> getHerstellerWithNumberOfKuchen(){
@@ -268,5 +283,22 @@ public class Automat extends Observable implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(platzImAutomat, storage, allHersteller, automatName);
+    }
+
+    @Override
+    public void meldeAn(Beobachter beobachter) {
+        this.beobachterList.add(beobachter);
+    }
+
+    @Override
+    public void meldeAb(Beobachter beobachter) {
+        this.beobachterList.remove(beobachter);
+    }
+
+    @Override
+    public void benachrichtige(Class<? extends Beobachter> beobachterType) {
+        this.beobachterList.stream()
+                .filter(beob -> beobachterType.isInstance(beob))
+                .forEach(b -> b.aktualisiere());
     }
 }

@@ -1,13 +1,11 @@
 package automat.apps.console;
 
+import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
+import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.HerstellerImplementation;
-import automat.mainlib.hersteller.observer.AddNewHerstellerObserver;
-import automat.mainlib.hersteller.observer.RemoveHarstellerObserver;
-import automat.mainlib.kuchen.KuchenParser;
-import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
-import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
+import automat.apps.console.service.KuchenParser;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,10 +24,6 @@ public class VerwaltungController {
     }
 
     public void run() {
-        automat.registerAddNewHerstellerObserver(new AddNewHerstellerObserver());
-        automat.registerAddNewKuchenObserver(new AddNewKuchenObserver());
-        automat.registerRemoveKuchenObserver(new RemoveKuchenObserver());
-        automat.registerRemoveHarstellerObserver(new RemoveHarstellerObserver());
         mainMenu();
     }
 
@@ -161,7 +155,7 @@ public class VerwaltungController {
     private void addKuchen(String userInput) {
         try {
             automat.addKuchen(kuchenParser.getKuchenInfo(userInput), LocalDateTime.now());
-        } catch (IllegalArgumentException e) {
+        } catch (AutomatIsFullException e) {
             System.out.println(String.format("Can not add kuchen, reason: %s", e.getMessage()));
         }
     }

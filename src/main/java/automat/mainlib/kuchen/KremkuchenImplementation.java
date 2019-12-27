@@ -96,18 +96,6 @@ public class KremkuchenImplementation implements Kremkuchen, Serializable {
         this.kremsorte = kremsorte;
     }
 
-//for test only
-//    @Override
-//    public String toString() {
-//        return String.format(
-//                        "kuchenInfo: price: %s," +
-//                        "hersteller: %s," +
-//                        "allergens: %s," +
-//                        "naehrwert: %s," +
-//                        "hatlbarkeit: %s," +
-//                        "kremsorte: %s"
-//                , getPrice(), getHersteller().toString(), getAllergenes().toString(), getNaehrwert(), getHaltbarkeit().toDays(), getKremsorte());
-//    }
 
     @Override
     public boolean equals(Object o) {

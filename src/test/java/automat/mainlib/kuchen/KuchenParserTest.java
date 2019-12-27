@@ -1,5 +1,6 @@
 package automat.mainlib.kuchen;
 
+import automat.apps.console.service.KuchenParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +21,5 @@ class KuchenParserTest {
 
         assertThat(kuchenParser.getKuchenInfo(userInput)).isInstanceOf(Kremkuchen.class);
     }
-
 
 }

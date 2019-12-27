@@ -1,6 +1,7 @@
-package automat.mainlib.kuchen;
+package automat.apps.console.service;
 
 import automat.mainlib.hersteller.HerstellerImplementation;
+import automat.mainlib.kuchen.*;
 
 import java.math.BigDecimal;
 import java.time.Duration;

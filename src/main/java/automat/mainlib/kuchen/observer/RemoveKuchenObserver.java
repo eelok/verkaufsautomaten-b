@@ -1,14 +1,20 @@
 package automat.mainlib.kuchen.observer;
 
-import automat.apps.console.Message;
-import automat.apps.console.Observer;
+import automat.mainlib.Automat;
+import automat.mainlib.Beobachter;
 
-public class RemoveKuchenObserver implements Observer {
+public class RemoveKuchenObserver implements Beobachter {
+
+    private Automat automat;
+
+    public RemoveKuchenObserver(Automat automat) {
+        this.automat = automat;
+        this.automat.meldeAn(this);
+    }
 
     @Override
-    public void handleEvent(Message message) {
-        RemoveKuchenMessage removeKuchenMessage = (RemoveKuchenMessage)message;
-        System.out.println(String.format("%s removed", removeKuchenMessage.getKuchen()));
+    public void aktualisiere() {
+        System.out.println("kuchen was deleted");
     }
 
 }
