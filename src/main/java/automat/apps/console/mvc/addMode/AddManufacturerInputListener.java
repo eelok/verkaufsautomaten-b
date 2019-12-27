@@ -1,10 +1,10 @@
 package automat.apps.console.mvc.addMode;
 
-import automat.apps.console.service.StringUtils;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
+import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
-import automat.mainlib.hersteller.Hersteller;
+import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.HerstellerImplementation;
 
 public class AddManufacturerInputListener implements InputEventListener {
@@ -22,11 +22,11 @@ public class AddManufacturerInputListener implements InputEventListener {
         if (event.getText() == null) {
             return;
         }
-        if (stringUtils.isOneWord(event.getText())) {
-            Hersteller hersteller = new HerstellerImplementation(event.getText());
+        String userInput = event.getText().toLowerCase().trim();
+        if (stringUtils.isOneWord(userInput)) {
             try {
-                automat.addHersteller(hersteller);
-            } catch (IllegalArgumentException ex) {
+                automat.addHersteller(new HerstellerImplementation(userInput));
+            } catch (ManufacturerExistException ex) {
                 System.out.println(ex.getMessage());
             }
         }

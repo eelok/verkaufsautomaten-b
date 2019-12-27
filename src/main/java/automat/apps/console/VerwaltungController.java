@@ -50,7 +50,7 @@ public class VerwaltungController {
                 break;
             case ":l":
                 System.out.println("list mode active");
-                System.out.println("Enter command: manufacturer<list of manufacturer> kuchen<list of kuchen>  :q<back to main menu> ");
+                System.out.println("Enter command: manufacturer / kuchen / :q<back to main menu> ");
                 System.out.print(">");
                 commandListMode();
                 break;
@@ -157,6 +157,8 @@ public class VerwaltungController {
             automat.addKuchen(kuchenParser.getKuchenInfo(userInput), LocalDateTime.now());
         } catch (AutomatIsFullException e) {
             System.out.println(String.format("Can not add kuchen, reason: %s", e.getMessage()));
+        } catch (IllegalArgumentException e){
+            System.out.println(String.format("The Kuchen could not be added, reason: %s", e.getMessage()));
         }
     }
 }

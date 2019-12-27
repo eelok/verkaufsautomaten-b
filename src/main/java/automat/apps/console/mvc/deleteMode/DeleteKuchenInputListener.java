@@ -9,27 +9,24 @@ public class DeleteKuchenInputListener implements InputEventListener {
     private Automat automat;
     private StringUtils stringUtils;
 
-    public DeleteKuchenInputListener(StringUtils stringUtils, Automat automat) {
+    public DeleteKuchenInputListener(Automat automat, StringUtils stringUtils) {
         this.automat = automat;
         this.stringUtils = stringUtils;
     }
 
     @Override
     public void onInputEvent(InputEvent event) {
-        //TODO: optimize
-//        if (event.getText().matches("^f.[0-9]*$")) {
-//            int fachNum = stringUtils.extractFachNumberFromString(event.getText());
-//            List<EinlagerungEntry> einlagerungList = automat.getEinlagerungList();
-//            if (fachNum > einlagerungList.size() - 1) {
-//                System.out.println(String.format("Fach %s doesn't exist", fachNum));
-//                return;
-//            }
-//            if (einlagerungList[fachNum] == null) {
-//                System.out.println(String.format("Fach %s is empty", fachNum));
-//                return;
-//            }
-//            automat.removeKuchenFromAutomat(einlagerungList[fachNum].getKuchen());
-//        }
+        if(event.getText() == null){
+            return;
+        }
+        if(event.getText().matches("^f.[0-9]*$")){
+            int fachNumber = stringUtils.extractFachNumberFromString(event.getText());
+            try {
+                automat.removeKuchenFromAutomat(fachNumber);
+            } catch (IllegalArgumentException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
 }

@@ -20,7 +20,8 @@ public class ConsoleReader {
             if (userInput.equals(":q")) {
                 break;
             }
-            handler.handle(new InputEvent(this, userInput));
+            InputEvent event = new InputEvent(this, userInput);
+            handler.handle(event);
         } while (true);
     }
 }
