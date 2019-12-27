@@ -5,7 +5,6 @@ import automat.apps.console.mvc.InputEventListener;
 import automat.mainlib.Automat;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ListKuchenInputListener implements InputEventListener {
     private Automat automat;
@@ -17,20 +16,12 @@ public class ListKuchenInputListener implements InputEventListener {
     @Override
     public void onInputEvent(InputEvent event) {
         if (event.getText().equals("kuchen")) {
-            List<String> kuchenAndFach = getKuchenAndFach();
-            if (kuchenAndFach.isEmpty()) {
+            List<String> allKuchenWithFachNum = automat.getAllKuchenWithFachNum();
+            if (allKuchenWithFachNum.isEmpty()) {
                 System.out.println("No Kuchen Available in the Automat");
+            } else {
+                allKuchenWithFachNum.forEach(System.out::println);
             }
-            kuchenAndFach.forEach(System.out::println);
         }
-    }
-
-    private List<String> getKuchenAndFach() {
-        return automat.getAllEingelagertenKuchen().stream()
-                .map(kuchen -> {
-                    int fachnummerZuBestimmtenKuchen = automat.getFachnummerZuBestimmtenKuchen(kuchen);
-                    return String.format("%s : f%s", kuchen, fachnummerZuBestimmtenKuchen);
-                })
-                .collect(Collectors.toList());
     }
 }

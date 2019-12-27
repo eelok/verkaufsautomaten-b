@@ -15,7 +15,9 @@ public class InputEventHandler {
     }
 
     public void handle(InputEvent event) {
-        listenerList.forEach(inputEventListener -> inputEventListener.onInputEvent(event));
+        for (InputEventListener each : listenerList){
+            each.onInputEvent(event);
+        }
     }
 
 }

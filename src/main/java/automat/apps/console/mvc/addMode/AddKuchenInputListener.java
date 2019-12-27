@@ -3,6 +3,7 @@ package automat.apps.console.mvc.addMode;
 import automat.apps.console.mvc.InputEventListener;
 import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
+import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.kuchen.Kuchen;
 import automat.apps.console.service.KuchenParser;
 
@@ -29,8 +30,10 @@ public class AddKuchenInputListener implements InputEventListener {
         }
         try {
             automat.addKuchen(kuchenInfo, LocalDateTime.now());
-        } catch (IllegalArgumentException ex) {
-            System.out.println(String.format("The Kuchen could not be added, reason: %s", ex.getMessage()));
+        } catch (AutomatIsFullException ex) {
+            System.out.println(String.format("Can not add kuchen, reason: %s", ex.getMessage()));
+        } catch (IllegalArgumentException e){
+            System.out.println(String.format("The Kuchen could not be added, reason: %s", e.getMessage()));
         }
     }
 }

@@ -10,9 +10,11 @@ import automat.apps.console.mvc.InputEventListener;
 public class DeleteModeInputListener implements InputEventListener {
 
     private Automat automat;
+    private StringUtils stringUtils;
 
-    public DeleteModeInputListener(Automat automat) {
+    public DeleteModeInputListener(Automat automat, StringUtils stringUtils) {
         this.automat = automat;
+        this.stringUtils = stringUtils;
     }
 
     @Override
@@ -22,7 +24,7 @@ public class DeleteModeInputListener implements InputEventListener {
             ConsoleReader consoleReader = new ConsoleReader();
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new DeleteHerstellerInputListener(automat));
-            eventHandler.add(new DeleteKuchenInputListener(new StringUtils(), automat));
+            eventHandler.add(new DeleteKuchenInputListener(automat, stringUtils));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
         }
