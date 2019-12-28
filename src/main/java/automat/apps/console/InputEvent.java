@@ -1,6 +1,9 @@
-package automat.apps.console.mvc;
+package automat.apps.console;
 
-public class InputEvent extends java.util.EventObject {
+import java.util.EventObject;
+
+public class InputEvent extends EventObject {
+
     private String text;
 
     public InputEvent(Object source, String text) {
@@ -9,7 +12,6 @@ public class InputEvent extends java.util.EventObject {
     }
 
     public String getText() {
-        return this.text;
+        return text;
     }
 }
-
