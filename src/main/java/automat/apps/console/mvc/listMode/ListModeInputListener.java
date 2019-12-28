@@ -23,15 +23,7 @@ public class ListModeInputListener implements InputEventListener {
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new ListManufacturerInputListener(automat));
             eventHandler.add(new ListKuchenInputListener(automat));
-
-            eventHandler.add(new InputEventListener() {
-                @Override
-                public void onInputEvent(InputEvent event) {
-                    if(!event.getText().equals("manufacturer") && !event.getText().equals("kuchen")){
-                        System.out.println("List Mode input: expected format: manufacturer / kuchen");
-                    }
-                }
-            });
+            eventHandler.add(new ListModeInfo());
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
 

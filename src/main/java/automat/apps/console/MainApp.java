@@ -1,6 +1,7 @@
 package automat.apps.console;
 
 import automat.apps.console.mvc.ConsoleReader;
+import automat.apps.console.mvc.InfoCommandMode;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.addMode.AddModeInputListener;
 import automat.apps.console.mvc.deleteMode.DeleteModeInputListener;
@@ -12,7 +13,7 @@ import automat.mainlib.hersteller.observer.DeleteHarstellerObserver;
 import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
 import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
 
-public class AppMvc {
+public class MainApp {
     public static void main(String[] args) {
 
         Automat automat = new Automat(5);
@@ -30,6 +31,9 @@ public class AppMvc {
         AddModeInputListener addModeInputListener = new AddModeInputListener(automat);
         ListModeInputListener listModeInputListener = new ListModeInputListener(automat);
         DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, stringUtils);
+        InfoCommandMode infoCommandMode = new InfoCommandMode();
+
+        eventHandler.add(infoCommandMode);
         eventHandler.add(addModeInputListener);
         eventHandler.add(listModeInputListener);
         eventHandler.add(deleteModeInputListener);

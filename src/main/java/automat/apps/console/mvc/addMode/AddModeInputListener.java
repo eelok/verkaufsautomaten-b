@@ -24,7 +24,6 @@ public class AddModeInputListener implements InputEventListener {
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new AddManufacturerInputListener(new StringUtils(), automat));
             eventHandler.add(new AddKuchenInputListener(new KuchenParser(), automat));
-
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
         }

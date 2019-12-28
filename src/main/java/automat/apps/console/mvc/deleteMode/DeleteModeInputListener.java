@@ -21,6 +21,7 @@ public class DeleteModeInputListener implements InputEventListener {
     public void onInputEvent(InputEvent event) {
         if (event.getText() != null && event.getText().equals(":d")) {
             System.out.println("delete mode active");
+            System.out.println("Expected input: name of manufacturer / f<fachnummer>");
             ConsoleReader consoleReader = new ConsoleReader();
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new DeleteHerstellerInputListener(automat));
