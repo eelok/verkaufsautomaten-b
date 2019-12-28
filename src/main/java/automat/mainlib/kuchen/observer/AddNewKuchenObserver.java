@@ -2,13 +2,16 @@ package automat.mainlib.kuchen.observer;
 
 import automat.mainlib.Automat;
 import automat.mainlib.Beobachter;
+import automat.mainlib.Printer;
 
 public class AddNewKuchenObserver implements Beobachter {
 
     private Automat automat;
+    private Printer printer;
 
-    public AddNewKuchenObserver(Automat automat) {
+    public AddNewKuchenObserver(Automat automat, Printer printer) {
         this.automat = automat;
+        this.printer = printer;
         this.automat.meldeAn(this);
     }
 
@@ -17,9 +20,9 @@ public class AddNewKuchenObserver implements Beobachter {
         int automatCapacity = automat.getPlatzImAutomat();
         int numberOfKuchenInAutomat = automat.getAllEingelagertenKuchen().size();
         if (automatCapacity - numberOfKuchenInAutomat == 1) {
-            System.out.println("There is only one place available left");
+            printer.println("There is only one place available left");
         }
-        System.out.println(String.format("%s was added", automat.getMessage()));
+        printer.println(String.format("%s was added", automat.getMessage()));
     }
 
 }

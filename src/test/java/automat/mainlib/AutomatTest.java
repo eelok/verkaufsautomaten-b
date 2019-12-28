@@ -263,23 +263,17 @@ class AutomatTest {
 
     @Test
     void should_remove_kuchen() {
-        Automat automat = new Automat(2);
-        Hersteller alex = mock(Hersteller.class);
-        when(alex.getName()).thenReturn("alex");
-        automat.addHersteller(alex);
+        EinlagerungEntry einlagerungEntry1 = mock(EinlagerungEntry.class);
+        List<EinlagerungEntry> storageList = mock(List.class);
+        when(storageList.size()).thenReturn(1);
+        when(storageList.get(0)).thenReturn(einlagerungEntry1);
+        when(einlagerungEntry1.getFachnummer()).thenReturn(0);
+        Automat automat = new Automat(2, storageList, null);
 
-        Kuchen kuchen = mock(Kuchen.class);
-        Kuchen kremKuchen = mock(Kremkuchen.class);
-        when(kuchen.getHersteller()).thenReturn(alex);
-        when(kremKuchen.getHersteller()).thenReturn(alex);
+        int fachNum = 0;
+        when(storageList.remove(anyInt())).thenReturn(einlagerungEntry1);
 
-        automat.addKuchen(kuchen, LocalDateTime.now());
-        automat.addKuchen(kremKuchen, LocalDateTime.now());
-
-        int fachnummer = automat.getFachnummerZuBestimmtenKuchen(kremKuchen);
-        automat.removeKuchenFromAutomat(fachnummer);
-
-        assertThat(automat.getAllEingelagertenKuchen()).isEqualTo(Arrays.asList(kuchen));
+        assertThat(automat.removeKuchenFromAutomat(fachNum)).isEqualTo(einlagerungEntry1);
     }
 
     @Test
@@ -301,7 +295,7 @@ class AutomatTest {
 
         assertThatThrownBy(() -> automat.removeKuchenFromAutomat(fachnummer))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("fachnumber does not exist");
+                .hasMessage("fachnummer does not exist");
     }
 
     @Test

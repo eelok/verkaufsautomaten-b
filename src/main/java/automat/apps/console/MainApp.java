@@ -25,8 +25,8 @@ public class MainApp {
         Printer printer = new Printer();
         AddHerstellerObserver addHerstellerObserver = new AddHerstellerObserver(automat, printer);
         DeleteHarstellerObserver deleteHarstellerObserver = new DeleteHarstellerObserver(automat, printer);
-        AddNewKuchenObserver addNewKuchenObserver = new AddNewKuchenObserver(automat);
-        RemoveKuchenObserver removeKuchenObserver = new RemoveKuchenObserver(automat);
+        AddNewKuchenObserver addNewKuchenObserver = new AddNewKuchenObserver(automat, printer);
+        RemoveKuchenObserver removeKuchenObserver = new RemoveKuchenObserver(automat, printer);
 
         StringUtils stringUtils = new StringUtils();
 

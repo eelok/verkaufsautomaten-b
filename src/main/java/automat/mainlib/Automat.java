@@ -162,13 +162,14 @@ public class Automat implements Subject, Serializable {
     }
 
 
-    public void removeKuchenFromAutomat(int fachNummer) {
+    public EinlagerungEntry removeKuchenFromAutomat(int fachNummer) {
         int indexOfEinlagerungsEntry = findIndex(fachNummer);
         if (indexOfEinlagerungsEntry == -1) {
-            throw new IllegalArgumentException("fachnumber does not exist");
+            throw new IllegalArgumentException("fachnummer does not exist");
         }
-        storage.remove(indexOfEinlagerungsEntry);
+        EinlagerungEntry removedEinlagerungEntry = storage.remove(indexOfEinlagerungsEntry);
         benachrichtige(RemoveKuchenObserver.class);
+        return removedEinlagerungEntry;
     }
 
     public List<String> getHerstellerWithNumberOfKuchen(){
