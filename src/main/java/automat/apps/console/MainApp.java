@@ -10,6 +10,7 @@ import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
 import automat.mainlib.hersteller.observer.AddHerstellerObserver;
 import automat.mainlib.hersteller.observer.DeleteHarstellerObserver;
+import automat.mainlib.Printer;
 import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
 import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
 
@@ -21,8 +22,9 @@ public class MainApp {
         InputEventHandler eventHandler = new InputEventHandler();
         consoleReader.setHandler(eventHandler);
 
-        AddHerstellerObserver addHerstellerObserver = new AddHerstellerObserver(automat);
-        DeleteHarstellerObserver deleteHarstellerObserver = new DeleteHarstellerObserver(automat);
+        Printer printer = new Printer();
+        AddHerstellerObserver addHerstellerObserver = new AddHerstellerObserver(automat, printer);
+        DeleteHarstellerObserver deleteHarstellerObserver = new DeleteHarstellerObserver(automat, printer);
         AddNewKuchenObserver addNewKuchenObserver = new AddNewKuchenObserver(automat);
         RemoveKuchenObserver removeKuchenObserver = new RemoveKuchenObserver(automat);
 
