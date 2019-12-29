@@ -3,12 +3,12 @@ package automat.mainlib;
 import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.Hersteller;
-import automat.mainlib.hersteller.observer.DeleteHarstellerObserver;
+import automat.apps.console.observer.DeleteHerstellerObserver;
 import automat.mainlib.kuchen.Allergen;
 import automat.mainlib.kuchen.Kuchen;
-import automat.mainlib.hersteller.observer.AddHerstellerObserver;
-import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
-import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
+import automat.apps.console.observer.AddHerstellerObserver;
+import automat.apps.console.observer.AddNewKuchenObserver;
+import automat.apps.console.observer.RemoveKuchenObserver;
 
 import java.io.Serializable;
 import java.time.Duration;
@@ -110,7 +110,7 @@ public class Automat implements Subject, Serializable {
         }
         allHersteller.remove(hersteller);
         this.message = name;
-        benachrichtige(DeleteHarstellerObserver.class);
+        benachrichtige(DeleteHerstellerObserver.class);
     }
 
     public EinlagerungEntry addKuchen(Kuchen newKuchen, LocalDateTime date) {

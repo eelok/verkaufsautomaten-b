@@ -1,8 +1,7 @@
-package automat.mainlib.kuchen.observer;
+package automat.apps.console.observer;
 
 import automat.mainlib.Automat;
 import automat.mainlib.Beobachter;
-import automat.mainlib.Printer;
 
 public class AddNewKuchenObserver implements Beobachter {
 

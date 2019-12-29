@@ -1,16 +1,15 @@
-package automat.mainlib.hersteller.observer;
+package automat.apps.console.observer;
 
 import automat.mainlib.Automat;
 import automat.mainlib.Beobachter;
-import automat.mainlib.Printer;
 
-public class DeleteHarstellerObserver implements Beobachter {
+public class DeleteHerstellerObserver implements Beobachter {
 
     private Automat automat;
     private Printer printer;
 
 
-    public DeleteHarstellerObserver(Automat automat, Printer printer) {
+    public DeleteHerstellerObserver(Automat automat, Printer printer) {
         this.automat = automat;
         this.printer = printer;
         this.automat.meldeAn(this);

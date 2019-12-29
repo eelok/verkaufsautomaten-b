@@ -1,7 +1,6 @@
-package automat.mainlib.kuchen.observer;
+package automat.apps.console.observer;
 
 import automat.mainlib.Automat;
-import automat.mainlib.Printer;
 import automat.mainlib.kuchen.KremkuchenImplementation;
 import automat.mainlib.kuchen.Kuchen;
 import automat.mainlib.kuchen.KuchenImplementation;
@@ -30,7 +29,7 @@ class AddNewKuchenObserverTest {
 
 
     @Test
-    void should_call_println_when_many_places_in_automat(){
+    void should_call_println_when_more_than_one_places_in_automat(){
         when(automat.getPlatzImAutomat()).thenReturn(4);
         String message = "message";
         when(automat.getMessage()).thenReturn(message);
@@ -44,7 +43,7 @@ class AddNewKuchenObserverTest {
     }
 
     @Test
-    void should_call_println_when_only_one_place_in_automat_left(){
+    void should_call_println_when_one_place_in_automat_left(){
         when(automat.getPlatzImAutomat()).thenReturn(4);
 
         List<Kuchen> listWithKuchen = Arrays.asList(

@@ -1,7 +1,6 @@
-package automat.mainlib.hersteller.observer;
+package automat.apps.console.observer;
 
 import automat.mainlib.Automat;
-import automat.mainlib.Printer;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

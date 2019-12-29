@@ -8,11 +8,11 @@ import automat.apps.console.mvc.deleteMode.DeleteModeInputListener;
 import automat.apps.console.mvc.listMode.ListModeInputListener;
 import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
-import automat.mainlib.hersteller.observer.AddHerstellerObserver;
-import automat.mainlib.hersteller.observer.DeleteHarstellerObserver;
-import automat.mainlib.Printer;
-import automat.mainlib.kuchen.observer.AddNewKuchenObserver;
-import automat.mainlib.kuchen.observer.RemoveKuchenObserver;
+import automat.apps.console.observer.AddHerstellerObserver;
+import automat.apps.console.observer.DeleteHerstellerObserver;
+import automat.apps.console.observer.Printer;
+import automat.apps.console.observer.AddNewKuchenObserver;
+import automat.apps.console.observer.RemoveKuchenObserver;
 
 public class MainApp {
     public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class MainApp {
 
         Printer printer = new Printer();
         AddHerstellerObserver addHerstellerObserver = new AddHerstellerObserver(automat, printer);
-        DeleteHarstellerObserver deleteHarstellerObserver = new DeleteHarstellerObserver(automat, printer);
+        DeleteHerstellerObserver deleteHerstellerObserver = new DeleteHerstellerObserver(automat, printer);
         AddNewKuchenObserver addNewKuchenObserver = new AddNewKuchenObserver(automat, printer);
         RemoveKuchenObserver removeKuchenObserver = new RemoveKuchenObserver(automat, printer);
 
