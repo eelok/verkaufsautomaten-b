@@ -1,5 +1,6 @@
 package automat.apps.console.mvc.addMode;
 
+import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
@@ -11,10 +12,12 @@ public class AddManufacturerInputListener implements InputEventListener {
 
     private StringUtils stringUtils;
     private Automat automat;
+    private Printer printer;
 
-    public AddManufacturerInputListener(StringUtils stringUtils, Automat automat) {
+    public AddManufacturerInputListener(StringUtils stringUtils, Automat automat, Printer printer) {
         this.stringUtils = stringUtils;
         this.automat = automat;
+        this.printer = printer;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class AddManufacturerInputListener implements InputEventListener {
             try {
                 automat.addHersteller(new HerstellerImplementation(userInput));
             } catch (ManufacturerExistException ex) {
-                System.out.println(ex.getMessage());
+                printer.println(ex.getMessage());
             }
         }
     }

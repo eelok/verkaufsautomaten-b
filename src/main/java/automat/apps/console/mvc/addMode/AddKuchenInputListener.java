@@ -1,5 +1,6 @@
 package automat.apps.console.mvc.addMode;
 
+import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEventListener;
 import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
@@ -13,10 +14,13 @@ public class AddKuchenInputListener implements InputEventListener {
 
     private KuchenParser kuchenParser;
     private Automat automat;
+    private Printer printer;
 
-    public AddKuchenInputListener(KuchenParser kuchenParser, Automat automat) {
+
+    public AddKuchenInputListener(KuchenParser kuchenParser, Automat automat, Printer printer) {
         this.kuchenParser = kuchenParser;
         this.automat = automat;
+        this.printer = printer;
     }
 
     @Override
@@ -31,9 +35,9 @@ public class AddKuchenInputListener implements InputEventListener {
         try {
             automat.addKuchen(kuchenInfo, LocalDateTime.now());
         } catch (AutomatIsFullException ex) {
-            System.out.println(String.format("Can not add kuchen, reason: %s", ex.getMessage()));
+            printer.println(String.format("Can not add kuchen, reason: %s", ex.getMessage()));
         } catch (IllegalArgumentException e){
-            System.out.println(String.format("The Kuchen could not be added, reason: %s", e.getMessage()));
+            printer.println(String.format("The Kuchen could not be added, reason: %s", e.getMessage()));
         }
     }
 }

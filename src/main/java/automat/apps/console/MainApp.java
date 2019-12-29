@@ -10,7 +10,6 @@ import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
 import automat.apps.console.observer.AddHerstellerObserver;
 import automat.apps.console.observer.DeleteHerstellerObserver;
-import automat.apps.console.observer.Printer;
 import automat.apps.console.observer.AddNewKuchenObserver;
 import automat.apps.console.observer.RemoveKuchenObserver;
 
@@ -30,7 +29,7 @@ public class MainApp {
 
         StringUtils stringUtils = new StringUtils();
 
-        AddModeInputListener addModeInputListener = new AddModeInputListener(automat);
+        AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer);
         ListModeInputListener listModeInputListener = new ListModeInputListener(automat);
         DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, stringUtils);
         InfoCommandMode infoCommandMode = new InfoCommandMode();

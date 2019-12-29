@@ -94,7 +94,7 @@ public class Automat implements Subject, Serializable {
 
     public boolean addHersteller(Hersteller hersteller) throws ManufacturerExistException {
         if (herstellerExists(hersteller.getName())) {
-            throw  new ManufacturerExistException(String.format("Manufacturer %s already exists", hersteller.getName()));
+            throw new ManufacturerExistException(String.format("Manufacturer %s already exists", hersteller.getName()));
         }
 
         allHersteller.add(hersteller);

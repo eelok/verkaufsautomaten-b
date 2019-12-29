@@ -1,4 +1,4 @@
-package automat.apps.console.observer;
+package automat.apps.console;
 
 public class Printer {
 

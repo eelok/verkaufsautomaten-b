@@ -1,5 +1,6 @@
 package automat.apps.console.observer;
 
+import automat.apps.console.Printer;
 import automat.mainlib.Automat;
 import automat.mainlib.Beobachter;
 
