@@ -1,6 +1,5 @@
-package automat;
+package automat.apps.console.service;
 
-import automat.apps.console.service.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,12 +1,11 @@
-package automat.mainlib.hersteller.observer;
+package automat.apps.console.observer;
 
 import automat.mainlib.Automat;
-import automat.mainlib.Printer;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
-class DeleteHarstellerObserverTest {
+class DeleteHerstellerObserverTest {
 
 
     @Test
@@ -15,9 +14,9 @@ class DeleteHarstellerObserverTest {
         Printer printer = mock(Printer.class);
         String message = "was called";
         when(automat.getMessage()).thenReturn(message);
-        DeleteHarstellerObserver deleteHarstellerObserver = new DeleteHarstellerObserver(automat, printer);
+        DeleteHerstellerObserver deleteHerstellerObserver = new DeleteHerstellerObserver(automat, printer);
 
-        deleteHarstellerObserver.aktualisiere();
+        deleteHerstellerObserver.aktualisiere();
         verify(printer).println(String.format("Manufacturer %s was deleted", automat.getMessage()));
     }
 
