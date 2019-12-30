@@ -75,8 +75,9 @@ public class ObsttorteImplementation implements Obsttorte, Serializable {
         return haltbarkeit;
     }
 
-    public String toString(){
-        return "Obsttorte";
+    @Override
+    public String getType() {
+        return TypeOfKuchen.Obsttorte.toString();
     }
 
     public void setPrice(BigDecimal price) {
@@ -105,6 +106,19 @@ public class ObsttorteImplementation implements Obsttorte, Serializable {
 
     public void setKremsorte(String kremsorte) {
         this.kremsorte = kremsorte;
+    }
+
+    @Override
+    public String toString() {
+        return "ObsttorteImplementation{" +
+                "price=" + price +
+                ", hersteller=" + hersteller +
+                ", allergens=" + allergens +
+                ", naehrwert=" + naehrwert +
+                ", haltbarkeit=" + haltbarkeit +
+                ", obstsorte='" + obstsorte + '\'' +
+                ", kremsorte='" + kremsorte + '\'' +
+                '}';
     }
 
     @Override

@@ -69,8 +69,21 @@ public class ObstkuchenImplementation implements Obstkuchen, Serializable {
         return haltbarkeit;
     }
 
-    public String toString(){
-        return "Obstkuchen";
+    @Override
+    public String getType() {
+        return TypeOfKuchen.Obstkuchen.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "ObstkuchenImplementation{" +
+                "price=" + price +
+                ", hersteller=" + hersteller +
+                ", allergens=" + allergens +
+                ", naehrwert=" + naehrwert +
+                ", haltbarkeit=" + haltbarkeit +
+                ", obstsorte='" + obstsorte + '\'' +
+                '}';
     }
 
     public void setPrice(BigDecimal price) {

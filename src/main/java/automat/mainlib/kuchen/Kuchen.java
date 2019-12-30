@@ -17,4 +17,6 @@ public interface Kuchen {
     int getNaehrwert();
 
     Duration getHaltbarkeit();
+
+    String getType();
 }
