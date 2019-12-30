@@ -33,5 +33,12 @@
             <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/name.falgout.jeffrey.testing.junit5/mockito-extension -->
+        <dependency>
+            <groupId>name.falgout.jeffrey.testing.junit5</groupId>
+            <artifactId>mockito-extension</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
     </dependencies>
 </project>

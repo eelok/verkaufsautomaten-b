@@ -1,5 +1,6 @@
 package automat.apps.console.mvc.listMode;
 
+import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.mainlib.Automat;
@@ -8,9 +9,11 @@ import java.util.List;
 
 public class ListManufacturerInputListener implements InputEventListener {
     private Automat automat;
+    private Printer printer;
 
-    public ListManufacturerInputListener(Automat automat) {
+    public ListManufacturerInputListener(Automat automat, Printer printer) {
         this.automat = automat;
+        this.printer = printer;
     }
 
     @Override
@@ -18,9 +21,9 @@ public class ListManufacturerInputListener implements InputEventListener {
         if (event.getText().equals("manufacturer")) {
             List<String> herstellerWithNumberOfKuchen = automat.getHerstellerWithNumberOfKuchen();
             if (herstellerWithNumberOfKuchen.isEmpty()) {
-                System.out.println("there is no manufacturer");
+                printer.println("there is no manufacturer");
             } else {
-                herstellerWithNumberOfKuchen.forEach(System.out::println);
+                herstellerWithNumberOfKuchen.forEach(lin -> printer.println(lin));
             }
         }
     }

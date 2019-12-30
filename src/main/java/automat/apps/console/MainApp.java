@@ -30,9 +30,9 @@ public class MainApp {
         StringUtils stringUtils = new StringUtils();
 
         AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer);
-        ListModeInputListener listModeInputListener = new ListModeInputListener(automat);
-        DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, stringUtils);
-        InfoCommandMode infoCommandMode = new InfoCommandMode();
+        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer);
+        DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, stringUtils, printer);
+        InfoCommandMode infoCommandMode = new InfoCommandMode(printer);
 
         eventHandler.add(infoCommandMode);
         eventHandler.add(addModeInputListener);

@@ -1,15 +1,18 @@
 package automat.apps.console.mvc.deleteMode;
 
+import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.mainlib.Automat;
 
 public class DeleteHerstellerInputListener implements InputEventListener {
     private Automat automat;
+    private Printer printer;
 
 
-    public DeleteHerstellerInputListener(Automat automat) {
+    public DeleteHerstellerInputListener(Automat automat, Printer printer) {
         this.automat = automat;
+        this.printer = printer;
     }
 
     @Override
@@ -21,7 +24,7 @@ public class DeleteHerstellerInputListener implements InputEventListener {
             try {
                 automat.deleteHersteller(event.getText().toLowerCase().trim());
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                printer.println(e.getMessage());
             }
         }
     }

@@ -1,5 +1,6 @@
 package automat.apps.console.mvc.deleteMode;
 
+import automat.apps.console.Printer;
 import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
@@ -8,10 +9,12 @@ import automat.apps.console.mvc.InputEventListener;
 public class DeleteKuchenInputListener implements InputEventListener {
     private Automat automat;
     private StringUtils stringUtils;
+    private Printer printer;
 
-    public DeleteKuchenInputListener(Automat automat, StringUtils stringUtils) {
+    public DeleteKuchenInputListener(Automat automat, StringUtils stringUtils, Printer printer) {
         this.automat = automat;
         this.stringUtils = stringUtils;
+        this.printer = printer;
     }
 
     @Override
@@ -24,7 +27,7 @@ public class DeleteKuchenInputListener implements InputEventListener {
             try {
                 automat.removeKuchenFromAutomat(fachNumber);
             } catch (IllegalArgumentException ex){
-                System.out.println(ex.getMessage());
+                printer.println(ex.getMessage());
             }
         }
     }

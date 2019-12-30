@@ -1,5 +1,6 @@
 package automat.apps.console.mvc.deleteMode;
 
+import automat.apps.console.Printer;
 import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
 import automat.apps.console.mvc.ConsoleReader;
@@ -11,10 +12,12 @@ public class DeleteModeInputListener implements InputEventListener {
 
     private Automat automat;
     private StringUtils stringUtils;
+    private Printer printer;
 
-    public DeleteModeInputListener(Automat automat, StringUtils stringUtils) {
+    public DeleteModeInputListener(Automat automat, StringUtils stringUtils, Printer printer) {
         this.automat = automat;
         this.stringUtils = stringUtils;
+        this.printer = printer;
     }
 
     @Override
@@ -24,8 +27,8 @@ public class DeleteModeInputListener implements InputEventListener {
             System.out.println("Expected input: name of manufacturer / f<fachnummer>");
             ConsoleReader consoleReader = new ConsoleReader();
             InputEventHandler eventHandler = new InputEventHandler();
-            eventHandler.add(new DeleteHerstellerInputListener(automat));
-            eventHandler.add(new DeleteKuchenInputListener(automat, stringUtils));
+            eventHandler.add(new DeleteHerstellerInputListener(automat, printer));
+            eventHandler.add(new DeleteKuchenInputListener(automat, stringUtils, printer));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
         }
