@@ -125,7 +125,7 @@ public class Automat implements Subject, Serializable {
         int cell = findEmptyCell();
         EinlagerungEntry einlagerungEntry = new EinlagerungEntry(date, newKuchen, cell);
         storage.add(einlagerungEntry);
-        this.message = newKuchen.toString();
+        this.message = newKuchen.getType();
         benachrichtige(AddNewKuchenObserver.class);
         return einlagerungEntry;
     }
@@ -168,6 +168,7 @@ public class Automat implements Subject, Serializable {
             throw new IllegalArgumentException("fachnummer does not exist");
         }
         EinlagerungEntry removedEinlagerungEntry = storage.remove(indexOfEinlagerungsEntry);
+        this.message = removedEinlagerungEntry.getKuchen().getType();
         benachrichtige(RemoveKuchenObserver.class);
         return removedEinlagerungEntry;
     }
@@ -184,7 +185,7 @@ public class Automat implements Subject, Serializable {
     public List<String> getAllKuchenWithFachNum(){
         List<String> listWithKuchenWithAllocatedFachNum = new ArrayList<>();
         for (EinlagerungEntry each :storage){
-            listWithKuchenWithAllocatedFachNum.add(each.getKuchen() + ": " + each.getFachnummer());
+            listWithKuchenWithAllocatedFachNum.add(each.getKuchen().getType() + ": " + each.getFachnummer());
         }
         return listWithKuchenWithAllocatedFachNum;
     }

@@ -77,8 +77,20 @@ public class KuchenImplementation implements Kuchen, Serializable {
         this.haltbarkeit = haltbarkeit;
     }
 
+    @Override
+    public String getType() {
+        return TypeOfKuchen.Kuchen.toString();
+    }
+
+    @Override
     public String toString() {
-        return "kuchen";
+        return "KuchenImplementation{" +
+                "price=" + price +
+                ", hersteller=" + hersteller +
+                ", naehrwert=" + naehrwert +
+                ", allergenes=" + allergenes +
+                ", haltbarkeit=" + haltbarkeit +
+                '}';
     }
 
     @Override

@@ -67,23 +67,21 @@ public class KremkuchenImplementation implements Kremkuchen, Serializable {
         return haltbarkeit;
     }
 
-    @Override
-    public String toString() {
-        return "Kremkuchen";
+    public String getType(){
+        return TypeOfKuchen.Kremkuchen.toString();
     }
 
-
-//    @Override
-//    public String toString() {
-//        return "KremkuchenImplementation{" +
-//                "price=" + price +
-//                ", hersteller=" + hersteller +
-//                ", allergens=" + allergens +
-//                ", naehrwert=" + naehrwert +
-//                ", haltbarkeit=" + haltbarkeit +
-//                ", kremsorte='" + kremsorte + '\'' +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "KremkuchenImplementation{" +
+                "price=" + price +
+                ", hersteller=" + hersteller +
+                ", allergens=" + allergens +
+                ", naehrwert=" + naehrwert +
+                ", haltbarkeit=" + haltbarkeit +
+                ", kremsorte='" + kremsorte + '\'' +
+                '}';
+    }
 
     public void setPrice(BigDecimal price) {
         this.price = price;

@@ -6,12 +6,12 @@ import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.addMode.AddModeInputListener;
 import automat.apps.console.mvc.deleteMode.DeleteModeInputListener;
 import automat.apps.console.mvc.listMode.ListModeInputListener;
+import automat.apps.console.observer.AddHerstellerObserver;
+import automat.apps.console.observer.AddNewKuchenObserver;
+import automat.apps.console.observer.DeleteHerstellerObserver;
+import automat.apps.console.observer.RemoveKuchenObserver;
 import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
-import automat.apps.console.observer.AddHerstellerObserver;
-import automat.apps.console.observer.DeleteHerstellerObserver;
-import automat.apps.console.observer.AddNewKuchenObserver;
-import automat.apps.console.observer.RemoveKuchenObserver;
 
 public class MainApp {
     public static void main(String[] args) {
@@ -29,9 +29,9 @@ public class MainApp {
 
         StringUtils stringUtils = new StringUtils();
 
-        AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer, consoleReader);
-        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, consoleReader);
-        DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, stringUtils, printer, consoleReader);
+        AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer, new ConsoleReader());
+        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, new ConsoleReader());
+        DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, stringUtils, printer, new ConsoleReader());
         InfoCommandMode infoCommandMode = new InfoCommandMode(printer);
 
         eventHandler.add(infoCommandMode);

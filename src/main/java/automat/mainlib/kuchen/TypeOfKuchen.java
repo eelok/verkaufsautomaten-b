@@ -1,4 +1,4 @@
-package automat.apps.simulation;
+package automat.mainlib.kuchen;
 
 public enum TypeOfKuchen {
     Kuchen,

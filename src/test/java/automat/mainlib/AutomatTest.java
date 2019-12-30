@@ -264,6 +264,9 @@ class AutomatTest {
     @Test
     void should_remove_kuchen() {
         EinlagerungEntry einlagerungEntry1 = mock(EinlagerungEntry.class);
+        Kuchen kuchen= mock(Kremkuchen.class);
+        when(kuchen.getType()).thenReturn(TypeOfKuchen.Kuchen.toString());
+        when(einlagerungEntry1.getKuchen()).thenReturn(kuchen);
         List<EinlagerungEntry> storageList = mock(List.class);
         when(storageList.size()).thenReturn(1);
         when(storageList.get(0)).thenReturn(einlagerungEntry1);
@@ -421,17 +424,20 @@ class AutomatTest {
 
         Kuchen kuchen = mock(KuchenImplementation.class);
         when(kuchen.getHersteller()).thenReturn(alex);
+        when(kuchen.getType()).thenReturn(TypeOfKuchen.Kuchen.toString());
         Obstkuchen obstkuchen = mock(ObstkuchenImplementation.class);
+        when(obstkuchen.getType()).thenReturn(TypeOfKuchen.Obstkuchen.toString());
         when(obstkuchen.getHersteller()).thenReturn(alex);
+
 
         automat.addKuchen(kuchen, LocalDateTime.now());
         automat.addKuchen(kuchen, LocalDateTime.now());
         automat.addKuchen(obstkuchen, LocalDateTime.now());
 
         List<String> expected = Arrays.asList(
-                kuchen.toString()+": "+"0",
-                kuchen.toString()+": " + "1",
-                obstkuchen.toString()+": " + "2"
+                kuchen.getType()+": "+"0",
+                kuchen.getType()+": " + "1",
+                obstkuchen.getType()+": " + "2"
         );
         assertThat(automat.getAllKuchenWithFachNum()).isEqualTo(expected);
     }
