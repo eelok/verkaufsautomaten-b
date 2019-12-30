@@ -13,17 +13,18 @@ public class AddModeInputListener implements InputEventListener {
 
     private Automat automat;
     private Printer printer;
+    private ConsoleReader consoleReader;
 
-    public AddModeInputListener(Automat automat, Printer printer) {
+    public AddModeInputListener(Automat automat, Printer printer, ConsoleReader consoleReader) {
         this.automat = automat;
         this.printer = printer;
+        this.consoleReader = consoleReader;
     }
 
     @Override
     public void onInputEvent(InputEvent event) {
         if (event.getText() != null && event.getText().equals(":a")) {
-            System.out.println("add mode active");
-            ConsoleReader consoleReader = new ConsoleReader();
+            printer.println("add mode active");
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new AddManufacturerInputListener(new StringUtils(), automat, printer));
             eventHandler.add(new AddKuchenInputListener(new KuchenParser(), automat, printer));

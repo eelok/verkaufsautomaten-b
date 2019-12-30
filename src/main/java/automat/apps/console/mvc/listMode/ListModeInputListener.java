@@ -11,18 +11,19 @@ public class ListModeInputListener implements InputEventListener {
 
     private Automat automat;
     private Printer printer;
+    private ConsoleReader consoleReader;
 
-    public ListModeInputListener(Automat automat, Printer printer) {
+    public ListModeInputListener(Automat automat, Printer printer, ConsoleReader consoleReader) {
         this.automat = automat;
         this.printer = printer;
+        this.consoleReader = consoleReader;
     }
 
     @Override
     public void onInputEvent(InputEvent event) {
         if (event.getText() != null && event.getText().equals(":l")) {
-            System.out.println("list mode active");
-            System.out.println("Enter command: manufacturer / kuchen / :q<back to main menu> ");
-            ConsoleReader consoleReader = new ConsoleReader();
+            printer.println("list mode active");
+            printer.println("Enter command: manufacturer / kuchen / :q<back to main menu> ");
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new ListManufacturerInputListener(automat, printer));
             eventHandler.add(new ListKuchenInputListener(automat, printer));

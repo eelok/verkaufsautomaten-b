@@ -29,9 +29,9 @@ public class MainApp {
 
         StringUtils stringUtils = new StringUtils();
 
-        AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer);
-        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer);
-        DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, stringUtils, printer);
+        AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer, consoleReader);
+        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, consoleReader);
+        DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, stringUtils, printer, consoleReader);
         InfoCommandMode infoCommandMode = new InfoCommandMode(printer);
 
         eventHandler.add(infoCommandMode);

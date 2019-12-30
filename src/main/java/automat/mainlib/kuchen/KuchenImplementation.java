@@ -5,9 +5,7 @@ import automat.mainlib.hersteller.Hersteller;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 public class KuchenImplementation implements Kuchen, Serializable {
