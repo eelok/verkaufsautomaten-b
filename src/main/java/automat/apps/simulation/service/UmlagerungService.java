@@ -1,6 +1,5 @@
 package automat.apps.simulation.service;
 
-import automat.apps.simulation.CreateAutomatService;
 import automat.mainlib.Automat;
 import automat.mainlib.EinlagerungEntry;
 

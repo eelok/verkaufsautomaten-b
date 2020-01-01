@@ -1,7 +1,5 @@
 package automat.apps.simulation.service;
 
-import automat.apps.simulation.CreateAutomatService;
-import automat.apps.simulation.service.UmlagerungService;
 import automat.mainlib.Automat;
 import automat.mainlib.EinlagerungEntry;
 import automat.mainlib.kuchen.Kuchen;

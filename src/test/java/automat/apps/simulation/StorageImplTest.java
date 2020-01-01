@@ -3,7 +3,6 @@ package automat.apps.simulation;
 import automat.apps.simulation.service.UmlagerungService;
 import automat.mainlib.Automat;
 import automat.mainlib.kuchen.Kuchen;
-import automat.mainlib.kuchen.KuchenImplementation;
 import automat.mainlib.kuchen.ObstkuchenImplementation;
 import automat.mainlib.kuchen.TypeOfKuchen;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,6 +37,16 @@ class StorageImplTest {
 
         verify(freshKuchenAutomat).addKuchen(eq(obsttorte), any(LocalDateTime.class));
     }
+
+    @Test
+    void poll_should_call_method_umlagernKuchen() throws InterruptedException {
+        when(freshKuchenAutomat.isFull()).thenReturn(true);
+
+        storageimpl.poll();
+
+        verify(umlagerungService).umlagernKuchen();
+    }
+
 
 
 }
