@@ -1,16 +1,14 @@
-package automat.apps.simulation;
+package automat.apps.simulation.service;
 
 
 import automat.mainlib.Automat;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
 
-import java.util.ArrayList;
-
 public class CreateAutomatService {
 
     public Automat createAutomat(int place) {
-        Automat automat = new Automat(place, new ArrayList<>(), new ArrayList<>());
+        Automat automat = new Automat(place);
         addManufacturer(automat);
 
         return automat;

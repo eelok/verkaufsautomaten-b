@@ -1,5 +1,7 @@
 package automat.apps.simulation;
 
+import automat.apps.simulation.service.RandomKuchenService;
+
 public class EinlagerungProducer extends Thread {
 
     private Storage storage;
