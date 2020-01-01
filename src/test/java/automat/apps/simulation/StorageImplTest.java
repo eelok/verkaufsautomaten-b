@@ -7,7 +7,6 @@ import automat.mainlib.kuchen.ObstkuchenImplementation;
 import automat.mainlib.kuchen.TypeOfKuchen;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -46,7 +45,5 @@ class StorageImplTest {
 
         verify(umlagerungService).umlagernKuchen();
     }
-
-
 
 }

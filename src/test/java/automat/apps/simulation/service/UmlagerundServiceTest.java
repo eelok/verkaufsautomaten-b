@@ -17,7 +17,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class UmlagerundServiceTest {
 
-
     @Mock
     private Automat freshKuchenAutomat;
     @Mock
@@ -42,6 +41,5 @@ class UmlagerundServiceTest {
         verify(freshKuchenAutomat).removeKuchenFromAutomat(fachNum);
         verify(oldKuchenAutomat).addKuchen(eq(obstKuchen), any(LocalDateTime.class));
     }
-
 
 }
