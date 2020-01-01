@@ -1,9 +1,6 @@
 package automat.apps.simulation;
 
-
-
 import automat.mainlib.Automat;
-import automat.mainlib.EinlagerungEntry;
 import automat.mainlib.kuchen.Kuchen;
 
 import java.time.LocalDateTime;
@@ -26,7 +23,7 @@ public class StorageImpl implements Storage {
             freshKuchenAutomat.addKuchen(kuchen, LocalDateTime.now());
             System.out.println(String.format("%s-> Adding >> %s {haltbarkeit in days: %s}",
                     this.freshKuchenAutomat.getName(),
-                    kuchen,
+                    kuchen.getType(),
                     kuchen.getHaltbarkeit().toDays())
             );
             notifyAll();
@@ -48,18 +45,18 @@ public class StorageImpl implements Storage {
         int fachnummer = freshKuchenAutomat.findKuchenWithSmallestHaltbarkeit().getFachnummer();
         freshKuchenAutomat.removeKuchenFromAutomat(fachnummer);
 
-        System.out.println(String.format("%s {haltbarkeit in days: %s} form %s wird in anderer Automat umgelagert",
-                kuchenWithSmallestHaltbarkeit,
+        System.out.println(String.format("%s {haltbarkeit in days: %s} aus %s wird in anderer Automat umgelagert",
+                kuchenWithSmallestHaltbarkeit.getType(),
                 kuchenWithSmallestHaltbarkeit.getHaltbarkeit().toDays(),
                 freshKuchenAutomat.getName()
         ));
-        System.out.println(String.format("%s Removing >> %s", freshKuchenAutomat.getName(), kuchenWithSmallestHaltbarkeit));
+        System.out.println(String.format("%s Removing >> %s", freshKuchenAutomat.getName(), kuchenWithSmallestHaltbarkeit.getType()));
 
         Automat oldKuchenAutomat = automatFactory.createAutomat(10);
         oldKuchenAutomat.setName("OldKuchenAutomat");
         oldKuchenAutomat.addKuchen(kuchenWithSmallestHaltbarkeit, LocalDateTime.now());
 
-        System.out.println(String.format("%s -> Adding >> %s {haltbarkeit in days: %s}", oldKuchenAutomat.getName(), kuchenWithSmallestHaltbarkeit, kuchenWithSmallestHaltbarkeit.getHaltbarkeit().toDays()));
+        System.out.println(String.format("%s -> Adding >> %s {haltbarkeit in days: %s}", oldKuchenAutomat.getName(), kuchenWithSmallestHaltbarkeit.getType(), kuchenWithSmallestHaltbarkeit.getHaltbarkeit().toDays()));
     }
 
 
