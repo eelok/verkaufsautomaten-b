@@ -1,4 +1,4 @@
-package automat.apps.simulation;
+package automat.apps.simulation.service;
 
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.kuchen.*;

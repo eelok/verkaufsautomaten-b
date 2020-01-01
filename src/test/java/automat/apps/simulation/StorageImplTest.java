@@ -1,5 +1,6 @@
 package automat.apps.simulation;
 
+import automat.apps.simulation.service.UmlagerungService;
 import automat.mainlib.Automat;
 import automat.mainlib.kuchen.Kuchen;
 import automat.mainlib.kuchen.KuchenImplementation;
@@ -17,13 +18,13 @@ import static org.mockito.Mockito.*;
 class StorageImplTest {
     private StorageImpl storageimpl;
     private Automat freshKuchenAutomat;
-    private CreateAutomatService automatFactory;
+    private UmlagerungService umlagerungService;
 
     @BeforeEach
     void setUp(){
         freshKuchenAutomat = mock(Automat.class);
-        automatFactory = mock(CreateAutomatService.class);
-        this.storageimpl = new StorageImpl(freshKuchenAutomat, automatFactory);
+        umlagerungService = mock(UmlagerungService.class);
+        this.storageimpl = new StorageImpl(freshKuchenAutomat, umlagerungService);
     }
     @Test
     void put_should_call_method_addKuchen() throws InterruptedException {
@@ -38,8 +39,5 @@ class StorageImplTest {
         verify(freshKuchenAutomat).addKuchen(eq(obsttorte), any(LocalDateTime.class));
     }
 
-    @Test
-    void poll_should_call_method() throws InterruptedException {
-        storageimpl.poll();
-    }
+
 }
