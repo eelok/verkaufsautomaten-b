@@ -2,6 +2,7 @@ package automat.apps.fx;
 
 import automat.apps.fx.model.Kremkuchen;
 import automat.mainlib.Automat;
+import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.kuchen.Allergen;
 import javafx.collections.ObservableList;
