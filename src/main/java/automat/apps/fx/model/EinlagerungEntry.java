@@ -14,8 +14,8 @@ public class EinlagerungEntry extends automat.mainlib.EinlagerungEntry implement
     public EinlagerungEntry(LocalDateTime einlagerungsDatum, Kuchen kuchen, int fachnummer) {
         super(einlagerungsDatum, kuchen, fachnummer);
     }
-
-    public ObjectProperty getKuchenProperty(){
+//todo добавила <Kuchen> из mainlib
+    public ObjectProperty<Kuchen> getKuchenProperty(){
         return this.kuchen;
     }
 

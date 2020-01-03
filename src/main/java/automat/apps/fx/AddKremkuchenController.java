@@ -58,7 +58,7 @@ public class AddKremkuchenController implements Initializable {
 
     @FXML
     @Override
-    public void initialize(URL location, ResourceBundle resources){
+    public void initialize(URL location, ResourceBundle resources) {
         this.automat = AutomatSingleton.getInstance();
         this.herstellerChoiceBox.setItems((ObservableList<Hersteller>) automat.getHerstellerList());
         this.herstellerChoiceBox.getSelectionModel().selectFirst();
@@ -91,11 +91,16 @@ public class AddKremkuchenController implements Initializable {
                     LocalDateTime.now()
             );
             ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+            int platzImAutomat = automat.getPlatzImAutomat();
+            int numberOfKuchenInAutomat = automat.getAllEingelagertenKuchen().size();
+            if (platzImAutomat - numberOfKuchenInAutomat == 1) {
+                showInfo();
+            }
         } catch (NullPointerException e) {
             showWarning("Please check input value");
         } catch (NumberFormatException nex) {
             showWarning("Please enter a valid number");
-        } catch (IllegalArgumentException ex) {
+        } catch (AutomatIsFullException ex) {
             showWarning(ex.getMessage());
         }
     }
@@ -105,6 +110,13 @@ public class AddKremkuchenController implements Initializable {
         alert.setTitle("WARNING");
         alert.setHeaderText("This is a Warning");
         alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showInfo() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("INFORMATION");
+        alert.setContentText("Only one place in automat left");
         alert.showAndWait();
     }
 
