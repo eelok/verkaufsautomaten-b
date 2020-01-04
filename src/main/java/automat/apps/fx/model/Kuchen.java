@@ -2,14 +2,12 @@ package automat.apps.fx.model;
 
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.kuchen.Allergen;
-import automat.mainlib.kuchen.KremkuchenImplementation;
 import automat.mainlib.kuchen.KuchenImplementation;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.util.Collection;
 import java.util.List;
 
 public class Kuchen extends KuchenImplementation implements KuchenFx {

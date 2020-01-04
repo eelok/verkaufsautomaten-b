@@ -1,16 +1,12 @@
 package automat.apps.fx;
 
-import automat.apps.fx.model.EinlagerungEntryFX;
 import automat.apps.fx.model.HerstellerFX;
-import automat.apps.fx.model.Kuchen;
 import automat.apps.fx.model.KuchenFx;
 import automat.mainlib.Automat;
 import automat.mainlib.EinlagerungEntry;
+import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.Hersteller;
-import automat.mainlib.hersteller.HerstellerImplementation;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -219,7 +215,7 @@ public class AutomatController implements Initializable {
         this.fachCol.setCellValueFactory(cellData ->
                 new SimpleObjectProperty<>(cellData.getValue().getFachnummer()));
         this.kuchenCol.setCellValueFactory(cellData ->
-                new SimpleObjectProperty<>(cellData.getValue().getKuchen()).asString());
+                new SimpleObjectProperty<>(cellData.getValue().getKuchen().getType()));
     }
 
 
@@ -229,7 +225,7 @@ public class AutomatController implements Initializable {
                 Hersteller hersteller = new HerstellerFX(userInputHerstellerName);
                 automat.addHersteller(hersteller);
                 herstellerInput.clear();
-            } catch (Exception e) {
+            } catch (ManufacturerExistException e) {
                 manufacturerAlert(e.getMessage());
                 herstellerInput.clear();
             }

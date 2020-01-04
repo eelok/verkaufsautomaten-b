@@ -2,6 +2,7 @@ package automat.apps.fx;
 
 import automat.apps.fx.model.Kuchen;
 import automat.mainlib.Automat;
+import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.kuchen.Allergen;
 import automat.mainlib.kuchen.KuchenImplementation;
@@ -54,7 +55,7 @@ public class AddKuchenController implements Initializable {
 
     @FXML
     @Override
-    public void initialize(URL location, ResourceBundle resources){
+    public void initialize(URL location, ResourceBundle resources) {
         this.automat = AutomatSingleton.getInstance();
         this.herstellerChoiceBox.setItems((ObservableList<Hersteller>) automat.getHerstellerList());
         this.herstellerChoiceBox.getSelectionModel().selectFirst();
@@ -85,12 +86,17 @@ public class AddKuchenController implements Initializable {
                     ),
                     LocalDateTime.now()
             );
+            int platzImAutomat = automat.getPlatzImAutomat();
+            int numberOfKuchenInAutomat = automat.getAllEingelagertenKuchen().size();
+            if (platzImAutomat - numberOfKuchenInAutomat == 1) {
+                showInfo();
+            }
             ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
         } catch (NullPointerException e) {
             showWarning("Please check input value");
         } catch (NumberFormatException nex) {
             showWarning("Please enter a valid number");
-        } catch (IllegalArgumentException ex) {
+        } catch (AutomatIsFullException ex) {
             showWarning(ex.getMessage());
         }
 
@@ -101,6 +107,13 @@ public class AddKuchenController implements Initializable {
         alert.setTitle("WARNING");
         alert.setHeaderText("This is a Warning");
         alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showInfo() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("INFORMATION");
+        alert.setContentText("Only one place in automat left");
         alert.showAndWait();
     }
 
