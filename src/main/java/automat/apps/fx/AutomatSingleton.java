@@ -6,7 +6,7 @@ import javafx.collections.FXCollections;
 public class AutomatSingleton {
 
     private static Automat automatInstance = new Automat(
-        3,
+        5,
         FXCollections.observableArrayList(),
         FXCollections.observableArrayList()
     );
