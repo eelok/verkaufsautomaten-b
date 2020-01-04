@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 class AutomatRepositoryJBPTest {
 
@@ -31,12 +31,12 @@ class AutomatRepositoryJBPTest {
     }
 
     @Test
-    void readFromFile_should_call_method_readObject(){
+    void should_read_from_file(){
         Automat automat = mock(Automat.class);
         XMLDecoder decoder = mock(XMLDecoder.class);
+        when(decoder.readObject()).thenReturn(automat);
 
-        automatRepositoryJBP.readFromFile(decoder);
-        verify(decoder).readObject();
+        assertThat(automatRepositoryJBP.readFromFile(decoder)).isEqualTo(automat);
     }
 
 }
