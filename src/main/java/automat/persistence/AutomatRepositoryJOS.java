@@ -18,13 +18,13 @@ public class AutomatRepositoryJOS {
     //deserialize
     public Automat readFromFile(ObjectInput ois) {
         try {
-            ois.readObject();
+            Automat automatFromFile = (Automat) ois.readObject();
             ois.close();
+            return automatFromFile;
         } catch (IOException e) {
             throw new IllegalArgumentException();
         } catch (ClassNotFoundException e) {
             throw new IllegalArgumentException();
         }
-        return null;
     }
 }

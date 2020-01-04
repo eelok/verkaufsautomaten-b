@@ -18,9 +18,17 @@ public class HerstellerImplementation implements Hersteller, Serializable {
         this.name = name;
     }
 
+
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "HerstellerImplementation{" +
+                "name='" + name + '\'' +
+                '}';
     }
 
     @Override

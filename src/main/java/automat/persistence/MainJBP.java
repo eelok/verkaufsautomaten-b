@@ -53,7 +53,12 @@ public class MainJBP {
             XMLDecoder decoder = new XMLDecoder(inputStream);
             Automat automatFromFile = automatRepositoryJBP.readFromFile(decoder);
             System.out.println(automatFromFile.toString());
-            System.out.println(automat.getAllEingelagertenKuchen().toString());
+            System.out.println("*******");
+            System.out.println(automatFromFile.getAllEingelagertenKuchen().toString());
+            System.out.println("*******");
+            System.out.println(automatFromFile.getHerstellerList());
+            System.out.println("*******");
+            System.out.println(automatFromFile.getStorage());
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }

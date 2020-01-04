@@ -46,6 +46,15 @@ public class EinlagerungEntry implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "EinlagerungEntry{" +
+                "einlagerungsDatum=" + einlagerungsDatum +
+                ", kuchen=" + kuchen +
+                ", fachnummer=" + fachnummer +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
