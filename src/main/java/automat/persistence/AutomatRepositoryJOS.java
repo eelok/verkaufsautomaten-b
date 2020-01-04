@@ -6,7 +6,7 @@ import java.io.*;
 
 public class AutomatRepositoryJOS {
     //serialize
-    public void saveToFile(ObjectOutput out, Automat automat) {
+    public void writeToFile(ObjectOutput out, Automat automat) {
         try {
             out.writeObject(automat);
             out.close();

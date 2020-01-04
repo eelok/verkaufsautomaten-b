@@ -53,7 +53,7 @@ public class MainJOS {
 
         try {
             ObjectOutput out = new ObjectOutputStream(new FileOutputStream(fileName));
-            automatRepositoryJOS.saveToFile(out, automat);
+            automatRepositoryJOS.writeToFile(out, automat);
         } catch (IOException e) {
             e.printStackTrace();
         }
