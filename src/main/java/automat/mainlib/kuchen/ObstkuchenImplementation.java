@@ -55,7 +55,7 @@ public class ObstkuchenImplementation implements Obstkuchen, Serializable {
     }
 
     @Override
-    public Collection<Allergen> getAllergenes() {
+    public Collection<Allergen> getAllergens() {
         return allergens;
     }
 

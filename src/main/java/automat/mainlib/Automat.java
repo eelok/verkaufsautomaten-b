@@ -192,7 +192,7 @@ public class Automat implements Subject, Serializable {
 
     public List<Allergen> getAllergenenInAutomat() {
         return getAllEingelagertenKuchen().stream()
-                .flatMap(kuchen -> kuchen.getAllergenes().stream())
+                .flatMap(kuchen -> kuchen.getAllergens().stream())
                 .distinct()
                 .collect(Collectors.toList());
     }

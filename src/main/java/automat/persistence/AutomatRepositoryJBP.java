@@ -1,10 +1,9 @@
 package automat.persistence;
 
 import automat.mainlib.Automat;
-import automat.mainlib.kuchen.Allergen;
+import automat.mainlib.kuchen.Kuchen;
 import automat.persistence.persistenceDelegate.BigDecimalPersistenceDelegate;
 import automat.persistence.persistenceDelegate.DurationPersistenceDelegate;
-import automat.persistence.persistenceDelegate.EnumPersistenceDelegate;
 import automat.persistence.persistenceDelegate.LocalDateTimePersistenceDelegate;
 
 import java.beans.XMLDecoder;
@@ -15,11 +14,10 @@ import java.time.LocalDateTime;
 
 public class AutomatRepositoryJBP {
 
-    public void saveToFile(XMLEncoder encoder, Automat automat){
+    public void saveToFile(XMLEncoder encoder, Object automat){
         encoder.setPersistenceDelegate(BigDecimal.class, new BigDecimalPersistenceDelegate());
         encoder.setPersistenceDelegate(Duration.class, new DurationPersistenceDelegate());
         encoder.setPersistenceDelegate(LocalDateTime.class, new LocalDateTimePersistenceDelegate());
-        encoder.setPersistenceDelegate(Allergen.class, new EnumPersistenceDelegate());
         encoder.writeObject(automat);
         encoder.close();
     }
