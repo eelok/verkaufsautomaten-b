@@ -25,6 +25,7 @@ public class MainJBP {
         List<Allergen> allergens = new ArrayList<>();
         allergens.add(Allergen.Erdnuss);
         allergens.add(Allergen.Gluten);
+
         Hersteller alex = new HerstellerImplementation("alex");
         automat.addHersteller(alex);
 
@@ -54,11 +55,10 @@ public class MainJBP {
             Automat automatFromFile = automatRepositoryJBP.readFromFile(decoder);
             System.out.println(automatFromFile.toString());
             System.out.println("*******");
+            System.out.println(automatFromFile.getHerstellerList().toString());
+            System.out.println("*******");
             System.out.println(automatFromFile.getAllEingelagertenKuchen().toString());
             System.out.println("*******");
-            System.out.println(automatFromFile.getHerstellerList());
-            System.out.println("*******");
-            System.out.println(automatFromFile.getStorage());
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }

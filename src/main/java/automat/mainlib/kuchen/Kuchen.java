@@ -12,7 +12,7 @@ public interface Kuchen {
 
     Hersteller getHersteller();
 
-    Collection<Allergen> getAllergenes();
+    Collection<Allergen> getAllergens();
 
     int getNaehrwert();
 

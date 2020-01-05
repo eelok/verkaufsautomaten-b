@@ -53,7 +53,7 @@ public class KremkuchenImplementation implements Kremkuchen, Serializable {
     }
 
     @Override
-    public Collection<Allergen> getAllergenes() {
+    public Collection<Allergen> getAllergens() {
         return allergens;
     }
 

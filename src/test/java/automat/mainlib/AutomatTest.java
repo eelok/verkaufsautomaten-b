@@ -313,8 +313,8 @@ class AutomatTest {
 
         when(kuchen.getHersteller()).thenReturn(alex);
         when(kremKuchen.getHersteller()).thenReturn(alex);
-        when(kuchen.getAllergenes()).thenReturn(Arrays.asList(Allergen.Gluten));
-        when(kremKuchen.getAllergenes()).thenReturn(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
+        when(kuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.Gluten));
+        when(kremKuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
 
         automat.addKuchen(kuchen, LocalDateTime.now());
         automat.addKuchen(kremKuchen, LocalDateTime.now());
@@ -334,8 +334,8 @@ class AutomatTest {
 
         when(kuchen.getHersteller()).thenReturn(alex);
         when(kremKuchen.getHersteller()).thenReturn(alex);
-        when(kuchen.getAllergenes()).thenReturn(Arrays.asList(Allergen.Gluten));
-        when(kremKuchen.getAllergenes()).thenReturn(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
+        when(kuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.Gluten));
+        when(kremKuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
 
         automat.addKuchen(kuchen, LocalDateTime.now());
         automat.addKuchen(kremKuchen, LocalDateTime.now());

@@ -13,7 +13,7 @@ public class KuchenImplementation implements Kuchen, Serializable {
     private BigDecimal price;
     private Hersteller hersteller;
     private int naehrwert;
-    private Collection<Allergen> allergenes;
+    private Collection<Allergen> allergens;
     private Duration haltbarkeit;
 
     public KuchenImplementation() {
@@ -22,13 +22,13 @@ public class KuchenImplementation implements Kuchen, Serializable {
     public KuchenImplementation(
             BigDecimal price,
             Hersteller hersteller,
-            Collection<Allergen> allergenes,
+            Collection<Allergen> allergens,
             int naehrwert,
             Duration haltbarkeit) {
         this.price = price;
         this.hersteller = hersteller;
         this.naehrwert = naehrwert;
-        this.allergenes = allergenes;
+        this.allergens = allergens;
         this.haltbarkeit = haltbarkeit;
     }
 
@@ -51,12 +51,12 @@ public class KuchenImplementation implements Kuchen, Serializable {
     }
 
     @Override
-    public Collection<Allergen> getAllergenes() {
-        return allergenes;
+    public Collection<Allergen> getAllergens() {
+        return allergens;
     }
 
-    public void setAllergenes(Collection<Allergen> allergenes) {
-        this.allergenes = allergenes;
+    public void setAllergens(Collection<Allergen> allergens) {
+        this.allergens = allergens;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class KuchenImplementation implements Kuchen, Serializable {
                 "price=" + price +
                 ", hersteller=" + hersteller +
                 ", naehrwert=" + naehrwert +
-                ", allergenes=" + allergenes +
+                ", allergenes=" + allergens +
                 ", haltbarkeit=" + haltbarkeit +
                 '}';
     }
@@ -101,12 +101,12 @@ public class KuchenImplementation implements Kuchen, Serializable {
         return naehrwert == that.naehrwert &&
                 Objects.equals(price, that.price) &&
                 Objects.equals(hersteller, that.hersteller) &&
-                Objects.equals(allergenes, that.allergenes) &&
+                Objects.equals(allergens, that.allergens) &&
                 Objects.equals(haltbarkeit, that.haltbarkeit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price, hersteller, naehrwert, allergenes, haltbarkeit);
+        return Objects.hash(price, hersteller, naehrwert, allergens, haltbarkeit);
     }
 }
