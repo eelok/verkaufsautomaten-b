@@ -1,60 +1,47 @@
 package automat.net;
 
-import automat.mainlib.Automat;
-import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
-import automat.mainlib.kuchen.*;
+import automat.mainlib.kuchen.Kuchen;
+import automat.mainlib.kuchen.KuchenImplementation;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.math.BigDecimal;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Client {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        int port = 1234;
-        InetAddress ip = InetAddress.getLocalHost();
-        Scanner scanner = new Scanner(System.in);
-        Socket socketConnection = new Socket(ip, port);
+        try (Socket socketConnection = new Socket(InetAddress.getLocalHost(), 1234)) {
+            ObjectOutputStream clientOutputStream = new ObjectOutputStream(socketConnection.getOutputStream());
+            ObjectInputStream clientInputStream = new ObjectInputStream(socketConnection.getInputStream());
 
 
-        DataOutputStream clientOutputStream = new DataOutputStream(socketConnection.getOutputStream());
-        DataInputStream clientInputStream = new DataInputStream(socketConnection.getInputStream());
-
-        while (true){
-            System.out.println("enter command");
-            String commad = scanner.nextLine();
-            System.out.println("enter data");
-            String data = scanner.nextLine();
-            String userInput = commad + "|" + data;
-
-            if("q".equalsIgnoreCase(userInput)){
-                System.out.println("bye");
-                break;
-            }
-            clientOutputStream.writeUTF(userInput);
-
-            Object recivedOject = clientInputStream.readUTF();
-            System.out.println("was recived " + recivedOject);
-
+            clientOutputStream.writeObject("addH/alex");
+            String alex = (String) clientInputStream.readObject();
+            System.out.println(alex);
+            clientOutputStream.writeObject("addH/donna");
+            String donna = (String) clientInputStream.readObject();
+            System.out.println(donna);
+//            clientOutputStream.writeObject("addK/Kremkuchen 2.50 Alex Erdnuss,Haselnuss 1400 24 Sahne");
+//            String infoKuchen =(String) clientInputStream.readObject();
+//            System.out.println("from server" + infoKuchen);
+//            clientOutputStream.writeObject("listH/*");
+//            Object l = clientInputStream.readObject();
+//            System.out.println("from server" + l.toString());
+//            clientOutputStream.writeObject("listK/*");
+//            Object kuchL = clientInputStream.readObject();
+//            System.out.println("from server" + kuchL.toString());
+            clientOutputStream.writeObject("delH/alex");
+            Object delH = clientInputStream.readObject();
+            System.out.println("from server" + delH.toString());
+            clientOutputStream.writeObject("listH/*");
+            Object readInf = clientInputStream.readObject();
+            System.out.println("from server" + readInf.toString());
         }
-//        try(Socket socketConnection = new Socket(ip, port);
-//            ObjectOutputStream clientOutputStream = new ObjectOutputStream(socketConnection.getOutputStream());
-//            ObjectInputStream clientInputStream = new ObjectInputStream(socketConnection.getInputStream()))  {
-//            clientOutputStream.writeObject(addHerstellerCommand);
-//            Automat automtResivedFromServer = (Automat)clientInputStream.readObject();
-//            System.out.println(automtResivedFromServer.getAllEingelagertenKuchen().toString());
-//            System.out.println("*********Resiced from Server"+ automtResivedFromServer.getHerstellerList().toString());
-//        }catch (Exception e){
-//            System.out.println(e);
-//        }
     }
 }
 
