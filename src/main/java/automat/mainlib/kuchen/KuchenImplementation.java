@@ -84,13 +84,15 @@ public class KuchenImplementation implements Kuchen, Serializable {
 
     @Override
     public String toString() {
-        return "KuchenImplementation{" +
-                "price=" + price +
-                ", hersteller=" + hersteller +
-                ", naehrwert=" + naehrwert +
-                ", allergenes=" + allergens +
-                ", haltbarkeit=" + haltbarkeit +
-                '}';
+        return String.format(
+                "{%s, price= %s, hersteller: %s, naehrwert= %s, allergenes: %s, haltbarkeit: %s}",
+                getType(),
+                getPrice(),
+                getHersteller().getName(),
+                getNaehrwert(),
+                getAllergens(),
+                getHaltbarkeit().toDays()
+        );
     }
 
     @Override

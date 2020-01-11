@@ -20,7 +20,7 @@ public class ServerAutomat extends IOException {
     private static Automat automatInServer = new Automat(5);
     private static KuchenParser kuchenParser = new KuchenParser();
     private static Command existingCommand;
-    public static void existingCommand(Command existingCommand, String inputCommand, String inputData, ObjectOutputStream serverOutputStream) throws IOException {
+    public static String existingCommand(Command existingCommand, String inputCommand, String inputData) throws IOException {
 
         //todo если введена неверная комманда
 //        try {
@@ -33,34 +33,35 @@ public class ServerAutomat extends IOException {
             case q:
                 break;
             case addH:
-                automatInServer.addHersteller(new HerstellerImplementation(inputData.toLowerCase()));
-                serverOutputStream.writeObject(String.format("from server: hersteller %s was added to Automat", inputData));
-                break;
+                if(automatInServer.addHersteller(new HerstellerImplementation(inputData.toLowerCase()))){
+                    return String.format("from server: hersteller %s was added to automat", inputData);
+                }
             case addK:
                 Kuchen kuchenInfo = kuchenParser.getKuchenInfo(inputData);
                 automatInServer.addKuchen(kuchenInfo, LocalDateTime.now());
-                serverOutputStream.writeObject(String.format("from server: kuchen %s was added to Automat", kuchenInfo.getType()));
-                break;
+                return String.format("from server: kuchen %s was added to automat", kuchenInfo.getType());
             case listH:
                 List<Hersteller> herstellerList = automatInServer.getHerstellerList();
-                serverOutputStream.writeObject(herstellerList);
-                break;
+                return "from server: " + herstellerList.toString();
             case listK:
                 List<Kuchen> allEingelagertenKuchen = automatInServer.getAllEingelagertenKuchen();
-                serverOutputStream.writeObject(allEingelagertenKuchen);
-                break;
+                return "from server: " + allEingelagertenKuchen.toString();
             case delH:
                 automatInServer.deleteHersteller(inputData);
-                serverOutputStream.writeObject(String.format("from server %s was deleted", inputData));
-                break;
+                return String.format("hersteller from server: %s was deleted from automat", inputData);
             case delK:
-                int fachNum = Integer.parseInt(inputData);
-                EinlagerungEntry einlagerungEntry = automatInServer.removeKuchenFromAutomat(fachNum);
-                serverOutputStream.writeObject(einlagerungEntry);
-                break;
+                String typeOfKuchenWasDel = deleteKuchen(inputData);
+                return String.format("%s from fach %s was deleted", typeOfKuchenWasDel, inputData);
             default:
-                serverOutputStream.writeObject("An Error occurred, check your input");
+//                serverOutputStream.writeObject("An Error occurred, check your input");
         }
+        return null;
+    }
+    private static String deleteKuchen(String inputData){
+        String number = inputData.replace("f", "");
+        int fachNum = Integer.parseInt(number);
+        EinlagerungEntry einlagerungEntry = automatInServer.removeKuchenFromAutomat(fachNum);
+        return einlagerungEntry.getKuchen().getType();
     }
 
 
@@ -83,7 +84,8 @@ public class ServerAutomat extends IOException {
             String commandFromInput = split[0].trim();
             String data = split[1].trim();
 
-            existingCommand(existingCommand, commandFromInput, data, serverOutputStream);
+            String s = existingCommand(existingCommand, commandFromInput, data);
+            serverOutputStream.writeObject(s);
 
         }
     }
