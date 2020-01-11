@@ -23,9 +23,9 @@ public class Client {
             System.out.println(donna);
 
             //todo введена неверная команда
-//            clientOutputStream.writeObject("add/*");
-//            String str = (String) clientInputStream.readObject();
-//            System.out.println(str);
+            clientOutputStream.writeObject("add/*");
+            String str = (String) clientInputStream.readObject();
+            System.out.println(str);
 
             clientOutputStream.writeObject("addK/Kremkuchen 2.50 Alex Erdnuss,Haselnuss 1400 24 Sahne");
             String infoKuchen =(String) clientInputStream.readObject();

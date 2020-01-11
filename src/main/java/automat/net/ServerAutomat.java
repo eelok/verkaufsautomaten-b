@@ -20,16 +20,15 @@ public class ServerAutomat extends IOException {
     private static Automat automatInServer = new Automat(5);
     private static KuchenParser kuchenParser = new KuchenParser();
     private static Command existingCommand;
-    public static String existingCommand(Command existingCommand, String inputCommand, String inputData) throws IOException {
 
-        //todo если введена неверная комманда
-//        try {
-//            Command receivedCommand = Command.valueOf(inputCommand);
-//        } catch (IllegalArgumentException ex){
-//            serverOutputStream.writeObject(ex.getMessage());
-////            serverOutputStream.writeObject(String.format("%s does not exist, check your input", serverOutputStream));
-//        }
-        switch (Command.valueOf(inputCommand)){
+    public static String existingCommand(String inputCommand, String inputData) throws IOException {
+        Command userCommand;
+        try {
+            userCommand = Command.valueOf(inputCommand);
+        } catch (IllegalArgumentException ex){
+            return String.format("from server: {%s} wrong command", inputCommand);
+        }
+        switch (userCommand){
             case q:
                 break;
             case addH:
@@ -48,12 +47,10 @@ public class ServerAutomat extends IOException {
                 return "from server: " + allEingelagertenKuchen.toString();
             case delH:
                 automatInServer.deleteHersteller(inputData);
-                return String.format("hersteller from server: %s was deleted from automat", inputData);
+                return String.format("from server: harsteller %s was deleted from automat", inputData);
             case delK:
                 String typeOfKuchenWasDel = deleteKuchen(inputData);
-                return String.format("%s from fach %s was deleted", typeOfKuchenWasDel, inputData);
-            default:
-//                serverOutputStream.writeObject("An Error occurred, check your input");
+                return String.format("from server: %s from fach %s was deleted", typeOfKuchenWasDel, inputData);
         }
         return null;
     }
@@ -84,7 +81,7 @@ public class ServerAutomat extends IOException {
             String commandFromInput = split[0].trim();
             String data = split[1].trim();
 
-            String s = existingCommand(existingCommand, commandFromInput, data);
+            String s = existingCommand(commandFromInput, data);
             serverOutputStream.writeObject(s);
 
         }
