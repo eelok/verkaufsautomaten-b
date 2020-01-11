@@ -1,5 +1,11 @@
 package automat.net;
 
 public enum Command {
-    addHerteller,
+    addH,
+    addK,
+    listH,
+    listK,
+    delH,
+    delK,
+    q
 }

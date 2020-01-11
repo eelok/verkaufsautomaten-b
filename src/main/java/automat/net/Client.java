@@ -1,5 +1,6 @@
 package automat.net;
 
+import automat.mainlib.EinlagerungEntry;
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.kuchen.Kuchen;
 import automat.mainlib.kuchen.KuchenImplementation;
@@ -23,24 +24,39 @@ public class Client {
             clientOutputStream.writeObject("addH/alex");
             String alex = (String) clientInputStream.readObject();
             System.out.println(alex);
+
             clientOutputStream.writeObject("addH/donna");
             String donna = (String) clientInputStream.readObject();
             System.out.println(donna);
-//            clientOutputStream.writeObject("addK/Kremkuchen 2.50 Alex Erdnuss,Haselnuss 1400 24 Sahne");
-//            String infoKuchen =(String) clientInputStream.readObject();
-//            System.out.println("from server" + infoKuchen);
+
+            //todo введена неверная команда
+//            clientOutputStream.writeObject("add/*");
+//            String str = (String) clientInputStream.readObject();
+//            System.out.println(str);
+
+            clientOutputStream.writeObject("addK/Kremkuchen 2.50 Alex Erdnuss,Haselnuss 1400 24 Sahne");
+            String infoKuchen =(String) clientInputStream.readObject();
+            System.out.println("from server kuchen was added" + infoKuchen);
+
+//            clientOutputStream.writeObject("addK/Kuchen 2.50 Alex Erdnuss,Haselnuss 1400 24");
+//            String infoKuch2 =(String) clientInputStream.readObject();
+//            System.out.println("from server kuchen was added" + infoKuch2);
+
+
 //            clientOutputStream.writeObject("listH/*");
 //            Object l = clientInputStream.readObject();
 //            System.out.println("from server" + l.toString());
 //            clientOutputStream.writeObject("listK/*");
 //            Object kuchL = clientInputStream.readObject();
 //            System.out.println("from server" + kuchL.toString());
-            clientOutputStream.writeObject("delH/alex");
+            clientOutputStream.writeObject("delH/donna");
             Object delH = clientInputStream.readObject();
             System.out.println("from server" + delH.toString());
-            clientOutputStream.writeObject("listH/*");
-            Object readInf = clientInputStream.readObject();
-            System.out.println("from server" + readInf.toString());
+//            clientOutputStream.writeObject("listH/*");
+//            Object readInf = clientInputStream.readObject();
+//            System.out.println("from server" + readInf.toString());
+
+
         }
     }
 }
