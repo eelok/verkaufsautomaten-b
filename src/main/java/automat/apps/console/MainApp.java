@@ -12,6 +12,7 @@ import automat.apps.console.observer.DeleteHerstellerObserver;
 import automat.apps.console.observer.RemoveKuchenObserver;
 import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
+import automat.net.DataSender;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -24,6 +25,8 @@ public class MainApp {
 //        Socket socketConnection = null;
 //        ObjectOutputStream clientOutputStream = null;
 //        ObjectInputStream clientInputStream = null;
+
+        DataSender dataSender = new DataSender();
 
         Automat automat = new Automat(5);
         ConsoleReader consoleReader = new ConsoleReader();
@@ -52,7 +55,8 @@ public class MainApp {
                 new AddModeInputListener(
                         automat,
                         printer,
-                        new ConsoleReader()
+                        new ConsoleReader(),
+                        dataSender
                 );
 
 
