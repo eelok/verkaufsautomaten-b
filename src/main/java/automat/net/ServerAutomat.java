@@ -2,24 +2,28 @@ package automat.net;
 
 import automat.apps.console.service.KuchenParser;
 import automat.mainlib.Automat;
+import automat.mainlib.hersteller.Hersteller;
+import automat.mainlib.hersteller.HerstellerImplementation;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServerAutomat extends IOException {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Automat automatInServer = new Automat(5);
+//        Automat automatInServer = new Automat(5);
 //        //todo start temp data
-//        List<Hersteller> list = new ArrayList<>();
-//        Automat automatInServer = new Automat(5, new ArrayList<>(), list);
-//        HerstellerImplementation alex = new HerstellerImplementation("alex");
-//        list.add(alex);
-//        HerstellerImplementation donna = new HerstellerImplementation("donna");
-//        list.add(donna);
+        List<Hersteller> list = new ArrayList<>();
+        Automat automatInServer = new Automat(5, new ArrayList<>(), list);
+        HerstellerImplementation alex = new HerstellerImplementation("alex");
+        list.add(alex);
+        HerstellerImplementation donna = new HerstellerImplementation("donna");
+        list.add(donna);
 //        List<Allergen> allergens = new ArrayList<>();
 //        allergens.add(Allergen.Erdnuss);
 //        allergens.add(Allergen.Gluten);

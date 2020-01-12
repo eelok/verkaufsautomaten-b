@@ -22,25 +22,12 @@ import java.net.Socket;
 
 public class MainApp {
     public static void main(String[] args) {
-//        Socket socketConnection = null;
-//        ObjectOutputStream clientOutputStream = null;
-//        ObjectInputStream clientInputStream = null;
-
         DataSender dataSender = new DataSender();
 
         Automat automat = new Automat(5);
         ConsoleReader consoleReader = new ConsoleReader();
         InputEventHandler eventHandler = new InputEventHandler();
         consoleReader.setHandler(eventHandler);
-
-
-//        try {
-//            socketConnection = new Socket(InetAddress.getLocalHost(), 1234);
-//            clientOutputStream = new ObjectOutputStream(socketConnection.getOutputStream());
-//            clientInputStream = new ObjectInputStream(socketConnection.getInputStream());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         Printer printer = new Printer();
         AddHerstellerObserver addHerstellerObserver = new AddHerstellerObserver(automat, printer);
@@ -51,13 +38,7 @@ public class MainApp {
         StringUtils stringUtils = new StringUtils();
 
 
-        AddModeInputListener addModeInputListener =
-                new AddModeInputListener(
-                        automat,
-                        printer,
-                        new ConsoleReader(),
-                        dataSender
-                );
+        AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer, new ConsoleReader(), dataSender);
 
 
         ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, new ConsoleReader());

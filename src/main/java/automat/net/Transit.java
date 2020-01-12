@@ -5,6 +5,7 @@ import automat.mainlib.Automat;
 import automat.mainlib.EinlagerungEntry;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
+import automat.mainlib.kuchen.KremkuchenImplementation;
 import automat.mainlib.kuchen.Kuchen;
 
 import java.io.IOException;
