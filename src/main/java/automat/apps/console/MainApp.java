@@ -41,7 +41,7 @@ public class MainApp {
         AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer, new ConsoleReader(), dataSender);
 
 
-        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, new ConsoleReader());
+        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, new ConsoleReader(), dataSender);
         DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, stringUtils, printer, new ConsoleReader());
         InfoCommandMode infoCommandMode = new InfoCommandMode(printer);
 

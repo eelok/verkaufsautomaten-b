@@ -49,11 +49,12 @@ public class Transit {
                     return e.getMessage();
                 }
             case listH:
-                List<Hersteller> herstellerList = automatInServer.getHerstellerList();
-                return "from server: " + herstellerList.toString();
+                List<String> herstellerWithNumberOfKuchen = automatInServer.getHerstellerWithNumberOfKuchen();
+                return "from server: " + herstellerWithNumberOfKuchen.toString();
             case listK:
-                List<Kuchen> allEingelagertenKuchen = automatInServer.getAllEingelagertenKuchen();
-                return "from server: " + allEingelagertenKuchen.toString();
+//                List<Kuchen> allEingelagertenKuchen = automatInServer.getAllEingelagertenKuchen();
+                List<String> allKuchenWithFachNum = automatInServer.getAllKuchenWithFachNum();
+                return "from server: " + allKuchenWithFachNum.toString();
             case delH:
                 automatInServer.deleteHersteller(inputData);
                 return String.format("from server: harsteller %s was deleted from automat", inputData);

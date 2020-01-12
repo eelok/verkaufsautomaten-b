@@ -27,7 +27,6 @@ public class AddKuchenInputListener implements InputEventListener {
         this.dataSender = dataSender;
     }
 
-
     @Override
     public void onInputEvent(InputEvent event) {
         if (event.getText() == null) {
@@ -39,7 +38,6 @@ public class AddKuchenInputListener implements InputEventListener {
         }
         try {
             //todo change parameter
-//            automat.addKuchen(kuchenInfo, LocalDateTime.now());
             dataSender.sendDataToServer(event.getText());
         } catch (AutomatIsFullException ex) {
             printer.println(String.format("Can not add kuchen, reason: %s", ex.getMessage()));

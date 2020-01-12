@@ -6,17 +6,20 @@ import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
 import automat.mainlib.Automat;
+import automat.net.DataSender;
 
 public class ListModeInputListener implements InputEventListener {
 
     private Automat automat;
     private Printer printer;
     private ConsoleReader consoleReader;
+    private DataSender dataSender;
 
-    public ListModeInputListener(Automat automat, Printer printer, ConsoleReader consoleReader) {
+    public ListModeInputListener(Automat automat, Printer printer, ConsoleReader consoleReader, DataSender dataSender) {
         this.automat = automat;
         this.printer = printer;
         this.consoleReader = consoleReader;
+        this.dataSender = dataSender;
     }
 
     @Override
@@ -25,8 +28,8 @@ public class ListModeInputListener implements InputEventListener {
             printer.println("list mode active");
             printer.println("Enter command: manufacturer / kuchen / :q<back to main menu> ");
             InputEventHandler eventHandler = new InputEventHandler();
-            eventHandler.add(new ListManufacturerInputListener(automat, printer));
-            eventHandler.add(new ListKuchenInputListener(automat, printer));
+            eventHandler.add(new ListManufacturerInputListener(automat, printer, dataSender));
+            eventHandler.add(new ListKuchenInputListener(automat, printer, dataSender));
             eventHandler.add(new ListModeInfo(printer));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
