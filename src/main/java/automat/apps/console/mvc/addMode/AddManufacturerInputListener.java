@@ -5,33 +5,20 @@ import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
 import automat.net.Command;
+import automat.net.ConnectionHelper;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 
 public class AddManufacturerInputListener implements InputEventListener {
 
     private StringUtils stringUtils;
     private Printer printer;
-    private Socket socketConnection;
-    private ObjectOutputStream clientOutputStream;
-    private ObjectInputStream clientInputStream;
+    private ConnectionHelper connectionHelper;
 
 
-    public AddManufacturerInputListener(
-            StringUtils stringUtils,
-            Printer printer,
-            Socket socketConnection,
-            ObjectOutputStream clientOutputStream,
-            ObjectInputStream clientInputStream
-    ) {
+    public AddManufacturerInputListener(StringUtils stringUtils, Printer printer) {
         this.stringUtils = stringUtils;
         this.printer = printer;
-        this.socketConnection = socketConnection;
-        this.clientOutputStream = clientOutputStream;
-        this.clientInputStream = clientInputStream;
     }
 
     @Override
@@ -48,16 +35,17 @@ public class AddManufacturerInputListener implements InputEventListener {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
     private void sendDataToServer(String userInput) throws IOException, ClassNotFoundException {
+        this.connectionHelper = ConnectionHelper.getConnectionHelperSingleton();
+
         String dataForTransport = "";
         dataForTransport = Command.addH + "/" + userInput;
 
-        this.clientOutputStream.writeObject(dataForTransport);
-        Object replyFromServer = this.clientInputStream.readObject();
+        this.connectionHelper.getClientOutputStream().writeObject(dataForTransport);
+        Object replyFromServer = this.connectionHelper.getClientInputStream().readObject();
         this.printer.println(replyFromServer.toString());
     }
 }
