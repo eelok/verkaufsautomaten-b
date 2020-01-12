@@ -40,8 +40,12 @@ public class Transit {
                 }
             case addK:
                 Kuchen kuchenInfo = kuchenParser.getKuchenInfo(inputData);
-                automatInServer.addKuchen(kuchenInfo, LocalDateTime.now());
-                return String.format("from server: kuchen %s was added to automat", kuchenInfo.getType());
+                try{
+                    automatInServer.addKuchen(kuchenInfo, LocalDateTime.now());
+                    return String.format("from server: kuchen %s was added to automat", kuchenInfo.getType());
+                } catch (IllegalArgumentException e){
+                    return e.getMessage();
+                }
             case listH:
                 List<Hersteller> herstellerList = automatInServer.getHerstellerList();
                 return "from server: " + herstellerList.toString();
@@ -61,8 +65,12 @@ public class Transit {
     private String deleteKuchen(String inputData){
         String number = inputData.replace("f", "");
         int fachNum = Integer.parseInt(number);
-        EinlagerungEntry einlagerungEntry = automatInServer.removeKuchenFromAutomat(fachNum);
-        return einlagerungEntry.getKuchen().getType();
+        try {
+            EinlagerungEntry einlagerungEntry = automatInServer.removeKuchenFromAutomat(fachNum);
+            return einlagerungEntry.getKuchen().getType();
+        } catch (IllegalArgumentException ex){
+            return ex.getMessage();
+        }
     }
 
 }

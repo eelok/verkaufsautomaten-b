@@ -1,33 +1,8 @@
 package automat.net;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.util.Scanner;
+public class TempData {
 
-public class Client {
-
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        try (Socket socketConnection = new Socket(InetAddress.getLocalHost(), 1234)) {
-            ObjectOutputStream clientOutputStream = new ObjectOutputStream(socketConnection.getOutputStream());
-            ObjectInputStream clientInputStream = new ObjectInputStream(socketConnection.getInputStream());
-
-            Scanner scanner = new Scanner(System.in);
-            String dataForTransport;
-            while (true){
-                System.out.println("enter command:");
-                System.out.print(">");
-                String inputCommand = scanner.nextLine();
-                System.out.println("enter data:");
-                String inputData = scanner.nextLine();
-                dataForTransport = inputCommand + "/" + inputData;
-                clientOutputStream.writeObject(dataForTransport);
-                Object replyFromServer = clientInputStream.readObject();
-                System.out.println(replyFromServer);
-            }
-//            clientOutputStream.writeObject("addH/alex");
+    //            clientOutputStream.writeObject("addH/alex");
 //            String alex = (String) clientInputStream.readObject();
 //            System.out.println(alex);
 //
@@ -67,7 +42,4 @@ public class Client {
 //            clientOutputStream.writeObject("delK/f0");
 //            Object delKuch = clientInputStream.readObject();
 //            System.out.println(delKuch);
-        }
-    }
 }
-
