@@ -4,20 +4,34 @@ import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
-import automat.mainlib.Automat;
-import automat.mainlib.exceptions.ManufacturerExistException;
-import automat.mainlib.hersteller.HerstellerImplementation;
+import automat.net.Command;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 public class AddManufacturerInputListener implements InputEventListener {
 
     private StringUtils stringUtils;
-    private Automat automat;
     private Printer printer;
+    private Socket socketConnection;
+    private ObjectOutputStream clientOutputStream;
+    private ObjectInputStream clientInputStream;
 
-    public AddManufacturerInputListener(StringUtils stringUtils, Automat automat, Printer printer) {
+
+    public AddManufacturerInputListener(
+            StringUtils stringUtils,
+            Printer printer,
+            Socket socketConnection,
+            ObjectOutputStream clientOutputStream,
+            ObjectInputStream clientInputStream
+    ) {
         this.stringUtils = stringUtils;
-        this.automat = automat;
         this.printer = printer;
+        this.socketConnection = socketConnection;
+        this.clientOutputStream = clientOutputStream;
+        this.clientInputStream = clientInputStream;
     }
 
     @Override
@@ -28,10 +42,22 @@ public class AddManufacturerInputListener implements InputEventListener {
         String userInput = event.getText().toLowerCase().trim();
         if (stringUtils.isOneWord(userInput)) {
             try {
-                automat.addHersteller(new HerstellerImplementation(userInput));
-            } catch (ManufacturerExistException ex) {
-                printer.println(ex.getMessage());
+                sendDataToServer(userInput);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
+
         }
+    }
+
+    private void sendDataToServer(String userInput) throws IOException, ClassNotFoundException {
+        String dataForTransport = "";
+        dataForTransport = Command.addH + "/" + userInput;
+
+        this.clientOutputStream.writeObject(dataForTransport);
+        Object replyFromServer = this.clientInputStream.readObject();
+        this.printer.println(replyFromServer.toString());
     }
 }

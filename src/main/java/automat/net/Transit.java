@@ -18,6 +18,7 @@ public class Transit {
     private KuchenParser kuchenParser;
     private Command existingCommand;
 
+
     public Transit(Automat automatInServer, KuchenParser kuchenParser) {
         this.automatInServer = automatInServer;
         this.kuchenParser = kuchenParser;
@@ -72,5 +73,8 @@ public class Transit {
             return ex.getMessage();
         }
     }
+
+
+
 
 }
