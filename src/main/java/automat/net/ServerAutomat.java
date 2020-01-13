@@ -46,7 +46,7 @@ public class ServerAutomat extends IOException {
 //
         KuchenParser kuchenParser = new KuchenParser();
 
-        dataHandler dataHandler = new dataHandler(automatInServer, kuchenParser);
+        DataHandler dataHandler = new DataHandler(automatInServer, kuchenParser);
         int port = 1234;
         ServerSocket serverSocket = new ServerSocket(port);
         Socket socket = serverSocket.accept();
@@ -62,7 +62,7 @@ public class ServerAutomat extends IOException {
             String commandFromInput = split[0].trim();
             String data = split[1].trim();
 
-            String replyFromServer = dataHandler.existingCommand(commandFromInput, data);
+            String replyFromServer = dataHandler.handleData(commandFromInput, data);
             serverOutputStream.writeObject(replyFromServer);
 
         }

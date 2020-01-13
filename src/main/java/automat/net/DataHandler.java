@@ -10,19 +10,18 @@ import automat.mainlib.kuchen.Kuchen;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class dataHandler {
+public class DataHandler {
 
     private Automat automatInServer;
     private KuchenParser kuchenParser;
 
 
-    public dataHandler(Automat automatInServer, KuchenParser kuchenParser) {
+    public DataHandler(Automat automatInServer, KuchenParser kuchenParser) {
         this.automatInServer = automatInServer;
         this.kuchenParser = kuchenParser;
     }
 
-    //    todo invent better name
-    public String existingCommand(String inputCommand, String info) {
+    public String handleData(String inputCommand, String info) {
         Command userCommand;
         try {
             userCommand = Command.valueOf(inputCommand);
