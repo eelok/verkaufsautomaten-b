@@ -37,11 +37,8 @@ public class MainApp {
 
         StringUtils stringUtils = new StringUtils();
 
-
-        AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer, new ConsoleReader(), dataSender);
-
-
-        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, new ConsoleReader(), dataSender);
+        AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer, new ConsoleReader());
+        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, new ConsoleReader());
         DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, stringUtils, printer, new ConsoleReader());
         InfoCommandMode infoCommandMode = new InfoCommandMode(printer);
 

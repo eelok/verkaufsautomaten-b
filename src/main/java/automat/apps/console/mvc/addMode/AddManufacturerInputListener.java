@@ -4,20 +4,20 @@ import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
-import automat.net.DataSender;
-
-import java.io.IOException;
+import automat.mainlib.Automat;
+import automat.mainlib.exceptions.ManufacturerExistException;
+import automat.mainlib.hersteller.HerstellerImplementation;
 
 public class AddManufacturerInputListener implements InputEventListener {
 
     private StringUtils stringUtils;
+    private Automat automat;
     private Printer printer;
-    private DataSender dataSender;
 
-    public AddManufacturerInputListener(StringUtils stringUtils, Printer printer, DataSender dataSender) {
+    public AddManufacturerInputListener(StringUtils stringUtils, Automat automat, Printer printer) {
         this.stringUtils = stringUtils;
+        this.automat = automat;
         this.printer = printer;
-        this.dataSender = dataSender;
     }
 
     @Override
@@ -28,11 +28,9 @@ public class AddManufacturerInputListener implements InputEventListener {
         String userInput = event.getText().toLowerCase().trim();
         if (stringUtils.isOneWord(userInput)) {
             try {
-                dataSender.sendDataToServer(userInput);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                automat.addHersteller(new HerstellerImplementation(userInput));
+            } catch (ManufacturerExistException ex) {
+                printer.println(ex.getMessage());
             }
         }
     }

@@ -15,7 +15,9 @@ public class DataSender {
 //        dataForTransport = Command.addH + "/" + inputData;
 //        dataForTransport = Command.addK + "/" + inputData;
 //        dataForTransport = Command.listH + "/" + inputData;
-        dataForTransport = Command.listK + "/" + inputData;
+//        dataForTransport = Command.listK + "/" + inputData;
+//        dataForTransport = Command.delH + "/" + inputData;
+        dataForTransport = Command.delK + "/" + inputData;
         connectionHelper.getClientOutputStream().writeObject(dataForTransport);
         Object replyFromServer = connectionHelper.getClientInputStream().readObject();
 

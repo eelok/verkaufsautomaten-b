@@ -1,26 +1,26 @@
-package automat.apps.console.mvc.addMode;
+package automat.net.addModeNet;
 
 import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.KuchenParser;
-import automat.mainlib.Automat;
 import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.kuchen.Kuchen;
+import automat.net.DataSender;
 
-import java.time.LocalDateTime;
+import java.io.IOException;
 
-public class AddKuchenInputListener implements InputEventListener {
+public class AddKuchenInputListenerNet implements InputEventListener {
 
     private KuchenParser kuchenParser;
-    private Automat automat;
     private Printer printer;
+    private DataSender dataSender;
 
 
-    public AddKuchenInputListener(KuchenParser kuchenParser, Automat automat, Printer printer) {
+    public AddKuchenInputListenerNet(KuchenParser kuchenParser, Printer printer, DataSender dataSender) {
         this.kuchenParser = kuchenParser;
-        this.automat = automat;
         this.printer = printer;
+        this.dataSender = dataSender;
     }
 
     @Override
@@ -33,10 +33,11 @@ public class AddKuchenInputListener implements InputEventListener {
             return;
         }
         try {
-            automat.addKuchen(kuchenInfo, LocalDateTime.now());
+            //todo change parameter
+            dataSender.sendDataToServer(event.getText());
         } catch (AutomatIsFullException ex) {
             printer.println(String.format("Can not add kuchen, reason: %s", ex.getMessage()));
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException | IOException | ClassNotFoundException e){
             printer.println(String.format("The Kuchen could not be added, reason: %s", e.getMessage()));
         }
     }

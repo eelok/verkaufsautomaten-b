@@ -32,28 +32,28 @@ public class ServerAutomat extends IOException {
         list.add(alex);
         HerstellerImplementation donna = new HerstellerImplementation("donna");
         list.add(donna);
-        List<Allergen> allergens = new ArrayList<>();
-        allergens.add(Allergen.Erdnuss);
-        allergens.add(Allergen.Gluten);
-        Kuchen kuchen = new KuchenImplementation(
-                new BigDecimal(20),
-                alex,
-                allergens,
-                500,
-                Duration.ofDays(2)
-        );
+//        List<Allergen> allergens = new ArrayList<>();
+//        allergens.add(Allergen.Erdnuss);
+//        allergens.add(Allergen.Gluten);
+//        Kuchen kuchen = new KuchenImplementation(
+//                new BigDecimal(20),
+//                alex,
+//                allergens,
+//                500,
+//                Duration.ofDays(2)
+//        );
 
-        Kuchen kremkuchen = new KremkuchenImplementation(
-                new BigDecimal(15),
-                donna,
-                allergens,
-                500,
-                Duration.ofDays(1),
-                "sahne"
-        );
-        automatInServer.addKuchen(kuchen, LocalDateTime.now());
-        automatInServer.addKuchen(kremkuchen, LocalDateTime.now());
-//        // todo end temp data
+//        Kuchen kremkuchen = new KremkuchenImplementation(
+//                new BigDecimal(15),
+//                donna,
+//                allergens,
+//                500,
+//                Duration.ofDays(1),
+//                "sahne"
+//        );
+//        automatInServer.addKuchen(kuchen, LocalDateTime.now());
+//        automatInServer.addKuchen(kremkuchen, LocalDateTime.now());
+////        // todo end temp data
 
         KuchenParser kuchenParser = new KuchenParser();
 

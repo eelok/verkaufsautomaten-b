@@ -59,21 +59,22 @@ public class Transit {
                 automatInServer.deleteHersteller(inputData);
                 return String.format("from server: harsteller %s was deleted from automat", inputData);
             case delK:
-                String typeOfKuchenWasDel = deleteKuchen(inputData);
-                return String.format("from server: %s from fach %s was deleted", typeOfKuchenWasDel, inputData);
+                EinlagerungEntry einlagerungEntry = automatInServer.removeKuchenFromAutomat(Integer.valueOf(inputData));
+//                String typeOfKuchenWasDel = deleteKuchen(Integer.valueOf());
+                return String.format("from server: %s from fach %s was deleted", einlagerungEntry.getKuchen().getType(), einlagerungEntry.getFachnummer());
         }
         return null;
     }
 
-    private String deleteKuchen(String inputData){
-        String number = inputData.replace("f", "");
-        int fachNum = Integer.parseInt(number);
-        try {
-            EinlagerungEntry einlagerungEntry = automatInServer.removeKuchenFromAutomat(fachNum);
-            return einlagerungEntry.getKuchen().getType();
-        } catch (IllegalArgumentException ex){
-            return ex.getMessage();
-        }
-    }
+//    private String deleteKuchen(String inputData){
+//        String number = inputData.replace("f", "");
+//        int fachNum = Integer.parseInt(number);
+//        try {
+//            EinlagerungEntry einlagerungEntry = automatInServer.removeKuchenFromAutomat(fachNum);
+//            return einlagerungEntry.getKuchen().getType();
+//        } catch (IllegalArgumentException ex){
+//            return ex.getMessage();
+//        }
+//    }
 
 }
