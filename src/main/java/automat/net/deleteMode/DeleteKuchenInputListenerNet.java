@@ -28,11 +28,11 @@ public class DeleteKuchenInputListenerNet implements InputEventListener {
         String inputData = event.getText().toLowerCase().trim();
         if(inputData.matches("^f.[0-9]*$")){
             int fachNumber = stringUtils.extractFachNumberFromString(inputData);
-            try {
-                dataSender.sendDataToServer(String.valueOf(fachNumber));
-            } catch (IllegalArgumentException | IOException | ClassNotFoundException ex){
-                printer.println(ex.getMessage());
-            }
+//            try {
+//                dataSender.sendDataToServer(String.valueOf(fachNumber));
+//            } catch (IllegalArgumentException | IOException | ClassNotFoundException ex){
+//                printer.println(ex.getMessage());
+//            }
         }
     }
 

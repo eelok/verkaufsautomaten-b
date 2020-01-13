@@ -23,7 +23,7 @@ public class AddModeInputListenerNet implements InputEventListener {
 
     @Override
     public void onInputEvent(InputEvent event) {
-        if (event.getText() != null && event.getText().equals(":a")) {
+        if (event.getText() != null && ":a".equals(event.getText())) {
             printer.println("add mode active");
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new AddManufacturerInputListenerNet(new StringUtils(), dataSender));

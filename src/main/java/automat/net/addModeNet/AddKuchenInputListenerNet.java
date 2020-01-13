@@ -6,6 +6,7 @@ import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.KuchenParser;
 import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.kuchen.Kuchen;
+import automat.net.Command;
 import automat.net.DataSender;
 
 import java.io.IOException;
@@ -33,12 +34,12 @@ public class AddKuchenInputListenerNet implements InputEventListener {
             return;
         }
         try {
-            //todo change parameter
-            dataSender.sendDataToServer(event.getText());
-        } catch (AutomatIsFullException ex) {
-            printer.println(String.format("Can not add kuchen, reason: %s", ex.getMessage()));
-        } catch (IllegalArgumentException | IOException | ClassNotFoundException e){
-            printer.println(String.format("The Kuchen could not be added, reason: %s", e.getMessage()));
+            dataSender.sendDataToServer(event.getText(), Command.addK);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+
     }
 }
