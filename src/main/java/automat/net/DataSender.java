@@ -1,6 +1,6 @@
 package automat.net;
 
-import automat.net.heplers.ConnectionHelper;
+import automat.net.helper.ConnectionHelper;
 
 import java.io.IOException;
 

@@ -2,24 +2,12 @@ package automat.net;
 
 import automat.apps.console.service.KuchenParser;
 import automat.mainlib.Automat;
-import automat.mainlib.hersteller.Hersteller;
-import automat.mainlib.hersteller.HerstellerImplementation;
-import automat.mainlib.kuchen.Allergen;
-import automat.mainlib.kuchen.KremkuchenImplementation;
-import automat.mainlib.kuchen.Kuchen;
-import automat.mainlib.kuchen.KuchenImplementation;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.math.BigDecimal;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ServerAutomat extends IOException {
 
@@ -58,7 +46,7 @@ public class ServerAutomat extends IOException {
 //
         KuchenParser kuchenParser = new KuchenParser();
 
-        Transit transit = new Transit(automatInServer, kuchenParser);
+        dataHandler dataHandler = new dataHandler(automatInServer, kuchenParser);
         int port = 1234;
         ServerSocket serverSocket = new ServerSocket(port);
         Socket socket = serverSocket.accept();
@@ -74,7 +62,7 @@ public class ServerAutomat extends IOException {
             String commandFromInput = split[0].trim();
             String data = split[1].trim();
 
-            String replyFromServer = transit.existingCommand(commandFromInput, data);
+            String replyFromServer = dataHandler.existingCommand(commandFromInput, data);
             serverOutputStream.writeObject(replyFromServer);
 
         }

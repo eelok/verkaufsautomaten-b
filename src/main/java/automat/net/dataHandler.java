@@ -7,19 +7,16 @@ import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.kuchen.Kuchen;
 
-
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//todo invent better name
-public class Transit {
+public class dataHandler {
 
     private Automat automatInServer;
     private KuchenParser kuchenParser;
 
 
-    public Transit(Automat automatInServer, KuchenParser kuchenParser) {
+    public dataHandler(Automat automatInServer, KuchenParser kuchenParser) {
         this.automatInServer = automatInServer;
         this.kuchenParser = kuchenParser;
     }
