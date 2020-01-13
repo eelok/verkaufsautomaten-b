@@ -2,12 +2,14 @@ package automat.net;
 
 import automat.apps.console.service.KuchenParser;
 import automat.mainlib.Automat;
+import automat.net.helper.ConnectionHelper;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Collections;
 
 public class ServerAutomat extends IOException {
 
@@ -44,6 +46,7 @@ public class ServerAutomat extends IOException {
 //        automatInServer.addKuchen(kremkuchen, LocalDateTime.now());
 //////        // todo end temp data
 //
+
         KuchenParser kuchenParser = new KuchenParser();
 
         DataHandler dataHandler = new DataHandler(automatInServer, kuchenParser);
