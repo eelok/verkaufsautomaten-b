@@ -3,6 +3,7 @@ package automat.net.addModeNet;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
+import automat.net.command.CommandAddHersteller;
 import automat.net.DataSender;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class AddManufacturerInputListenerNet implements InputEventListener {
         String userInput = event.getText().toLowerCase().trim();
         if (stringUtils.isOneWord(userInput)) {
             try {
-                dataSender.sendDataToServer(userInput);
+                dataSender.sendDataToServer(new CommandAddHersteller(userInput));
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {

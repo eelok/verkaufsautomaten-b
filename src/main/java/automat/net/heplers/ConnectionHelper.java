@@ -1,4 +1,4 @@
-package automat.net;
+package automat.net.heplers;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
