@@ -12,17 +12,9 @@ import automat.apps.console.observer.DeleteHerstellerObserver;
 import automat.apps.console.observer.RemoveKuchenObserver;
 import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
-import automat.net.DataSender;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.InetAddress;
-import java.net.Socket;
 
 public class MainApp {
     public static void main(String[] args) {
-        DataSender dataSender = new DataSender();
 
         Automat automat = new Automat(5);
         ConsoleReader consoleReader = new ConsoleReader();

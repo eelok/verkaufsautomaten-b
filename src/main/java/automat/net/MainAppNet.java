@@ -21,7 +21,6 @@ public class MainAppNet {
     public static void main(String[] args) {
         DataSender dataSender = new DataSender();
 
-//        Automat automat = new Automat(5);
         ConsoleReader consoleReader = new ConsoleReader();
         InputEventHandler eventHandler = new InputEventHandler();
         consoleReader.setHandler(eventHandler);
