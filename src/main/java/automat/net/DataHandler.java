@@ -15,7 +15,6 @@ public class DataHandler {
     private Automat automatInServer;
     private KuchenParser kuchenParser;
 
-
     public DataHandler(Automat automatInServer, KuchenParser kuchenParser) {
         this.automatInServer = automatInServer;
         this.kuchenParser = kuchenParser;
