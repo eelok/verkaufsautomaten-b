@@ -27,7 +27,7 @@ public class ListModeInputListenerNet implements InputEventListener {
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new ListManufacturerInputListenerNet(dataSender));
             eventHandler.add(new ListKuchenInputListenerNet(dataSender));
-            eventHandler.add(new ListModeInfo(printer));
+            eventHandler.add(new ListModeInfoNet(printer));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
         }

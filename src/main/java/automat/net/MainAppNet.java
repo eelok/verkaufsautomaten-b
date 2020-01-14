@@ -2,17 +2,8 @@ package automat.net;
 
 import automat.apps.console.Printer;
 import automat.apps.console.mvc.ConsoleReader;
-import automat.apps.console.mvc.InfoCommandMode;
 import automat.apps.console.mvc.InputEventHandler;
-import automat.apps.console.mvc.addMode.AddModeInputListener;
-import automat.apps.console.mvc.deleteMode.DeleteModeInputListener;
-import automat.apps.console.mvc.listMode.ListModeInputListener;
-import automat.apps.console.observer.AddHerstellerObserver;
-import automat.apps.console.observer.AddNewKuchenObserver;
-import automat.apps.console.observer.DeleteHerstellerObserver;
-import automat.apps.console.observer.RemoveKuchenObserver;
 import automat.apps.console.service.StringUtils;
-import automat.mainlib.Automat;
 import automat.net.addModeNet.AddModeInputListenerNet;
 import automat.net.deleteMode.DeleteModeInputListenerNet;
 import automat.net.listModeNet.ListModeInputListenerNet;
@@ -39,9 +30,9 @@ public class MainAppNet {
         ListModeInputListenerNet listModeInputListenerNet = new ListModeInputListenerNet(printer, new ConsoleReader(), dataSender);
         DeleteModeInputListenerNet deleteModeInputListenerNet = new DeleteModeInputListenerNet(stringUtils, printer, new ConsoleReader(), dataSender);
 
-        InfoCommandMode infoCommandMode = new InfoCommandMode(printer);
+        InfoCommandModeNet InfoCommandModeNet = new InfoCommandModeNet(printer);
 
-        eventHandler.add(infoCommandMode);
+        eventHandler.add(InfoCommandModeNet);
         eventHandler.add(addModeInputListenerNet);
         eventHandler.add(listModeInputListenerNet);
         eventHandler.add(deleteModeInputListenerNet);

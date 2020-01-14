@@ -14,13 +14,11 @@ import java.io.IOException;
 public class AddKuchenInputListenerNet implements InputEventListener {
 
     private KuchenParser kuchenParser;
-    private Printer printer;
     private DataSender dataSender;
 
 
-    public AddKuchenInputListenerNet(KuchenParser kuchenParser, Printer printer, DataSender dataSender) {
+    public AddKuchenInputListenerNet(KuchenParser kuchenParser, DataSender dataSender) {
         this.kuchenParser = kuchenParser;
-        this.printer = printer;
         this.dataSender = dataSender;
     }
 

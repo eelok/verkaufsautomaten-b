@@ -27,7 +27,7 @@ public class AddModeInputListenerNet implements InputEventListener {
             printer.println("add mode active");
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new AddManufacturerInputListenerNet(new StringUtils(), dataSender));
-            eventHandler.add(new AddKuchenInputListenerNet(new KuchenParser(), printer, dataSender));
+            eventHandler.add(new AddKuchenInputListenerNet(new KuchenParser(), dataSender));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
         }

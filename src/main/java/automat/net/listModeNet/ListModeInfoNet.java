@@ -4,11 +4,11 @@ import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 
-public class ListModeInfo implements InputEventListener {
+public class ListModeInfoNet implements InputEventListener {
 
     private Printer printer;
 
-    public ListModeInfo(Printer printer) {
+    public ListModeInfoNet(Printer printer) {
         this.printer = printer;
     }
 
