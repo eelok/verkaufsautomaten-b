@@ -2,44 +2,35 @@ package automat.net;
 
 public class TempData {
 
-    //            clientOutputStream.writeObject("addH/alex");
-//            String alex = (String) clientInputStream.readObject();
-//            System.out.println(alex);
+    ////        //todo start temp data
+//        List<Hersteller> list = new ArrayList<>();
+////        Automat automatInServer = new Automat(5, new ArrayList<>(), list);
+//        HerstellerImplementation alex = new HerstellerImplementation("alex");
+//        list.add(alex);
+//        HerstellerImplementation donna = new HerstellerImplementation("donna");
+//        list.add(donna);
+//        automatInServer.setHerstellerList(list);
+//        List<Allergen> allergens = new ArrayList<>();
+//        allergens.add(Allergen.Erdnuss);
+//        allergens.add(Allergen.Gluten);
+//        Kuchen kuchen = new KuchenImplementation(
+//                new BigDecimal(20),
+//                alex,
+//                allergens,
+//                500,
+//                Duration.ofDays(2)
+//        );
 //
-//            clientOutputStream.writeObject("addH/donna");
-//            String donna = (String) clientInputStream.readObject();
-//            System.out.println(donna);
+//        Kuchen kremkuchen = new KremkuchenImplementation(
+//                new BigDecimal(15),
+//                donna,
+//                allergens,
+//                500,
+//                Duration.ofDays(1),
+//                "sahne"
+//        );
+//        automatInServer.addKuchen(kuchen, LocalDateTime.now());
+//        automatInServer.addKuchen(kremkuchen, LocalDateTime.now());
+//////        // todo end temp data
 //
-//            //todo введена неверная команда
-//            clientOutputStream.writeObject("add/*");
-//            String str = (String) clientInputStream.readObject();
-//            System.out.println(str);
-//
-//            clientOutputStream.writeObject("addK/Kremkuchen 2.50 Alex Erdnuss,Haselnuss 1400 24 Sahne");
-//            String infoKuchen =(String) clientInputStream.readObject();
-//            System.out.println(infoKuchen);
-//
-//            clientOutputStream.writeObject("addK/Kuchen 2.50 Donna Gluten,Haselnuss 1400 54");
-//            String infoKuch2 =(String) clientInputStream.readObject();
-//            System.out.println(infoKuch2);
-//
-//            clientOutputStream.writeObject("listH/*");
-//            Object l = clientInputStream.readObject();
-//            System.out.println(l);
-//
-//            clientOutputStream.writeObject("listK/*");
-//            Object kuchL = clientInputStream.readObject();
-//            System.out.println(kuchL);
-//
-//            clientOutputStream.writeObject("delH/donna");
-//            Object delH = clientInputStream.readObject();
-//            System.out.println(delH);
-//
-//            clientOutputStream.writeObject("listH/*");
-//            Object readInf = clientInputStream.readObject();
-//            System.out.println(readInf);
-//
-//            clientOutputStream.writeObject("delK/f0");
-//            Object delKuch = clientInputStream.readObject();
-//            System.out.println(delKuch);
 }

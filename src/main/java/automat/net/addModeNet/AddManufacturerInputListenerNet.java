@@ -1,0 +1,35 @@
+package automat.net.addModeNet;
+
+import automat.apps.console.mvc.InputEvent;
+import automat.apps.console.mvc.InputEventListener;
+import automat.apps.console.service.StringUtils;
+import automat.net.Command;
+import automat.net.DataSender;
+
+import java.io.IOException;
+
+public class AddManufacturerInputListenerNet implements InputEventListener {
+
+    private StringUtils stringUtils;
+    private DataSender dataSender;
+
+    public AddManufacturerInputListenerNet(StringUtils stringUtils, DataSender dataSender) {
+        this.stringUtils = stringUtils;
+        this.dataSender = dataSender;
+    }
+
+    @Override
+    public void onInputEvent(InputEvent event) {
+        if (event.getText() == null) {
+            return;
+        }
+        String userInput = event.getText().toLowerCase().trim();
+        if (stringUtils.isOneWord(userInput)) {
+            try {
+                dataSender.sendDataToServer(userInput, Command.addH);
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+}

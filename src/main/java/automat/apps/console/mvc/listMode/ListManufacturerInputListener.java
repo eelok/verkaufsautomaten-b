@@ -18,7 +18,7 @@ public class ListManufacturerInputListener implements InputEventListener {
 
     @Override
     public void onInputEvent(InputEvent event) {
-        if (event.getText().equals("manufacturer")) {
+        if ("manufacturer".equalsIgnoreCase(event.getText())) {
             List<String> herstellerWithNumberOfKuchen = automat.getHerstellerWithNumberOfKuchen();
             if (herstellerWithNumberOfKuchen.isEmpty()) {
                 printer.println("there is no manufacturer");
