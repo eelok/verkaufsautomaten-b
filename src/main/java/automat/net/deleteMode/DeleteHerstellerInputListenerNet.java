@@ -4,7 +4,7 @@ import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.net.Command;
-import automat.net.DataSender;
+import automat.net.client.DataSender;
 
 import java.io.IOException;
 
@@ -26,13 +26,11 @@ public class DeleteHerstellerInputListenerNet implements InputEventListener {
         String inputData = event.getText().toLowerCase().trim();
         if (!inputData.matches("^f.[0-9]*$")) {
             try {
-                dataSender.sendDataToServer(inputData, Command.delH);
+                dataSender.sendDataToServer(inputData, Command.DELETE_HERSTELLER);
             } catch (IllegalArgumentException e) {
                 printer.println(e.getMessage());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
     }

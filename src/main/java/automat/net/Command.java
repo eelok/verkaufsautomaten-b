@@ -1,11 +1,11 @@
 package automat.net;
 
 public enum Command {
-    addH,
-    addK,
-    listH,
-    listK,
-    delH,
-    delK,
-    q
+    ADD_HERSTELLER,
+    ADD_KUCHEN,
+    LIST_HERSTELLER,
+    LIST_KUCHEN,
+    DELETE_HERSTELLER,
+    DELETE_KUCHEN,
+    Q
 }

@@ -1,13 +1,11 @@
 package automat.net.addModeNet;
 
-import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.KuchenParser;
-import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.kuchen.Kuchen;
 import automat.net.Command;
-import automat.net.DataSender;
+import automat.net.client.DataSender;
 
 import java.io.IOException;
 
@@ -32,11 +30,9 @@ public class AddKuchenInputListenerNet implements InputEventListener {
             return;
         }
         try {
-            dataSender.sendDataToServer(event.getText(), Command.addK);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            dataSender.sendDataToServer(event.getText(), Command.ADD_KUCHEN);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }

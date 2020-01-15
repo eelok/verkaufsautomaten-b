@@ -5,7 +5,7 @@ import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
-import automat.net.DataSender;
+import automat.net.client.DataSender;
 
 public class ListModeInputListenerNet implements InputEventListener {
 

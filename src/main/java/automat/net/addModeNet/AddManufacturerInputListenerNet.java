@@ -4,7 +4,7 @@ import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
 import automat.net.Command;
-import automat.net.DataSender;
+import automat.net.client.DataSender;
 
 import java.io.IOException;
 
@@ -26,7 +26,7 @@ public class AddManufacturerInputListenerNet implements InputEventListener {
         String userInput = event.getText().toLowerCase().trim();
         if (stringUtils.isOneWord(userInput)) {
             try {
-                dataSender.sendDataToServer(userInput, Command.addH);
+                dataSender.sendDataToServer(userInput, Command.ADD_HERSTELLER);
             } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }

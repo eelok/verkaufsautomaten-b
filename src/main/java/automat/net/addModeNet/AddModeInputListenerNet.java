@@ -7,7 +7,7 @@ import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.KuchenParser;
 import automat.apps.console.service.StringUtils;
-import automat.net.DataSender;
+import automat.net.client.DataSender;
 
 public class AddModeInputListenerNet implements InputEventListener {
 

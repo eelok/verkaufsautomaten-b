@@ -5,7 +5,7 @@ import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
 import automat.net.Command;
-import automat.net.DataSender;
+import automat.net.client.DataSender;
 
 import java.io.IOException;
 
@@ -30,7 +30,7 @@ public class DeleteKuchenInputListenerNet implements InputEventListener {
         if(inputData.matches("^f.[0-9]*$")){
             int fachNumber = stringUtils.extractFachNumberFromString(inputData);
             try {
-                dataSender.sendDataToServer(String.valueOf(fachNumber), Command.delK);
+                dataSender.sendDataToServer(String.valueOf(fachNumber), Command.DELETE_KUCHEN);
             } catch (IllegalArgumentException | IOException | ClassNotFoundException ex){
                 printer.println(ex.getMessage());
             }

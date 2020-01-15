@@ -6,7 +6,7 @@ import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
-import automat.net.DataSender;
+import automat.net.client.DataSender;
 
 public class DeleteModeInputListenerNet implements InputEventListener {
 
