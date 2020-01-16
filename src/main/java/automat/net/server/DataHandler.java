@@ -36,7 +36,7 @@ public class DataHandler {
                 try {
                     automat.addHersteller(new HerstellerImplementation(info));
                     return String.format("from server: hersteller %s was added to automat", info);
-                } catch (ManufacturerExistException ex) {
+                } catch (ManufacturerExistException | IllegalArgumentException ex) {
                     return ex.getMessage();
                 }
             case ADD_KUCHEN:
@@ -56,7 +56,7 @@ public class DataHandler {
             case DELETE_HERSTELLER:
                 try {
                     automat.deleteHersteller(info);
-                    return String.format("from server: harsteller %s was deleted from automat", info);
+                    return String.format("from server: hersteller %s was deleted from automat", info);
                 } catch (IllegalArgumentException ex) {
                     return ex.getMessage();
                 }

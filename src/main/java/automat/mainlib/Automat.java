@@ -84,9 +84,9 @@ public class Automat implements Subject, Serializable {
     }
 
     public boolean isFull() {
-        try{
+        try {
             findEmptyCell();
-        } catch(AutomatIsFullException ex){
+        } catch (AutomatIsFullException ex) {
             return true;
         }
         return false;
@@ -107,6 +107,9 @@ public class Automat implements Subject, Serializable {
         Hersteller hersteller = findHersteller(name);
         if (hersteller == null) {
             throw new IllegalArgumentException(String.format("Hersteller %s does not exist", name));
+        }
+        if (containsTheNameOfHerstellerInAllEingelagerteKuchen(name)) {
+            throw new IllegalArgumentException(String.format("Hersteller %s may not be deleted\nreason: a kuchen from %s is in Automat", name, name));
         }
         allHersteller.remove(hersteller);
         this.message = name;
@@ -173,7 +176,7 @@ public class Automat implements Subject, Serializable {
         return removedEinlagerungEntry;
     }
 
-    public List<String> getHerstellerWithNumberOfKuchen(){
+    public List<String> getHerstellerWithNumberOfKuchen() {
         return this.allHersteller.stream()
                 .map(hersteller -> {
                     long anzahlKuchenZuHersteller = getAnzahlKuchenZuHersteller(hersteller.getName());
@@ -182,9 +185,9 @@ public class Automat implements Subject, Serializable {
                 .collect(Collectors.toList());
     }
 
-    public List<String> getAllKuchenWithFachNum(){
+    public List<String> getAllKuchenWithFachNum() {
         List<String> listWithKuchenWithAllocatedFachNum = new ArrayList<>();
-        for (EinlagerungEntry each :storage){
+        for (EinlagerungEntry each : storage) {
             listWithKuchenWithAllocatedFachNum.add(each.getKuchen().getType() + ": " + each.getFachnummer());
         }
         return listWithKuchenWithAllocatedFachNum;
@@ -259,6 +262,11 @@ public class Automat implements Subject, Serializable {
         }
 
         return einlagerungEntry.getKuchen().equals(kuchen);
+    }
+
+    private boolean containsTheNameOfHerstellerInAllEingelagerteKuchen(String name) {
+        return getAllEingelagertenKuchen().stream()
+                .anyMatch(kuchen -> kuchen.getHersteller().getName().equals(name));
     }
 
     @Override
