@@ -69,6 +69,18 @@ class AutomatTest {
     }
 
     @Test
+    void should_throw_exception_when_delete_hersteller_when_automan_contains_a_kuchen_from_the_hersteller(){
+        Automat automat = new Automat(1);
+        Hersteller bob = new HerstellerImplementation("bob");
+        automat.setHerstellerList(Arrays.asList(bob));
+        Obsttorte obsttorte = mock(ObsttorteImplementation.class);
+        when(obsttorte.getHersteller()).thenReturn(bob);
+        automat.addKuchen(obsttorte, LocalDateTime.now());
+
+        assertThatThrownBy(() -> automat.deleteHersteller("bob")).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void should_add_kuchen() {
         Automat automat = new Automat(1);
         Hersteller alex = mock(Hersteller.class);

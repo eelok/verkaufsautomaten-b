@@ -6,12 +6,17 @@ import automat.net.helper.ConnectionHelper;
 import java.io.IOException;
 
 public class DataSender {
+    ConnectionHelper connectionHelper;
 
-    public DataSender() {
+    public DataSender(ConnectionHelper connectionHelper) {
+      this.connectionHelper = connectionHelper;
+    }
+
+    public ConnectionHelper getConnectionHelper() {
+        return connectionHelper;
     }
 
     public void sendDataToServer(String inputData, Command command) throws IOException, ClassNotFoundException {
-        ConnectionHelper connectionHelper = ConnectionHelper.getConnectionHelperSingleton();
 
         String dataForTransport = command + "/" + inputData;
 
