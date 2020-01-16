@@ -14,11 +14,11 @@ import java.util.List;
 
 public class DataHandler {
 
-    private Automat automatInServer;
+    private Automat automat;
     private KuchenParser kuchenParser;
 
-    public DataHandler(Automat automatInServer, KuchenParser kuchenParser) {
-        this.automatInServer = automatInServer;
+    public DataHandler(Automat automat, KuchenParser kuchenParser) {
+        this.automat = automat;
         this.kuchenParser = kuchenParser;
     }
 
@@ -34,7 +34,7 @@ public class DataHandler {
                 break;
             case ADD_HERSTELLER:
                 try {
-                    automatInServer.addHersteller(new HerstellerImplementation(info));
+                    automat.addHersteller(new HerstellerImplementation(info));
                     return String.format("from server: hersteller %s was added to automat", info);
                 } catch (ManufacturerExistException ex) {
                     return ex.getMessage();
@@ -42,27 +42,27 @@ public class DataHandler {
             case ADD_KUCHEN:
                 Kuchen kuchenInfo = kuchenParser.getKuchenInfo(info);
                 try {
-                    automatInServer.addKuchen(kuchenInfo, LocalDateTime.now());
+                    automat.addKuchen(kuchenInfo, LocalDateTime.now());
                     return String.format("from server: kuchen %s was added to automat", kuchenInfo.getType());
-                } catch (AutomatIsFullException e) {
+                } catch (AutomatIsFullException | IllegalArgumentException e) {
                     return e.getMessage();
                 }
             case LIST_HERSTELLER:
-                List<String> herstellerWithNumberOfKuchen = automatInServer.getHerstellerWithNumberOfKuchen();
+                List<String> herstellerWithNumberOfKuchen = automat.getHerstellerWithNumberOfKuchen();
                 return "from server: " + herstellerWithNumberOfKuchen.toString();
             case LIST_KUCHEN:
-                List<String> allKuchenWithFachNum = automatInServer.getAllKuchenWithFachNum();
+                List<String> allKuchenWithFachNum = automat.getAllKuchenWithFachNum();
                 return "from server: " + allKuchenWithFachNum.toString();
             case DELETE_HERSTELLER:
                 try {
-                    automatInServer.deleteHersteller(info);
+                    automat.deleteHersteller(info);
                     return String.format("from server: harsteller %s was deleted from automat", info);
                 } catch (IllegalArgumentException ex) {
                     return ex.getMessage();
                 }
             case DELETE_KUCHEN:
                 try {
-                    EinlagerungEntry einlagerungEntry = automatInServer.removeKuchenFromAutomat(Integer.parseInt(info));
+                    EinlagerungEntry einlagerungEntry = automat.removeKuchenFromAutomat(Integer.parseInt(info));
                     return String.format("from server: %s from fach %s was deleted", einlagerungEntry.getKuchen().getType(), einlagerungEntry.getFachnummer());
                 } catch (IllegalArgumentException message) {
                     return message.getMessage();

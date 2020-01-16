@@ -15,35 +15,52 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerAutomat extends IOException {
+public class ServerAutomat {
+
+    private Automat automat;
+    private DataHandler dataHandler;
+
+    public ServerAutomat(Automat automat, DataHandler dataHandler) {
+        this.automat = automat;
+        this.dataHandler = dataHandler;
+    }
+
+
+    public void initData() {
+        Printer printer = new Printer();
+        new AddHerstellerObserver(automat, printer);
+        new DeleteHerstellerObserver(automat, printer);
+        new AddNewKuchenObserver(automat, printer);
+        new RemoveKuchenObserver(automat, printer);
+    }
+
+    public void run(ObjectInputStream serverInputStream, ObjectOutputStream serverOutputStream) throws IOException, ClassNotFoundException {
+        Object inputObject = serverInputStream.readObject();
+        System.out.println(">>>>>>>>>>Object was received from client: " + inputObject.toString());
+        String receivedString = inputObject.toString();
+
+        String[] split = receivedString.split("/");
+        String commandFromInput = split[0].trim();
+        String data = split[1].trim();
+
+        String replyFromServer = dataHandler.handleData(commandFromInput, data);
+        serverOutputStream.writeObject(replyFromServer);
+    }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Automat automatInServer = new Automat(5);
-        Printer printer = new Printer();
-        AddHerstellerObserver addHerstellerObserver = new AddHerstellerObserver(automatInServer, printer);
-        DeleteHerstellerObserver deleteHerstellerObserver = new DeleteHerstellerObserver(automatInServer, printer);
-        AddNewKuchenObserver addNewKuchenObserver = new AddNewKuchenObserver(automatInServer, printer);
-        RemoveKuchenObserver removeKuchenObserver = new RemoveKuchenObserver(automatInServer, printer);
-        KuchenParser kuchenParser = new KuchenParser();
-
-        DataHandler dataHandler = new DataHandler(automatInServer, kuchenParser);
-        int port = 1234;
-        ServerSocket serverSocket = new ServerSocket(port);
+        ServerSocket serverSocket = new ServerSocket(1234);
         Socket socket = serverSocket.accept();
+        Automat automat = new Automat(5);
+        ServerAutomat server = new ServerAutomat(automat, new DataHandler(automat, new KuchenParser()));
+        server.initData();
         ObjectInputStream serverInputStream = new ObjectInputStream(socket.getInputStream());
         ObjectOutputStream serverOutputStream = new ObjectOutputStream(socket.getOutputStream());
-
-        while(true) {
-            Object inputObject = serverInputStream.readObject();
-            System.out.println(">>>>>>>>>>Object was received from client: " + inputObject.toString());
-            String receivedString = inputObject.toString();
-
-            String[] split = receivedString.split("/");
-            String commandFromInput = split[0].trim();
-            String data = split[1].trim();
-
-            String replyFromServer = dataHandler.handleData(commandFromInput, data);
-            serverOutputStream.writeObject(replyFromServer);
+        while (true) {
+            server.run(serverInputStream, serverOutputStream);
         }
+
+
     }
+
+
 }

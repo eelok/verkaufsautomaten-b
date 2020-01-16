@@ -1,31 +1,30 @@
 package automat.net.helper;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 
 public class ConnectionHelper {
-    private int port = 1234;
-    private Socket socketConnection = null;
-    private ObjectOutputStream clientOutputStream = null;
-    private ObjectInputStream clientInputStream = null;
+    private Socket socketConnection;
+    private ObjectOutputStream clientOutputStream;
+    private ObjectInputStream clientInputStream ;
 
-    private ConnectionHelper() {
-        try {
-            this.socketConnection = new Socket(InetAddress.getLocalHost(), port);
-            this.clientOutputStream = new ObjectOutputStream(this.socketConnection.getOutputStream());
-            this.clientInputStream = new ObjectInputStream(this.socketConnection.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private ConnectionHelper(Socket socketConnection, ObjectOutputStream clientOutputStream, ObjectInputStream clientInputStream) {
+        this.socketConnection = socketConnection;
+        this.clientOutputStream = clientOutputStream;
+        this.clientInputStream = clientInputStream;
     }
 
-    private static final ConnectionHelper connectionHelperSingleton = new ConnectionHelper();
+    private static ConnectionHelper connectionHelperSingleton = null;
 
 
-    public static ConnectionHelper getConnectionHelperSingleton(){
+    public static ConnectionHelper getConnectionHelperSingleton() throws IOException {
+        if(connectionHelperSingleton == null){
+            Socket socketConnection = new Socket(InetAddress.getLocalHost(), 1234);
+            ObjectOutputStream clientOutputStream = new ObjectOutputStream(socketConnection.getOutputStream());
+            ObjectInputStream clientInputStream = new ObjectInputStream(socketConnection.getInputStream());
+            connectionHelperSingleton = new ConnectionHelper(socketConnection, clientOutputStream, clientInputStream);
+        }
         return connectionHelperSingleton;
     }
 
