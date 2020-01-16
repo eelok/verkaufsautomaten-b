@@ -43,7 +43,7 @@ public class DataHandler {
                 Kuchen kuchenInfo = kuchenParser.getKuchenInfo(info);
                 try {
                     automat.addKuchen(kuchenInfo, LocalDateTime.now());
-                    return String.format("from server: kuchen %s was added to automat", kuchenInfo.getType());
+                    return String.format("from server: kuchen of type %s was added to automat", kuchenInfo.getType());
                 } catch (AutomatIsFullException | IllegalArgumentException e) {
                     return e.getMessage();
                 }

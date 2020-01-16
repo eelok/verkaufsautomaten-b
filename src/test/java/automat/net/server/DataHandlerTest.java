@@ -2,26 +2,21 @@ package automat.net.server;
 
 import automat.apps.console.service.KuchenParser;
 import automat.mainlib.Automat;
-import automat.mainlib.hersteller.Hersteller;
-import automat.mainlib.hersteller.HerstellerImplementation;
+import automat.mainlib.EinlagerungEntry;
 import automat.mainlib.kuchen.*;
-import automat.net.Command;
 import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class DataHandlerTest {
@@ -41,43 +36,49 @@ class DataHandlerTest {
 
     @Test
     void should_add_kuchen_when_command_ADD_KUCHEN_and_kuchen_data(){
-        String inputCommand = "ADD_KUCHEN";
-        String recivedData = "kremkuchen 2.5 Donna Sesamsamen,Haselnuss 1400 24 Sahne";
+        String data = "kremkuchen 2.5 Donna Sesamsamen,Haselnuss 1400 24 Sahne";
 
         Kremkuchen kremkuchen = mock(KremkuchenImplementation.class);
-        Hersteller donna = mock(HerstellerImplementation.class);
-        when(kremkuchen.getHersteller()).thenReturn(donna);
-        when(kremkuchen.getType()).thenReturn("kremkuchen");
-        when(kremkuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.Sesamsamen, Allergen.Haselnuss));
-        when(kremkuchen.getNaehrwert()).thenReturn(1400);
-        when(kremkuchen.getHaltbarkeit()).thenReturn(Duration.ofDays(1));
-        when(kremkuchen.getKremsorte()).thenReturn("Sahne");
+        when(kremkuchen.getType()).thenReturn(TypeOfKuchen.Kremkuchen.toString());
 
-        when(kuchenParser.getKuchenInfo(recivedData)).thenReturn(kremkuchen);
-        when(automat.getHerstellerList()).thenReturn(Collections.singletonList(donna));
-        dataHandler.handleData(inputCommand, recivedData);
+        when(kuchenParser.getKuchenInfo(data)).thenReturn(kremkuchen);
+        when(automat.addKuchen(kremkuchen, LocalDateTime.now())).thenReturn(mock(EinlagerungEntry.class));
 
-        verify(automat).addKuchen(eq(kremkuchen), any(LocalDateTime.class));
+        assertThat(dataHandler.handleData("ADD_KUCHEN", data)).
+                isEqualTo("from server: kuchen of type %s was added to automat", TypeOfKuchen.Kremkuchen.toString());
     }
 
     @Test
-    void should_list_hersteller_when_command_LIST_HERSTELLER(){
-        String inputCommand = "LIST_HERSTELLER";
-        String recivedData = "";
+    void should_return_list_hersteller_with_num_of_kuchen_when_command_LIST_HERSTELLER(){
+        List<String> herstellerWihtNumOfKuch = new ArrayList<>();
+        herstellerWihtNumOfKuch.add("donna"+ ": " + 0);
+        herstellerWihtNumOfKuch.add("tom"+ ": " + 5);
+        when(automat.getHerstellerWithNumberOfKuchen()).thenReturn(herstellerWihtNumOfKuch);
 
-        dataHandler.handleData(inputCommand, recivedData);
-
-        verify(automat).getHerstellerWithNumberOfKuchen();
+        assertThat(dataHandler.handleData("LIST_HERSTELLER", "")).isEqualTo("from server: [donna: 0, tom: 5]");
     }
 
     @Test
-    void should_list_kuchen_when_command_LIST_KUCHEN(){
-        String inputCommand = "LIST_KUCHEN";
-        String recivedData = "";
+    void should_return_list_kuchen_when_command_LIST_KUCHEN(){
+        List<String> listWithKuchAndFach = new ArrayList<>();
+        listWithKuchAndFach.add("obstkuhen" + ": " + 1);
+        listWithKuchAndFach.add("obsttorte" + ": " + 2);
+        when(automat.getAllKuchenWithFachNum()).thenReturn(listWithKuchAndFach);
 
-        dataHandler.handleData(inputCommand, recivedData);
+        assertThat(dataHandler.handleData("LIST_KUCHEN", "")).isEqualTo("from server: [obstkuhen: 1, obsttorte: 2]");
+    }
 
-        verify(automat).getAllKuchenWithFachNum();
+    @Test
+    void should_return_type_of_kuchen_and_fach_when_command_DELETE_KUCHEN_and_fach(){
+        int fach = 0;
+        EinlagerungEntry einlagerungEntry = mock(EinlagerungEntry.class);
+        Kuchen obsttorte = mock(ObsttorteImplementation.class);
+        when(obsttorte.getType()).thenReturn(TypeOfKuchen.Obsttorte.toString());
+        when(einlagerungEntry.getKuchen()).thenReturn(obsttorte);
+        when(einlagerungEntry.getFachnummer()).thenReturn(0);
+        when(automat.removeKuchenFromAutomat(fach)).thenReturn(einlagerungEntry);
+
+        assertThat(dataHandler.handleData("DELETE_KUCHEN", "0")).isEqualTo("from server: Obsttorte from fach 0 was deleted");
     }
 
 }
