@@ -36,7 +36,7 @@ public class DataHandler {
                 try {
                     automat.addHersteller(new HerstellerImplementation(info));
                     return String.format("from server: hersteller %s was added to automat", info);
-                } catch (ManufacturerExistException | IllegalArgumentException ex) {
+                } catch (ManufacturerExistException ex) {
                     return ex.getMessage();
                 }
             case ADD_KUCHEN:
@@ -49,9 +49,15 @@ public class DataHandler {
                 }
             case LIST_HERSTELLER:
                 List<String> herstellerWithNumberOfKuchen = automat.getHerstellerWithNumberOfKuchen();
+                if(herstellerWithNumberOfKuchen.isEmpty()){
+                    return "form server: there is no manufacturer";
+                }
                 return "from server: " + herstellerWithNumberOfKuchen.toString();
             case LIST_KUCHEN:
                 List<String> allKuchenWithFachNum = automat.getAllKuchenWithFachNum();
+                if(allKuchenWithFachNum.isEmpty()){
+                    return "from server: No Kuchen Available in the Automat";
+                }
                 return "from server: " + allKuchenWithFachNum.toString();
             case DELETE_HERSTELLER:
                 try {
