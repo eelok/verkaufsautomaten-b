@@ -5,6 +5,7 @@ import automat.mainlib.Automat;
 import automat.mainlib.EinlagerungEntry;
 import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.exceptions.ManufacturerExistException;
+import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.kuchen.Kuchen;
 import automat.net.Command;
@@ -27,15 +28,16 @@ public class DataHandler {
         try {
             userCommand = Command.valueOf(inputCommand);
         } catch (IllegalArgumentException ex) {
-            return String.format("from server: {%s} wrong command", inputCommand);
+            return String.format("from server: %s wrong command", inputCommand);
         }
         switch (userCommand) {
             case Q:
                 break;
             case ADD_HERSTELLER:
                 try {
-                    automat.addHersteller(new HerstellerImplementation(info));
-                    return String.format("from server: hersteller %s was added to automat", info);
+                    Hersteller hersteller = new HerstellerImplementation(info);
+                    automat.addHersteller(hersteller);
+                    return String.format("from server: hersteller %s was added to automat", hersteller.getName());
                 } catch (ManufacturerExistException ex) {
                     return ex.getMessage();
                 }

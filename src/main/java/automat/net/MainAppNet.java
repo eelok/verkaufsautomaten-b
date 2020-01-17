@@ -13,7 +13,7 @@ import automat.net.listModeNet.ListModeInputListenerNet;
 import java.io.IOException;
 
 public class MainAppNet {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
 
         startClient();
     }
