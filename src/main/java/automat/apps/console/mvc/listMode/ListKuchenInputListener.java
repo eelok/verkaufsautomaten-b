@@ -18,7 +18,7 @@ public class ListKuchenInputListener implements InputEventListener {
 
     @Override
     public void onInputEvent(InputEvent event) {
-        if ("kuchen".equalsIgnoreCase(event.getText())) {
+        if ("kuchen".equalsIgnoreCase(event.getText().trim())) {
             List<String> allKuchenWithFachNum = automat.getAllKuchenWithFachNum();
             if (allKuchenWithFachNum.isEmpty()) {
                 printer.println("No Kuchen Available in the Automat");

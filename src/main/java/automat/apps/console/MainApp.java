@@ -22,10 +22,10 @@ public class MainApp {
         consoleReader.setHandler(eventHandler);
 
         Printer printer = new Printer();
-        AddHerstellerObserver addHerstellerObserver = new AddHerstellerObserver(automat, printer);
-        DeleteHerstellerObserver deleteHerstellerObserver = new DeleteHerstellerObserver(automat, printer);
-        AddNewKuchenObserver addNewKuchenObserver = new AddNewKuchenObserver(automat, printer);
-        RemoveKuchenObserver removeKuchenObserver = new RemoveKuchenObserver(automat, printer);
+        new AddHerstellerObserver(automat, printer);
+        new DeleteHerstellerObserver(automat, printer);
+        new AddNewKuchenObserver(automat, printer);
+        new RemoveKuchenObserver(automat, printer);
 
         StringUtils stringUtils = new StringUtils();
 

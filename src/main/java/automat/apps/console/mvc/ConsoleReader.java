@@ -17,7 +17,7 @@ public class ConsoleReader {
             }
             System.out.print(">");
             String userInput = s.nextLine();
-            if (userInput.equals(":q")) {
+            if (":q".equalsIgnoreCase(userInput)) {
                 break;
             }
             InputEvent event = new InputEvent(this, userInput);
