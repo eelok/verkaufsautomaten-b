@@ -1,4 +1,4 @@
-package automat.net.listModeNet;
+package automat.net.client.mode.listModeNet;
 
 import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;

@@ -1,18 +1,19 @@
-package automat.net;
+package automat.net.client;
 
 import automat.apps.console.Printer;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.service.StringUtils;
-import automat.net.addModeNet.AddModeInputListenerNet;
-import automat.net.client.DataSender;
-import automat.net.deleteMode.DeleteModeInputListenerNet;
-import automat.net.helper.ConnectionHelper;
-import automat.net.listModeNet.ListModeInputListenerNet;
+import automat.net.client.connection.ConnectionHelper;
+import automat.net.client.connection.DataSender;
+import automat.net.client.mode.InfoCommandModeNet;
+import automat.net.client.mode.addModeNet.AddModeInputListenerNet;
+import automat.net.client.mode.deleteMode.DeleteModeInputListenerNet;
+import automat.net.client.mode.listModeNet.ListModeInputListenerNet;
 
 import java.io.IOException;
 
-public class MainAppNet {
+public class Client {
     public static void main(String[] args) {
 
         startClient();

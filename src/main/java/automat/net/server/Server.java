@@ -1,4 +1,4 @@
-package automat.net;
+package automat.net.server;
 
 import automat.apps.console.Printer;
 import automat.apps.console.observer.AddHerstellerObserver;
@@ -7,7 +7,7 @@ import automat.apps.console.observer.DeleteHerstellerObserver;
 import automat.apps.console.observer.RemoveKuchenObserver;
 import automat.apps.console.service.KuchenParser;
 import automat.mainlib.Automat;
-import automat.net.server.DataHandler;
+import automat.net.server.handler.DataHandler;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,12 +15,12 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerAutomat {
+public class Server {
 
     private Automat automat;
     private DataHandler dataHandler;
 
-    public ServerAutomat(Automat automat, DataHandler dataHandler) {
+    public Server(Automat automat, DataHandler dataHandler) {
         this.automat = automat;
         this.dataHandler = dataHandler;
     }
@@ -51,7 +51,7 @@ public class ServerAutomat {
         ServerSocket serverSocket = new ServerSocket(1234);
         Socket socket = serverSocket.accept();
         Automat automat = new Automat(5);
-        ServerAutomat server = new ServerAutomat(automat, new DataHandler(automat, new KuchenParser()));
+        Server server = new Server(automat, new DataHandler(automat, new KuchenParser()));
         server.initData();
         ObjectInputStream serverInputStream = new ObjectInputStream(socket.getInputStream());
         ObjectOutputStream serverOutputStream = new ObjectOutputStream(socket.getOutputStream());

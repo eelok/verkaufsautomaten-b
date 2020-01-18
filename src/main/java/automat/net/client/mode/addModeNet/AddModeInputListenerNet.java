@@ -1,4 +1,4 @@
-package automat.net.addModeNet;
+package automat.net.client.mode.addModeNet;
 
 import automat.apps.console.Printer;
 import automat.apps.console.mvc.ConsoleReader;
@@ -7,7 +7,7 @@ import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.KuchenParser;
 import automat.apps.console.service.StringUtils;
-import automat.net.client.DataSender;
+import automat.net.client.connection.DataSender;
 
 public class AddModeInputListenerNet implements InputEventListener {
 

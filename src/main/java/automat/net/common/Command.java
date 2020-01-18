@@ -1,4 +1,4 @@
-package automat.net;
+package automat.net.common;
 
 public enum Command {
     ADD_HERSTELLER,

@@ -1,7 +1,7 @@
-package automat.net;
+package automat.net.server;
 
 import automat.mainlib.Automat;
-import automat.net.server.DataHandler;
+import automat.net.server.handler.DataHandler;
 import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,9 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ServerAutomatTest {
+class ServerTest {
 
-    private ServerAutomat server;
+    private Server server;
 
     @Mock
     private Automat automat;
@@ -26,12 +26,12 @@ class ServerAutomatTest {
 
     @BeforeEach
     void setup() {
-        server = new ServerAutomat(automat, dataHandler);
+        server = new Server(automat, dataHandler);
     }
 
     @Test//todo come up with better name
     void test1() throws IOException, ClassNotFoundException {
-        ServerAutomat serverAutomat = new ServerAutomat(automat, dataHandler);
+        Server server = new Server(automat, dataHandler);
         ByteArrayOutputStream bos = new ByteArrayOutputStream(14);
         ObjectOutputStream outputStream = new ObjectOutputStream(bos);
 
@@ -41,7 +41,7 @@ class ServerAutomatTest {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bos.toByteArray());
         ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
 
-        serverAutomat.run(objectInputStream, outputStream);
+        server.run(objectInputStream, outputStream);
         ObjectInputStream dis = new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray()));
         assertThat(dis.readObject()).isEqualTo("command/donna");
         assertThat(dis.readObject()).isEqualTo("42");

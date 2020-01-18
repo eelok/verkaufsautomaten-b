@@ -1,10 +1,10 @@
-package automat.net.addModeNet;
+package automat.net.client.mode.addModeNet;
 
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
-import automat.net.Command;
-import automat.net.client.DataSender;
+import automat.net.common.Command;
+import automat.net.client.connection.DataSender;
 
 import java.io.IOException;
 

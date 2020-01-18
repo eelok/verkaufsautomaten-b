@@ -1,4 +1,4 @@
-package automat.net.deleteMode;
+package automat.net.client.mode.deleteMode;
 
 import automat.apps.console.Printer;
 import automat.apps.console.mvc.ConsoleReader;
@@ -6,7 +6,7 @@ import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
-import automat.net.client.DataSender;
+import automat.net.client.connection.DataSender;
 
 public class DeleteModeInputListenerNet implements InputEventListener {
 
