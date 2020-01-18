@@ -7,7 +7,7 @@ import automat.mainlib.Automat;
 
 import java.util.Random;
 
-public class MainApp {
+public class Main {
 
     public static void main(String[] args) {
         CreateAutomatService automatFactory = new CreateAutomatService();

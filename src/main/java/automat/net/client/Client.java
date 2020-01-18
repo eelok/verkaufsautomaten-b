@@ -14,33 +14,18 @@ import automat.net.client.mode.listModeNet.ListModeInputListenerNet;
 import java.io.IOException;
 
 public class Client {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        ConnectionHelper connectionHelper = ConnectionHelper.getConnectionHelperSingleton();
 
-        startClient();
-    }
-
-    private static void startClient(){
-        ConnectionHelper connectionHelper = null;
-        try {
-            connectionHelper = ConnectionHelper.getConnectionHelperSingleton();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         DataSender dataSender = new DataSender(connectionHelper);
-
         ConsoleReader consoleReader = new ConsoleReader();
         InputEventHandler eventHandler = new InputEventHandler();
         consoleReader.setHandler(eventHandler);
-
         Printer printer = new Printer();
-
         StringUtils stringUtils = new StringUtils();
-
-
         AddModeInputListenerNet addModeInputListenerNet = new AddModeInputListenerNet(printer, new ConsoleReader(), dataSender);
         ListModeInputListenerNet listModeInputListenerNet = new ListModeInputListenerNet(printer, new ConsoleReader(), dataSender);
         DeleteModeInputListenerNet deleteModeInputListenerNet = new DeleteModeInputListenerNet(stringUtils, printer, new ConsoleReader(), dataSender);
-
         InfoCommandModeNet InfoCommandModeNet = new InfoCommandModeNet(printer);
 
         eventHandler.add(InfoCommandModeNet);

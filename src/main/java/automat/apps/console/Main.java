@@ -13,7 +13,7 @@ import automat.apps.console.observer.RemoveKuchenObserver;
 import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
 
-public class MainApp {
+public class Main {
     public static void main(String[] args) {
 
         Automat automat = new Automat(5);

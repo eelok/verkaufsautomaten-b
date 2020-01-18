@@ -29,8 +29,8 @@ class ServerTest {
         server = new Server(automat, dataHandler);
     }
 
-    @Test//todo come up with better name
-    void test1() throws IOException, ClassNotFoundException {
+    @Test
+    void should_read_and_write_from_stream() throws IOException, ClassNotFoundException {
         Server server = new Server(automat, dataHandler);
         ByteArrayOutputStream bos = new ByteArrayOutputStream(14);
         ObjectOutputStream outputStream = new ObjectOutputStream(bos);

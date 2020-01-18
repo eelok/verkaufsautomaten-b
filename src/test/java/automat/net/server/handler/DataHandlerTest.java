@@ -1,4 +1,4 @@
-package automat.net.server;
+package automat.net.server.handler;
 
 import automat.apps.console.service.KuchenParser;
 import automat.mainlib.Automat;
@@ -38,14 +38,16 @@ class DataHandlerTest {
 
     @Test
     void should_return_when_command_does_not_exist(){
-        assertThat(dataHandler.handleData("NEW_COMMAND", "")).isEqualTo("from server: NEW_COMMAND wrong command");
+        assertThat(dataHandler.handleData("NEW_COMMAND", ""))
+                .isEqualTo("from server: NEW_COMMAND wrong command");
     }
 
     @Test
     void should_add_hersteller_when_command_ADD_HERSTELLER_and_hersteller_data(){
         String data = "bob";
 
-        assertThat(dataHandler.handleData("ADD_HERSTELLER", data)).isEqualTo("from server: hersteller bob was added to automat");
+        assertThat(dataHandler.handleData("ADD_HERSTELLER", data))
+                .isEqualTo("from server: hersteller bob was added to automat");
         verify(automat).addHersteller(any(HerstellerImplementation.class));
     }
 
@@ -54,7 +56,8 @@ class DataHandlerTest {
         String name = "tom";
         doThrow(new ManufacturerExistException(String.format("Manufacturer %s already exists", name)))
                 .when(automat).addHersteller(new HerstellerImplementation(name));
-        assertThat(dataHandler.handleData("ADD_HERSTELLER", "tom")).isEqualTo("Manufacturer tom already exists");
+        assertThat(dataHandler.handleData("ADD_HERSTELLER", "tom"))
+                .isEqualTo("Manufacturer tom already exists");
     }
     @Test
     void should_add_kuchen_when_command_ADD_KUCHEN_and_kuchen_data(){
@@ -67,7 +70,10 @@ class DataHandlerTest {
         when(automat.addKuchen(kremkuchen, LocalDateTime.now())).thenReturn(mock(EinlagerungEntry.class));
 
         assertThat(dataHandler.handleData("ADD_KUCHEN", data)).
-                isEqualTo("from server: kuchen of type %s was added to automat", TypeOfKuchen.Kremkuchen.toString());
+            isEqualTo(
+                "from server: kuchen of type %s was added to automat",
+                TypeOfKuchen.Kremkuchen.toString()
+            );
         verify(automat).addKuchen(any(KremkuchenImplementation.class), any(LocalDateTime.class));
     }
 
@@ -79,8 +85,10 @@ class DataHandlerTest {
         Kremkuchen kremkuchen = mock(KremkuchenImplementation.class);
         when(kuchenParser.getKuchenInfo(data)).thenReturn(kremkuchen);
 
-        doThrow(new IllegalArgumentException(String.format("No such manufacturer: %s. Please add manufacturer: %s.", name, name)))
-                .when(automat).addKuchen(eq(kremkuchen), any(LocalDateTime.class));
+        doThrow(
+            new IllegalArgumentException(
+                String.format("No such manufacturer: %s. Please add manufacturer: %s.", name, name))
+        ).when(automat).addKuchen(eq(kremkuchen), any(LocalDateTime.class));
 
         assertThat(dataHandler.handleData("ADD_KUCHEN", data)).isEqualTo("No such manufacturer: Donna. Please add manufacturer: Donna.");
     }
@@ -92,12 +100,14 @@ class DataHandlerTest {
         herstellerWihtNumOfKuch.add("tom"+ ": " + 5);
         when(automat.getHerstellerWithNumberOfKuchen()).thenReturn(herstellerWihtNumOfKuch);
 
-        assertThat(dataHandler.handleData("LIST_HERSTELLER", "")).isEqualTo("from server: [donna: 0, tom: 5]");
+        assertThat(dataHandler.handleData("LIST_HERSTELLER", ""))
+                .isEqualTo("from server: [donna: 0, tom: 5]");
     }
 
     @Test
     void should_return_message_when_list_with_hersteller_is_Empty(){
-        assertThat(dataHandler.handleData("LIST_HERSTELLER", "")).isEqualTo("form server: there is no manufacturer");
+        assertThat(dataHandler.handleData("LIST_HERSTELLER", ""))
+                .isEqualTo("form server: there is no manufacturer");
         verify(automat).getHerstellerWithNumberOfKuchen();
     }
     @Test
@@ -107,12 +117,13 @@ class DataHandlerTest {
         listWithKuchAndFach.add("obsttorte" + ": " + 2);
         when(automat.getAllKuchenWithFachNum()).thenReturn(listWithKuchAndFach);
 
-        assertThat(dataHandler.handleData("LIST_KUCHEN", "")).isEqualTo("from server: [obstkuhen: 1, obsttorte: 2]");
+        assertThat(dataHandler.handleData("LIST_KUCHEN", ""))
+                .isEqualTo("from server: [obstkuhen: 1, obsttorte: 2]");
     }
     @Test
     void should_return_message_when_list_kuchen_is_empty(){
-
-        assertThat(dataHandler.handleData("LIST_KUCHEN", "")).isEqualTo("from server: No Kuchen Available in the Automat");
+        assertThat(dataHandler.handleData("LIST_KUCHEN", ""))
+                .isEqualTo("from server: No Kuchen Available in the Automat");
         verify(automat).getAllKuchenWithFachNum();
     }
 
@@ -126,24 +137,30 @@ class DataHandlerTest {
         when(einlagerungEntry.getFachnummer()).thenReturn(0);
         when(automat.removeKuchenFromAutomat(fach)).thenReturn(einlagerungEntry);
 
-        assertThat(dataHandler.handleData("DELETE_KUCHEN", "0")).isEqualTo("from server: Obsttorte from fach 0 was deleted");
+        assertThat(dataHandler.handleData("DELETE_KUCHEN", "0"))
+                .isEqualTo("from server: Obsttorte from fach 0 was deleted");
     }
     @Test
     void should_return_message_when_kuchen_can_not_be_deleted_command_DELETE_KUCHEN(){
-        doThrow(new IllegalArgumentException("fachnummer does not exist")).when(automat).removeKuchenFromAutomat(10);
-        assertThat(dataHandler.handleData("DELETE_KUCHEN", "10")).isEqualTo("fachnummer does not exist");
+        doThrow(new IllegalArgumentException("fachnummer does not exist"))
+                .when(automat).removeKuchenFromAutomat(10);
+        assertThat(dataHandler.handleData("DELETE_KUCHEN", "10"))
+                .isEqualTo("fachnummer does not exist");
     }
 
     @Test
     void should_return_message_when_hersteller_can_not_be_deleted(){
-        doThrow(new IllegalArgumentException("Hersteller bob does not exist")).when(automat).deleteHersteller("bob");
+        doThrow(new IllegalArgumentException("Hersteller bob does not exist"))
+                .when(automat).deleteHersteller("bob");
 
-        assertThat(dataHandler.handleData("DELETE_HERSTELLER", "bob")).isEqualTo("Hersteller bob does not exist");
+        assertThat(dataHandler.handleData("DELETE_HERSTELLER", "bob"))
+                .isEqualTo("Hersteller bob does not exist");
     }
 
     @Test
     void should_return_message_when_hersteller_was_deleted_command_DELETE_HERSTELLER(){
-        assertThat(dataHandler.handleData("DELETE_HERSTELLER", "bob")).isEqualTo("from server: hersteller bob was deleted from automat");
+        assertThat(dataHandler.handleData("DELETE_HERSTELLER", "bob"))
+                .isEqualTo("from server: hersteller bob was deleted from automat");
         verify(automat).deleteHersteller(anyString());
     }
 }

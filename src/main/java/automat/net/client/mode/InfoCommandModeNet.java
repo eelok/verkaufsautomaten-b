@@ -14,7 +14,7 @@ public class InfoCommandModeNet implements InputEventListener {
 
     @Override
     public void onInputEvent(InputEvent event) {
-        if (!event.getText().equals(":a") && !event.getText().equals(":l") && !event.getText().equals(":d")){
+        if (!event.getText().equalsIgnoreCase(":a") && !event.getText().equalsIgnoreCase(":l") && !event.getText().equalsIgnoreCase(":d")){
             printer.println("Expected input: :a <input mode> | :l <list mode> | :d <delete mode>");
         }
     }
