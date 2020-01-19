@@ -1,9 +1,9 @@
 package automat.net.client;
 
-import automat.apps.console.Printer;
-import automat.apps.console.mvc.ConsoleReader;
-import automat.apps.console.mvc.InputEventHandler;
-import automat.apps.console.service.StringUtils;
+import automat.net.common.Printer;
+import automat.net.client.mode.ConsoleReader;
+import automat.net.client.mode.inputEvent.InputEventHandler;
+import automat.net.common.StringUtils;
 import automat.net.client.connection.ConnectionHelper;
 import automat.net.client.connection.DataSender;
 import automat.net.client.mode.InfoCommandModeNet;

@@ -1,8 +1,8 @@
 package automat.net.client.mode.listModeNet;
 
-import automat.apps.console.Printer;
-import automat.apps.console.mvc.InputEvent;
-import automat.apps.console.mvc.InputEventListener;
+import automat.net.common.Printer;
+import automat.net.client.mode.inputEvent.InputEvent;
+import automat.net.client.mode.inputEvent.InputEventListener;
 
 public class ListModeInfoNet implements InputEventListener {
 

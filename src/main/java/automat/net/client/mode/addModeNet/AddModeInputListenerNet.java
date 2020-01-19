@@ -1,12 +1,12 @@
 package automat.net.client.mode.addModeNet;
 
-import automat.apps.console.Printer;
-import automat.apps.console.mvc.ConsoleReader;
-import automat.apps.console.mvc.InputEvent;
-import automat.apps.console.mvc.InputEventHandler;
-import automat.apps.console.mvc.InputEventListener;
-import automat.apps.console.service.KuchenParser;
-import automat.apps.console.service.StringUtils;
+import automat.net.common.Printer;
+import automat.net.client.mode.ConsoleReader;
+import automat.net.client.mode.inputEvent.InputEvent;
+import automat.net.client.mode.inputEvent.InputEventHandler;
+import automat.net.client.mode.inputEvent.InputEventListener;
+import automat.net.common.KuchenParser;
+import automat.net.common.StringUtils;
 import automat.net.client.connection.DataSender;
 
 public class AddModeInputListenerNet implements InputEventListener {

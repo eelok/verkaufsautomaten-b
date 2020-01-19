@@ -1,11 +1,11 @@
 package automat.net.server;
 
-import automat.apps.console.Printer;
-import automat.apps.console.observer.AddHerstellerObserver;
-import automat.apps.console.observer.AddNewKuchenObserver;
-import automat.apps.console.observer.DeleteHerstellerObserver;
-import automat.apps.console.observer.RemoveKuchenObserver;
-import automat.apps.console.service.KuchenParser;
+import automat.net.common.Printer;
+import automat.net.server.observer.AddHerstellerObserver;
+import automat.net.server.observer.AddNewKuchenObserver;
+import automat.net.server.observer.DeleteHerstellerObserver;
+import automat.net.server.observer.RemoveKuchenObserver;
+import automat.net.common.KuchenParser;
 import automat.mainlib.Automat;
 import automat.net.server.handler.DataHandler;
 

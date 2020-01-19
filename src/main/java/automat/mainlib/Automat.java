@@ -3,12 +3,12 @@ package automat.mainlib;
 import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.Hersteller;
-import automat.apps.console.observer.DeleteHerstellerObserver;
+import automat.net.server.observer.DeleteHerstellerObserver;
 import automat.mainlib.kuchen.Allergen;
 import automat.mainlib.kuchen.Kuchen;
-import automat.apps.console.observer.AddHerstellerObserver;
-import automat.apps.console.observer.AddNewKuchenObserver;
-import automat.apps.console.observer.RemoveKuchenObserver;
+import automat.net.server.observer.AddHerstellerObserver;
+import automat.net.server.observer.AddNewKuchenObserver;
+import automat.net.server.observer.RemoveKuchenObserver;
 
 import java.io.Serializable;
 import java.time.Duration;

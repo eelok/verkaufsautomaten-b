@@ -1,6 +1,6 @@
 package automat.net.server.handler;
 
-import automat.apps.console.service.KuchenParser;
+import automat.net.common.KuchenParser;
 import automat.mainlib.Automat;
 import automat.mainlib.EinlagerungEntry;
 import automat.mainlib.exceptions.AutomatIsFullException;

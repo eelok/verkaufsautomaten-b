@@ -1,8 +1,8 @@
 package automat.net.client.mode.addModeNet;
 
-import automat.apps.console.mvc.InputEvent;
-import automat.apps.console.mvc.InputEventListener;
-import automat.apps.console.service.KuchenParser;
+import automat.net.client.mode.inputEvent.InputEvent;
+import automat.net.client.mode.inputEvent.InputEventListener;
+import automat.net.common.KuchenParser;
 import automat.mainlib.kuchen.Kuchen;
 import automat.net.common.Command;
 import automat.net.client.connection.DataSender;
