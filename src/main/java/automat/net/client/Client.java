@@ -32,7 +32,7 @@ public class Client {
         eventHandler.add(addModeInputListenerNet);
         eventHandler.add(listModeInputListenerNet);
         eventHandler.add(deleteModeInputListenerNet);
-
+        printer.println("Expected input: :a <input mode> | :l <list mode> | :d <delete mode>");
         consoleReader.start();
     }
 }
