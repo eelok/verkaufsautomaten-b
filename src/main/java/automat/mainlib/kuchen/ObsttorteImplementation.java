@@ -110,15 +110,17 @@ public class ObsttorteImplementation implements Obsttorte, Serializable {
 
     @Override
     public String toString() {
-        return "ObsttorteImplementation{" +
-                "price=" + price +
-                ", hersteller=" + hersteller +
-                ", allergens=" + allergens +
-                ", naehrwert=" + naehrwert +
-                ", haltbarkeit=" + haltbarkeit +
-                ", obstsorte='" + obstsorte + '\'' +
-                ", kremsorte='" + kremsorte + '\'' +
-                '}';
+        return String.format(
+                "{%s, price= %s, hersteller: %s, allergenes: %s, naehrwert= %s, haltbarkeit: %s, obstsorte: %s, kremsorte: %s}",
+                getType(),
+                getPrice(),
+                getHersteller().getName(),
+                getAllergens(),
+                getNaehrwert(),
+                getHaltbarkeit().toDays(),
+                getObstsorte(),
+                getKremsorte()
+        );
     }
 
     @Override

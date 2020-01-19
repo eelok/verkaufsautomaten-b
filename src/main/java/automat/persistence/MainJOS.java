@@ -3,10 +3,7 @@ package automat.persistence;
 import automat.mainlib.Automat;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
-import automat.mainlib.kuchen.Allergen;
-import automat.mainlib.kuchen.KremkuchenImplementation;
-import automat.mainlib.kuchen.Kuchen;
-import automat.mainlib.kuchen.KuchenImplementation;
+import automat.mainlib.kuchen.*;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -40,7 +37,7 @@ public class MainJOS {
                 Duration.ofDays(2)
         );
 
-        Kuchen kremkuchen = new KremkuchenImplementation(
+        Kremkuchen kremkuchen = new KremkuchenImplementation(
                 new BigDecimal(15),
                 donna,
                 Arrays.asList(Allergen.Haselnuss, Allergen.Sesamsamen),
@@ -48,8 +45,29 @@ public class MainJOS {
                 Duration.ofDays(1),
                 "sahne"
         );
+
+        Obstkuchen obstkuchen = new ObstkuchenImplementation(
+                new BigDecimal(15),
+                donna,
+                Arrays.asList(Allergen.Gluten, Allergen.Sesamsamen),
+                800,
+                Duration.ofDays(2),
+                "Kirsche"
+        );
+
+        Obsttorte obsttorte = new ObsttorteImplementation(
+                new BigDecimal(15),
+                donna,
+                Arrays.asList(Allergen.Gluten, Allergen.Sesamsamen, Allergen.Haselnuss),
+                800,
+                Duration.ofDays(2),
+                "Sahne",
+                "Kirsche"
+        );
         automat.addKuchen(kuchen, LocalDateTime.now());
         automat.addKuchen(kremkuchen, LocalDateTime.now());
+        automat.addKuchen(obstkuchen, LocalDateTime.now());
+        automat.addKuchen(obsttorte, LocalDateTime.now());
 
         try {
             ObjectOutput out = new ObjectOutputStream(new FileOutputStream(fileName));

@@ -76,14 +76,16 @@ public class ObstkuchenImplementation implements Obstkuchen, Serializable {
 
     @Override
     public String toString() {
-        return "ObstkuchenImplementation{" +
-                "price=" + price +
-                ", hersteller=" + hersteller +
-                ", allergens=" + allergens +
-                ", naehrwert=" + naehrwert +
-                ", haltbarkeit=" + haltbarkeit +
-                ", obstsorte='" + obstsorte + '\'' +
-                '}';
+        return String.format(
+                "{%s, price= %s, hersteller: %s, allergenes: %s, naehrwert= %s, , haltbarkeit: %s, obstsorte: %s}",
+                getType(),
+                getPrice(),
+                getHersteller().getName(),
+                getAllergens(),
+                getNaehrwert(),
+                getHaltbarkeit().toDays(),
+                getObstsorte()
+        );
     }
 
     public void setPrice(BigDecimal price) {
