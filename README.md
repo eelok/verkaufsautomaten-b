@@ -8,6 +8,3 @@
 2. Punkte
     [x] 5. Client-Server-VerbindungüberTCP
     [x] 6. je zwei Stellvertreter-Tests für Einfügen, Auflisten und Löschen pro Server
-
-## Aufgabe 6
- :exclamation: package net
