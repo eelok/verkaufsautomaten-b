@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Automat implements Subject, Serializable {
+public class Automat implements Subject, Serializable, AutomatInterface {
 
     private List<Beobachter> beobachterList = new ArrayList<>();
 
@@ -63,16 +63,8 @@ public class Automat implements Subject, Serializable {
         return storage;
     }
 
-    public void setStorage(List<EinlagerungEntry> storage) {
-        this.storage = storage;
-    }
-
     public int getPlatzImAutomat() {
         return platzImAutomat;
-    }
-
-    public void setPlatzImAutomat(int platzImAutomat) {
-        this.platzImAutomat = platzImAutomat;
     }
 
     public String getMessage() {
@@ -92,7 +84,7 @@ public class Automat implements Subject, Serializable {
         return false;
     }
 
-    public boolean addHersteller(Hersteller hersteller) throws ManufacturerExistException {
+    public void addHersteller(Hersteller hersteller) throws ManufacturerExistException {
         if (herstellerExists(hersteller.getName())) {
             throw new ManufacturerExistException(String.format("Manufacturer %s already exists", hersteller.getName()));
         }
@@ -100,7 +92,6 @@ public class Automat implements Subject, Serializable {
         allHersteller.add(hersteller);
         this.message = hersteller.getName();
         benachrichtige(AddHerstellerObserver.class);
-        return true;
     }
 
     public void deleteHersteller(String name) {

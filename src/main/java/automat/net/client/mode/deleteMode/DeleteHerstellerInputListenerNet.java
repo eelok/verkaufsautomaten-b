@@ -26,11 +26,9 @@ public class DeleteHerstellerInputListenerNet implements InputEventListener {
         String inputData = event.getText().toLowerCase().trim();
         if (!inputData.matches("^f.[0-9]*$")) {
             try {
-                dataSender.sendDataToServer(inputData, Command.DELETE_HERSTELLER);
+                dataSender.deleteHersteller(inputData);
             } catch (IllegalArgumentException e) {
                 printer.println(e.getMessage());
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
             }
         }
     }

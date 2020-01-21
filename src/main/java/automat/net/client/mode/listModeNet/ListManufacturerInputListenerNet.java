@@ -18,11 +18,7 @@ public class ListManufacturerInputListenerNet implements InputEventListener {
     public void onInputEvent(InputEvent event) {
         String inputData = event.getText().trim();
         if ("manufacturer".equalsIgnoreCase(inputData)) {
-            try {
-                dataSender.sendDataToServer(inputData, Command.LIST_HERSTELLER);
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+            dataSender.getAllKuchenWithFachNum();
         }
     }
 }

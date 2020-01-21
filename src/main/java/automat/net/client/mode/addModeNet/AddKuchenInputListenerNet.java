@@ -8,6 +8,7 @@ import automat.net.common.Command;
 import automat.net.client.connection.DataSender;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class AddKuchenInputListenerNet implements InputEventListener {
 
@@ -29,11 +30,6 @@ public class AddKuchenInputListenerNet implements InputEventListener {
         if (kuchenInfo == null) {
             return;
         }
-        try {
-            dataSender.sendDataToServer(event.getText(), Command.ADD_KUCHEN);
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
+        dataSender.addKuchen(kuchenInfo, LocalDateTime.now());
     }
 }

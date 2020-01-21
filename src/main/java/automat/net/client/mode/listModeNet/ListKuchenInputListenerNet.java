@@ -18,11 +18,7 @@ public class ListKuchenInputListenerNet implements InputEventListener {
     public void onInputEvent(InputEvent event) {
         String inputData = event.getText().trim();
         if ("kuchen".equalsIgnoreCase(inputData)) {
-            try {
-                dataSender.sendDataToServer(inputData, Command.LIST_KUCHEN);
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+            dataSender.getAllKuchenWithFachNum();
         }
     }
 }

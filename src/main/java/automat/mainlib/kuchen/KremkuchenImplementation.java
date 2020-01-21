@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class KremkuchenImplementation implements Kremkuchen, Serializable {
 
@@ -107,6 +108,20 @@ public class KremkuchenImplementation implements Kremkuchen, Serializable {
 
     public void setKremsorte(String kremsorte) {
         this.kremsorte = kremsorte;
+    }
+
+    @Override
+    public String kuchenTypeToString() {
+        return String.format(
+                "%s %s %s %s %s %s %s",
+                getType(),
+                price,
+                hersteller.getName(),
+                allergens.stream().map(Enum::toString).collect(Collectors.joining(",")),
+                naehrwert,
+                haltbarkeit.toDays(),
+                kremsorte
+        );
     }
 
 
