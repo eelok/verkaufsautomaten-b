@@ -37,10 +37,10 @@ class AutomatTest {
     void should_throw_exception_when_add_the_same_hersteller() {
         Automat automat = new Automat(3);
         Hersteller donna = mock(Hersteller.class);
-        ArrayList<Hersteller> allHersteller = new ArrayList<>();
-        allHersteller.add(donna);
-        automat.setHerstellerList(allHersteller);
         when(donna.getName()).thenReturn("donna");
+
+        List<Hersteller> allHersteller = Collections.singletonList(donna);
+        automat.setHerstellerList(allHersteller);
 
         assertThatThrownBy(() -> automat.addHersteller(donna)).isInstanceOf(ManufacturerExistException.class);
     }

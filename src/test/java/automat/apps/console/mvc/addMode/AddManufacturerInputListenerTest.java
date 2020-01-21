@@ -56,7 +56,7 @@ class AddManufacturerInputListenerTest {
         when(event.getText()).thenReturn(text);
         when(stringUtils.isOneWord(text)).thenReturn(true);
 
-        when(automat.addHersteller(new HerstellerImplementation("alex"))).thenThrow(new ManufacturerExistException("Manufacturer already exists"));
+        doThrow(new ManufacturerExistException("Manufacturer already exists")).when(automat).addHersteller(new HerstellerImplementation("alex"));
 
         addManufacturerInputListener.onInputEvent(event);
 

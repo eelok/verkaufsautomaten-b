@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
 
-public interface Kuchen {
+public interface Kuchen extends KuchenTypeToString {
 
     BigDecimal getPrice();
 
