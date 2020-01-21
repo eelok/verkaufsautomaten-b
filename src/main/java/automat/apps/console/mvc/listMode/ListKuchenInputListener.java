@@ -3,15 +3,16 @@ package automat.apps.console.mvc.listMode;
 import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
-import automat.mainlib.Automat;
+import automat.mainlib.AutomatInterface;
 
 import java.util.List;
 
 public class ListKuchenInputListener implements InputEventListener {
-    private Automat automat;
+
+    private AutomatInterface automat;
     private Printer printer;
 
-    public ListKuchenInputListener(Automat automat, Printer printer) {
+    public ListKuchenInputListener(AutomatInterface automat, Printer printer) {
         this.automat = automat;
         this.printer = printer;
     }

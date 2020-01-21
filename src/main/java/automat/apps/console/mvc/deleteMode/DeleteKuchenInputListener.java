@@ -1,17 +1,18 @@
 package automat.apps.console.mvc.deleteMode;
 
 import automat.apps.console.Printer;
-import automat.apps.console.service.StringUtils;
-import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
+import automat.apps.console.service.StringUtils;
+import automat.mainlib.AutomatInterface;
 
 public class DeleteKuchenInputListener implements InputEventListener {
-    private Automat automat;
+
+    private AutomatInterface automat;
     private StringUtils stringUtils;
     private Printer printer;
 
-    public DeleteKuchenInputListener(Automat automat, StringUtils stringUtils, Printer printer) {
+    public DeleteKuchenInputListener(AutomatInterface automat, StringUtils stringUtils, Printer printer) {
         this.automat = automat;
         this.stringUtils = stringUtils;
         this.printer = printer;

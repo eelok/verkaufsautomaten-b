@@ -3,14 +3,15 @@ package automat.apps.console.mvc.deleteMode;
 import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
-import automat.mainlib.Automat;
+import automat.mainlib.AutomatInterface;
 
 public class DeleteHerstellerInputListener implements InputEventListener {
-    private Automat automat;
+
+    private AutomatInterface automat;
     private Printer printer;
 
 
-    public DeleteHerstellerInputListener(Automat automat, Printer printer) {
+    public DeleteHerstellerInputListener(AutomatInterface automat, Printer printer) {
         this.automat = automat;
         this.printer = printer;
     }

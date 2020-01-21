@@ -4,7 +4,7 @@ import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.KuchenParser;
-import automat.mainlib.Automat;
+import automat.mainlib.AutomatInterface;
 import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.kuchen.Kuchen;
 
@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 public class AddKuchenInputListener implements InputEventListener {
 
     private KuchenParser kuchenParser;
-    private Automat automat;
+    private AutomatInterface automat;
     private Printer printer;
 
 
-    public AddKuchenInputListener(KuchenParser kuchenParser, Automat automat, Printer printer) {
+    public AddKuchenInputListener(KuchenParser kuchenParser, AutomatInterface automat, Printer printer) {
         this.kuchenParser = kuchenParser;
         this.automat = automat;
         this.printer = printer;

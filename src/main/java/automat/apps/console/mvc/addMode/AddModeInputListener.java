@@ -1,18 +1,21 @@
 package automat.apps.console.mvc.addMode;
 
 import automat.apps.console.Printer;
-import automat.apps.console.mvc.*;
+import automat.apps.console.mvc.ConsoleReader;
+import automat.apps.console.mvc.InputEvent;
+import automat.apps.console.mvc.InputEventHandler;
+import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.KuchenParser;
 import automat.apps.console.service.StringUtils;
-import automat.mainlib.Automat;
+import automat.mainlib.AutomatInterface;
 
 public class AddModeInputListener implements InputEventListener {
 
-    private Automat automat;
+    private AutomatInterface automat;
     private Printer printer;
     private ConsoleReader consoleReader;
 
-    public AddModeInputListener(Automat automat, Printer printer, ConsoleReader consoleReader) {
+    public AddModeInputListener(AutomatInterface automat, Printer printer, ConsoleReader consoleReader) {
         this.automat = automat;
         this.printer = printer;
         this.consoleReader = consoleReader;

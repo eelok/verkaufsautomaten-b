@@ -5,15 +5,15 @@ import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
-import automat.mainlib.Automat;
+import automat.mainlib.AutomatInterface;
 
 public class ListModeInputListener implements InputEventListener {
 
-    private Automat automat;
+    private AutomatInterface automat;
     private Printer printer;
     private ConsoleReader consoleReader;
 
-    public ListModeInputListener(Automat automat, Printer printer, ConsoleReader consoleReader) {
+    public ListModeInputListener(AutomatInterface automat, Printer printer, ConsoleReader consoleReader) {
         this.automat = automat;
         this.printer = printer;
         this.consoleReader = consoleReader;

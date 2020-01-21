@@ -5,16 +5,17 @@ import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
+import automat.mainlib.AutomatInterface;
 import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.HerstellerImplementation;
 
 public class AddManufacturerInputListener implements InputEventListener {
 
     private StringUtils stringUtils;
-    private Automat automat;
+    private AutomatInterface automat;
     private Printer printer;
 
-    public AddManufacturerInputListener(StringUtils stringUtils, Automat automat, Printer printer) {
+    public AddManufacturerInputListener(StringUtils stringUtils, AutomatInterface automat, Printer printer) {
         this.stringUtils = stringUtils;
         this.automat = automat;
         this.printer = printer;
