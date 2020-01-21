@@ -4,21 +4,18 @@ import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
-import automat.net.common.Command;
-import automat.net.client.connection.DataSender;
-
-import java.io.IOException;
+import automat.mainlib.AutomatInterface;
 
 public class DeleteKuchenInputListenerNet implements InputEventListener {
 
     private StringUtils stringUtils;
     private Printer printer;
-    private DataSender dataSender;
+    private AutomatInterface automat;
 
-    public DeleteKuchenInputListenerNet(StringUtils stringUtils, Printer printer, DataSender dataSender) {
+    public DeleteKuchenInputListenerNet(StringUtils stringUtils, Printer printer, AutomatInterface automat) {
         this.stringUtils = stringUtils;
         this.printer = printer;
-        this.dataSender = dataSender;
+        this.automat = automat;
     }
 
     @Override
@@ -30,7 +27,7 @@ public class DeleteKuchenInputListenerNet implements InputEventListener {
         if(inputData.matches("^f.[0-9]*$")){
             int fachNumber = stringUtils.extractFachNumberFromString(inputData);
             try {
-                dataSender.removeKuchenFromAutomat(fachNumber);
+                automat.removeKuchenFromAutomat(fachNumber);
             } catch (IllegalArgumentException ex){
                 printer.println(ex.getMessage());
             }

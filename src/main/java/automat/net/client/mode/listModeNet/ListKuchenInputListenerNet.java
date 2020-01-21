@@ -2,23 +2,20 @@ package automat.net.client.mode.listModeNet;
 
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
-import automat.net.common.Command;
-import automat.net.client.connection.DataSender;
-
-import java.io.IOException;
+import automat.mainlib.AutomatInterface;
 
 public class ListKuchenInputListenerNet implements InputEventListener {
-    private DataSender dataSender;
+    private AutomatInterface automat;
 
-    public ListKuchenInputListenerNet(DataSender dataSender) {
-        this.dataSender = dataSender;
+    public ListKuchenInputListenerNet(AutomatInterface automat) {
+        this.automat = automat;
     }
 
     @Override
     public void onInputEvent(InputEvent event) {
         String inputData = event.getText().trim();
         if ("kuchen".equalsIgnoreCase(inputData)) {
-            dataSender.getAllKuchenWithFachNum();
+            automat.getAllKuchenWithFachNum();
         }
     }
 }

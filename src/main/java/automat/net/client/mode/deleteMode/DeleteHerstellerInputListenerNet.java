@@ -3,19 +3,16 @@ package automat.net.client.mode.deleteMode;
 import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
-import automat.net.common.Command;
-import automat.net.client.connection.DataSender;
-
-import java.io.IOException;
+import automat.mainlib.AutomatInterface;
 
 public class DeleteHerstellerInputListenerNet implements InputEventListener {
 
     private Printer printer;
-    private DataSender dataSender;
+    private AutomatInterface automat;
 
-    public DeleteHerstellerInputListenerNet(Printer printer, DataSender dataSender) {
+    public DeleteHerstellerInputListenerNet(Printer printer, AutomatInterface automat) {
         this.printer = printer;
-        this.dataSender = dataSender;
+        this.automat = automat;
     }
 
     @Override
@@ -26,7 +23,7 @@ public class DeleteHerstellerInputListenerNet implements InputEventListener {
         String inputData = event.getText().toLowerCase().trim();
         if (!inputData.matches("^f.[0-9]*$")) {
             try {
-                dataSender.deleteHersteller(inputData);
+                automat.deleteHersteller(inputData);
             } catch (IllegalArgumentException e) {
                 printer.println(e.getMessage());
             }

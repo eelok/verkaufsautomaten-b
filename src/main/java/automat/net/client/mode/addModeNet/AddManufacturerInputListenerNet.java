@@ -3,20 +3,17 @@ package automat.net.client.mode.addModeNet;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
+import automat.mainlib.AutomatInterface;
 import automat.mainlib.hersteller.HerstellerImplementation;
-import automat.net.common.Command;
-import automat.net.client.connection.DataSender;
-
-import java.io.IOException;
 
 public class AddManufacturerInputListenerNet implements InputEventListener {
 
     private StringUtils stringUtils;
-    private DataSender dataSender;
+    private AutomatInterface automat;
 
-    public AddManufacturerInputListenerNet(StringUtils stringUtils, DataSender dataSender) {
+    public AddManufacturerInputListenerNet(StringUtils stringUtils, AutomatInterface automat) {
         this.stringUtils = stringUtils;
-        this.dataSender = dataSender;
+        this.automat = automat;
     }
 
     @Override
@@ -26,7 +23,7 @@ public class AddManufacturerInputListenerNet implements InputEventListener {
         }
         String userInput = event.getText().toLowerCase().trim();
         if (stringUtils.isOneWord(userInput)) {
-            dataSender.addHersteller(new HerstellerImplementation(userInput));
+            automat.addHersteller(new HerstellerImplementation(userInput));
         }
     }
 }

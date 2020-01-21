@@ -6,25 +6,25 @@ import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.StringUtils;
-import automat.net.client.connection.DataSender;
+import automat.mainlib.AutomatInterface;
 
 public class DeleteModeInputListenerNet implements InputEventListener {
 
     private StringUtils stringUtils;
     private Printer printer;
     private ConsoleReader consoleReader;
-    private DataSender dataSender;
+    private AutomatInterface automat;
 
     public DeleteModeInputListenerNet(
             StringUtils stringUtils,
             Printer printer,
             ConsoleReader consoleReader,
-            DataSender dataSender
+            AutomatInterface automat
     ) {
         this.stringUtils = stringUtils;
         this.printer = printer;
         this.consoleReader = consoleReader;
-        this.dataSender = dataSender;
+        this.automat = automat;
     }
 
     @Override
@@ -33,8 +33,8 @@ public class DeleteModeInputListenerNet implements InputEventListener {
             printer.println("delete mode active");
             printer.println("Expected input: name of manufacturer / f<fachnummer>");
             InputEventHandler eventHandler = new InputEventHandler();
-            eventHandler.add(new DeleteHerstellerInputListenerNet(printer, dataSender));
-            eventHandler.add(new DeleteKuchenInputListenerNet(stringUtils, printer, dataSender));
+            eventHandler.add(new DeleteHerstellerInputListenerNet(printer, automat));
+            eventHandler.add(new DeleteKuchenInputListenerNet(stringUtils, printer, automat));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
         }

@@ -3,22 +3,20 @@ package automat.net.client.mode.addModeNet;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.KuchenParser;
+import automat.mainlib.AutomatInterface;
 import automat.mainlib.kuchen.Kuchen;
-import automat.net.common.Command;
-import automat.net.client.connection.DataSender;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class AddKuchenInputListenerNet implements InputEventListener {
 
     private KuchenParser kuchenParser;
-    private DataSender dataSender;
+    private AutomatInterface automat;
 
 
-    public AddKuchenInputListenerNet(KuchenParser kuchenParser, DataSender dataSender) {
+    public AddKuchenInputListenerNet(KuchenParser kuchenParser, AutomatInterface automat) {
         this.kuchenParser = kuchenParser;
-        this.dataSender = dataSender;
+        this.automat = automat;
     }
 
     @Override
@@ -30,6 +28,6 @@ public class AddKuchenInputListenerNet implements InputEventListener {
         if (kuchenInfo == null) {
             return;
         }
-        dataSender.addKuchen(kuchenInfo, LocalDateTime.now());
+        automat.addKuchen(kuchenInfo, LocalDateTime.now());
     }
 }
