@@ -2,14 +2,15 @@ package automat.apps.console.observer;
 
 import automat.apps.console.Printer;
 import automat.mainlib.Automat;
+import automat.mainlib.AutomatInterface;
 import automat.mainlib.Beobachter;
 
 public class AddHerstellerObserver implements Beobachter {
 
-    private Automat automat;
+    private AutomatInterface automat;
     private Printer printer;
 
-    public AddHerstellerObserver(Automat automat, Printer printer) {
+    public AddHerstellerObserver(AutomatInterface automat, Printer printer) {
         this.automat = automat;
         this.automat.meldeAn(this);
         this.printer = printer;

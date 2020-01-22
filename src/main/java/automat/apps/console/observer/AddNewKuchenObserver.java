@@ -2,14 +2,15 @@ package automat.apps.console.observer;
 
 import automat.apps.console.Printer;
 import automat.mainlib.Automat;
+import automat.mainlib.AutomatInterface;
 import automat.mainlib.Beobachter;
 
 public class AddNewKuchenObserver implements Beobachter {
 
-    private Automat automat;
+    private AutomatInterface automat;
     private Printer printer;
 
-    public AddNewKuchenObserver(Automat automat, Printer printer) {
+    public AddNewKuchenObserver(AutomatInterface automat, Printer printer) {
         this.automat = automat;
         this.printer = printer;
         this.automat.meldeAn(this);

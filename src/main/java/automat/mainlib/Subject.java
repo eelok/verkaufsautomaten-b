@@ -7,4 +7,8 @@ public interface Subject {
     void meldeAb(Beobachter beobachter);
 
     void benachrichtige(Class<? extends Beobachter> beobachterType);
+
+    String getMessage();
+
+    void setMessage(String message);
 }
