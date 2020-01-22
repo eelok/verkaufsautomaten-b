@@ -23,7 +23,7 @@ public class DataHandler {
         this.kuchenParser = kuchenParser;
     }
 
-    public String handleData(String inputCommand, String info) {
+    public Object handleData(String inputCommand, String info) {
         Command userCommand;
         try {
             userCommand = Command.valueOf(inputCommand);
@@ -54,7 +54,8 @@ public class DataHandler {
                 if(herstellerWithNumberOfKuchen.isEmpty()){
                     return "form server: there is no manufacturer";
                 }
-                return "from server: " + herstellerWithNumberOfKuchen.toString();
+//                return "from server: " + herstellerWithNumberOfKuchen.toString();
+                return herstellerWithNumberOfKuchen;
             case LIST_KUCHEN:
                 List<String> allKuchenWithFachNum = automat.getAllKuchenWithFachNum();
                 if(allKuchenWithFachNum.isEmpty()){

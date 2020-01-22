@@ -43,7 +43,7 @@ public class Server {
         String commandFromInput = split[0].trim();
         String data = split[1].trim();
 
-        String replyFromServer = dataHandler.handleData(commandFromInput, data);
+        Object replyFromServer = dataHandler.handleData(commandFromInput, data);
         serverOutputStream.writeObject(replyFromServer);
     }
 

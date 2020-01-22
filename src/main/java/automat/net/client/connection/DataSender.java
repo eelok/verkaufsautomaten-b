@@ -1,7 +1,6 @@
 package automat.net.client.connection;
 
 import automat.mainlib.AutomatInterface;
-import automat.mainlib.Beobachter;
 import automat.mainlib.EinlagerungEntry;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.kuchen.Kuchen;
@@ -9,7 +8,7 @@ import automat.net.common.Command;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataSender implements AutomatInterface {
@@ -26,7 +25,8 @@ public class DataSender implements AutomatInterface {
     @Override
     public void addHersteller(Hersteller hersteller) {
         try {
-            sendDataToServer(hersteller.getName(), Command.ADD_HERSTELLER);
+            Object o = sendDataToServer(hersteller.getName(), Command.ADD_HERSTELLER);
+            System.out.println(o);
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -45,13 +45,16 @@ public class DataSender implements AutomatInterface {
 
     @Override
     public List<String> getHerstellerWithNumberOfKuchen() {
+        List<String> listWithManufacturer = new ArrayList<>();
         try {
-            sendDataToServer("manufacturer", Command.LIST_HERSTELLER);
+            Object manufacturer = sendDataToServer("manufacturer", Command.LIST_HERSTELLER);
+            System.out.println(manufacturer);
+            listWithManufacturer =(List<String>) manufacturer;
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         //todo change null
-        return null;
+        return listWithManufacturer;
     }
 
     @Override
@@ -86,49 +89,15 @@ public class DataSender implements AutomatInterface {
         return null;
     }
 
-    @Override
-    public int getPlatzImAutomat() {
-        return 0;
-    }
-
-    @Override
-    public Collection<Kuchen> getAllEingelagertenKuchen() {
-        return null;
-    }
-
-
     //todo make private
-    public void sendDataToServer(String inputData, Command command) throws IOException, ClassNotFoundException {
+    public Object sendDataToServer(String inputData, Command command) throws IOException, ClassNotFoundException {
 
         String dataForTransport = command + "/" + inputData;
 
         connectionHelper.getClientOutputStream().writeObject(dataForTransport);
         Object replyFromServer = connectionHelper.getClientInputStream().readObject();
-        System.out.println(replyFromServer);
+//        System.out.println(replyFromServer);
+        return replyFromServer;
     }
 
-    @Override
-    public void meldeAn(Beobachter beobachter) {
-
-    }
-
-    @Override
-    public void meldeAb(Beobachter beobachter) {
-
-    }
-
-    @Override
-    public void benachrichtige(Class<? extends Beobachter> beobachterType) {
-
-    }
-
-    @Override
-    public String getMessage() {
-        return null;
-    }
-
-    @Override
-    public void setMessage(String message) {
-
-    }
 }

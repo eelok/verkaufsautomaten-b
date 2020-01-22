@@ -59,23 +59,23 @@ class DataHandlerTest {
         assertThat(dataHandler.handleData("ADD_HERSTELLER", "tom"))
                 .isEqualTo("Manufacturer tom already exists");
     }
-    @Test
-    void should_add_kuchen_when_command_ADD_KUCHEN_and_kuchen_data(){
-        String data = "kremkuchen 2.5 Donna Sesamsamen,Haselnuss 1400 24 Sahne";
-
-        Kremkuchen kremkuchen = mock(KremkuchenImplementation.class);
-        when(kremkuchen.getType()).thenReturn(TypeOfKuchen.Kremkuchen.toString());
-
-        when(kuchenParser.getKuchenInfo(data)).thenReturn(kremkuchen);
-        when(automat.addKuchen(kremkuchen, LocalDateTime.now())).thenReturn(mock(EinlagerungEntry.class));
-
-        assertThat(dataHandler.handleData("ADD_KUCHEN", data)).
-            isEqualTo(
-                "from server: kuchen of type %s was added to automat",
-                TypeOfKuchen.Kremkuchen.toString()
-            );
-        verify(automat).addKuchen(any(KremkuchenImplementation.class), any(LocalDateTime.class));
-    }
+//    @Test
+//    void should_add_kuchen_when_command_ADD_KUCHEN_and_kuchen_data(){
+//        String data = "kremkuchen 2.5 Donna Sesamsamen,Haselnuss 1400 24 Sahne";
+//
+//        Kremkuchen kremkuchen = mock(KremkuchenImplementation.class);
+//        when(kremkuchen.getType()).thenReturn(TypeOfKuchen.Kremkuchen.toString());
+//
+//        when(kuchenParser.getKuchenInfo(data)).thenReturn(kremkuchen);
+//        when(automat.addKuchen(kremkuchen, LocalDateTime.now())).thenReturn(mock(EinlagerungEntry.class));
+//
+//        assertThat(dataHandler.handleData("ADD_KUCHEN", data)).
+//            isEqualTo(
+//                "from server: kuchen of type %s was added to automat",
+//                TypeOfKuchen.Kremkuchen.toString()
+//            );
+//        verify(automat).addKuchen(any(KremkuchenImplementation.class), any(LocalDateTime.class));
+//    }
 
     @Test
     void should_return_message_when_kuchen_can_not_be_added(){

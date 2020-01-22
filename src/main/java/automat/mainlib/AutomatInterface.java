@@ -4,10 +4,9 @@ import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.kuchen.Kuchen;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
-public interface AutomatInterface extends Subject {
+public interface AutomatInterface {
 
     void addHersteller(Hersteller hersteller);
 
@@ -21,7 +20,4 @@ public interface AutomatInterface extends Subject {
 
     EinlagerungEntry removeKuchenFromAutomat(int fachNummer);
 
-    int getPlatzImAutomat();
-
-    Collection<Kuchen> getAllEingelagertenKuchen();
 }

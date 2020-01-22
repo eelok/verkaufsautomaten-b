@@ -8,7 +8,4 @@ public interface Subject {
 
     void benachrichtige(Class<? extends Beobachter> beobachterType);
 
-    String getMessage();
-
-    void setMessage(String message);
 }

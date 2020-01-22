@@ -1,15 +1,15 @@
 package automat.apps.console.observer;
 
 import automat.apps.console.Printer;
-import automat.mainlib.AutomatInterface;
+import automat.mainlib.Automat;
 import automat.mainlib.Beobachter;
 
 public class RemoveKuchenObserver implements Beobachter {
 
-    private AutomatInterface automat;
+    private Automat automat;
     private Printer printer;
 
-    public RemoveKuchenObserver(AutomatInterface automat, Printer printer) {
+    public RemoveKuchenObserver(Automat automat, Printer printer) {
         this.automat = automat;
         this.printer = printer;
         this.automat.meldeAn(this);
