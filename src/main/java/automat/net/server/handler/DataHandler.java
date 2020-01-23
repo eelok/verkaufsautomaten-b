@@ -9,6 +9,7 @@ import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.kuchen.Kuchen;
 import automat.net.common.Command;
+import automat.net.server.Server;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,10 +45,12 @@ public class DataHandler {
             case ADD_KUCHEN:
                 Kuchen kuchenInfo = kuchenParser.getKuchenInfo(info);
                 try {
-                    automat.addKuchen(kuchenInfo, LocalDateTime.now());
-                    return String.format("from server: kuchen of type %s was added to automat", kuchenInfo.getType());
+                    EinlagerungEntry einlagerungEntry = automat.addKuchen(kuchenInfo, LocalDateTime.now());
+                    return new ServerResponse(einlagerungEntry);
                 } catch (AutomatIsFullException | IllegalArgumentException e) {
-                    return e.getMessage();
+                    ServerResponse serverResponse = new ServerResponse();
+                    serverResponse.setError(e.getMessage());
+                    return serverResponse;
                 }
             case LIST_HERSTELLER:
                 List<String> herstellerWithNumberOfKuchen = automat.getHerstellerWithNumberOfKuchen();

@@ -5,6 +5,7 @@ import automat.mainlib.EinlagerungEntry;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.kuchen.Kuchen;
 import automat.net.common.Command;
+import automat.net.server.handler.ServerResponse;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -24,9 +25,13 @@ public class DataSender implements AutomatInterface {
 
     @Override
     public void addHersteller(Hersteller hersteller) {
+        ServerResponse serverResponse;
         try {
-            Object o = sendDataToServer(hersteller.getName(), Command.ADD_HERSTELLER);
-            System.out.println(o);
+            Object obj = sendDataToServer(hersteller.getName(), Command.ADD_HERSTELLER);
+            serverResponse = (ServerResponse) obj;
+            if(!serverResponse.getError().isEmpty()){
+                System.out.println(serverResponse.getError());
+            }
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -34,8 +39,13 @@ public class DataSender implements AutomatInterface {
 
     @Override
     public EinlagerungEntry addKuchen(Kuchen newKuchen, LocalDateTime date) {
+        ServerResponse serverResponse;
         try {
-            sendDataToServer(newKuchen.kuchenTypeToString(), Command.ADD_KUCHEN);
+            Object obj = sendDataToServer(newKuchen.kuchenTypeToString(), Command.ADD_KUCHEN);
+            serverResponse = (ServerResponse) obj;
+            if (serverResponse.getError() != null) {
+                System.out.println(serverResponse.getError());
+            }
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
