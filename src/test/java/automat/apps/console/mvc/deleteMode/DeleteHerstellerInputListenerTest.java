@@ -4,6 +4,7 @@ import automat.apps.console.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.mainlib.Automat;
 import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -21,9 +22,23 @@ class DeleteHerstellerInputListenerTest {
     @Mock
     private InputEvent event;
 
+    private  DeleteHerstellerInputListener deleteHerstellerInputListener;
+
+    @BeforeEach
+    void setUp(){
+        deleteHerstellerInputListener = new DeleteHerstellerInputListener(automat, printer);
+    }
+
+    @Test
+    void should_be_no_interaction_when_input_test_null(){
+        when(event.getText()).thenReturn(null);
+        deleteHerstellerInputListener.onInputEvent(event);
+
+        verify(automat, times(0)).addHersteller(any());
+    }
+
     @Test
     void should_call_deleteHersteller(){
-        DeleteHerstellerInputListener deleteHerstellerInputListener = new DeleteHerstellerInputListener(automat, printer);
         when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("alex");
 
@@ -33,8 +48,7 @@ class DeleteHerstellerInputListenerTest {
     }
 
     @Test
-    void should_call_println(){
-        DeleteHerstellerInputListener deleteHerstellerInputListener = new DeleteHerstellerInputListener(automat, printer);
+    void should_call_println_when_hersteller_was_not_deleted(){
         when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("alex");
 

@@ -8,14 +8,18 @@ import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.kuchen.Kuchen;
 import automat.mainlib.kuchen.KuchenImplementation;
+import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class AddKuchenInputListenerTest {
     private AddKuchenInputListener addKuchenInputListener;
     private KuchenParser kuchenParser;
@@ -29,6 +33,30 @@ class AddKuchenInputListenerTest {
         printer = mock(Printer.class);
         addKuchenInputListener = new AddKuchenInputListener(kuchenParser, automat, printer);
     }
+
+    @Test
+    void should_be_no_interaction_when_input_text_is_null(){
+        InputEvent inputEvent = mock(InputEvent.class);
+        when(inputEvent.getSource()).thenReturn(mock(Object.class));
+        when(inputEvent.getText()).thenReturn(null);
+
+        addKuchenInputListener.onInputEvent(inputEvent);
+
+        verify(automat, times(0)).addKuchen(any(), any());
+    }
+
+    @Test
+    void should_be_no_interaction_when_kuchenParser_returns_null(){
+        String notKuchen = "not kuchen";
+        InputEvent inputEvent = mock(InputEvent.class);
+        when(inputEvent.getText()).thenReturn(notKuchen);
+        when(kuchenParser.getKuchenInfo(notKuchen)).thenReturn(null);
+
+        addKuchenInputListener.onInputEvent(inputEvent);
+
+        verify(automat, times(0)).addKuchen(any(), any());
+    }
+
 
 
     @Test
@@ -64,8 +92,8 @@ class AddKuchenInputListenerTest {
         InputEvent event = mock(InputEvent.class);
         String text = "some text";
         when(event.getText()).thenReturn(text);
-        List<Hersteller> herstellerList = mock(List.class);
-        when(herstellerList.size()).thenReturn(0);
+        List<Hersteller> herstellerList = new ArrayList<>();
+
         when(kuchenParser.getKuchenInfo(event.getText())).thenReturn(mock(KuchenImplementation.class));
         when(automat.getHerstellerList()).thenReturn(herstellerList);
 

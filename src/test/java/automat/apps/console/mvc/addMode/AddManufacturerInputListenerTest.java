@@ -5,16 +5,16 @@ import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
 import automat.mainlib.exceptions.ManufacturerExistException;
-import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
+import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class AddManufacturerInputListenerTest {
 
     private AddManufacturerInputListener addManufacturerInputListener;
@@ -28,6 +28,16 @@ class AddManufacturerInputListenerTest {
         automat = mock(Automat.class);
         printer = mock(Printer.class);
         addManufacturerInputListener = new AddManufacturerInputListener(stringUtils, automat, printer);
+    }
+
+    @Test
+    void should_be_no_interaction_when_usert_input_null(){
+        InputEvent event = mock(InputEvent.class);
+        when(event.getText()).thenReturn(null);
+
+        addManufacturerInputListener.onInputEvent(event);
+
+        verify(automat, times(0)).addHersteller(any());
     }
 
     @Test
@@ -47,10 +57,6 @@ class AddManufacturerInputListenerTest {
     @Test
     void should_call_println(){
         InputEvent event = mock(InputEvent.class);
-        List<Hersteller> herstellerList = mock(List.class);
-        Hersteller alex = mock(HerstellerImplementation.class);
-        when(alex.getName()).thenReturn("alex");
-        when(herstellerList.get(0)).thenReturn(alex);
         when(event.getSource()).thenReturn(new Object());
         String text = "alex";
         when(event.getText()).thenReturn(text);

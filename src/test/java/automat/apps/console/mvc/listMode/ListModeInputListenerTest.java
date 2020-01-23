@@ -34,6 +34,7 @@ class ListModeInputListenerTest {
         listModeInputListener.onInputEvent(event);
 
         verify(printer).println("list mode active");
+        verify(printer).println("Enter command: manufacturer / kuchen / :q<back to main menu> ");
     }
 
     @Test

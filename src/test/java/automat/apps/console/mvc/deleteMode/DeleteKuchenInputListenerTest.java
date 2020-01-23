@@ -32,6 +32,14 @@ class DeleteKuchenInputListenerTest {
     }
 
     @Test
+    void should_be_no_interaction(){
+        when(event.getText()).thenReturn(null);
+        deleteKuchenInputListener.onInputEvent(event);
+
+        verify(automat, times(0)).removeKuchenFromAutomat(anyInt());
+    }
+
+    @Test
     void should_call_removeKuchen(){
         when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("f1");

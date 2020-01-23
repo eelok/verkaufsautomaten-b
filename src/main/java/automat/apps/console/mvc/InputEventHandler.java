@@ -10,10 +10,6 @@ public class InputEventHandler {
         this.listenerList.add(listener);
     }
 
-    public void remove(InputEventListener listener) {
-        this.listenerList.remove(listener);
-    }
-
     public void handle(InputEvent event) {
         for (InputEventListener each : listenerList){
             each.onInputEvent(event);

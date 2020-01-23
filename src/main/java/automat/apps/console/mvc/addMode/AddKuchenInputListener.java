@@ -16,7 +16,6 @@ public class AddKuchenInputListener implements InputEventListener {
     private Automat automat;
     private Printer printer;
 
-
     public AddKuchenInputListener(KuchenParser kuchenParser, Automat automat, Printer printer) {
         this.kuchenParser = kuchenParser;
         this.automat = automat;

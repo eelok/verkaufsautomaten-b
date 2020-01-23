@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -45,7 +46,7 @@ class ListKuchenInputListenerTest {
     void should_call_println_when_allKuchenWithFachNum_is_not_empty(){
         when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("kuchen");
-        when(automat.getAllKuchenWithFachNum()).thenReturn(Arrays.asList("kremkuchen: f2"));
+        when(automat.getAllKuchenWithFachNum()).thenReturn(Collections.singletonList("kremkuchen: f2"));
 
         listKuchenInputListener.onInputEvent(event);
 

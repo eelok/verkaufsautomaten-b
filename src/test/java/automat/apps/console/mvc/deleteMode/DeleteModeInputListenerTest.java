@@ -47,6 +47,7 @@ class DeleteModeInputListenerTest {
         deleteModeInputListener.onInputEvent(event);
 
         verify(printer).println("delete mode active");
+        verify(printer).println("Expected input: name of manufacturer / f<fachnummer>");
     }
 
 }

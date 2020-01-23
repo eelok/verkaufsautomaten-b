@@ -6,8 +6,10 @@ import automat.mainlib.kuchen.KremkuchenImplementation;
 import automat.mainlib.kuchen.Kuchen;
 import automat.mainlib.kuchen.KuchenImplementation;
 import automat.mainlib.kuchen.ObstkuchenImplementation;
+import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class AddNewKuchenObserverTest {
 
     private Automat automat;

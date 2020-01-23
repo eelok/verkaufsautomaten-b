@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -47,7 +48,7 @@ class ListManufacturerInputListenerTest {
     void should_call_herstellerWithNumberOfKuchen() {
         when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("manufacturer");
-        when(automat.getHerstellerWithNumberOfKuchen()).thenReturn(Arrays.asList("alex: 1"));
+        when(automat.getHerstellerWithNumberOfKuchen()).thenReturn(Collections.singletonList("alex: 1"));
 
         listManufacturerInputListener.onInputEvent(event);
 
