@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -162,5 +163,11 @@ class DataHandlerTest {
         assertThat(dataHandler.handleData("DELETE_HERSTELLER", "bob"))
                 .isEqualTo("from server: hersteller bob was deleted from automat");
         verify(automat).deleteHersteller(anyString());
+    }
+
+    @Test
+    void should (){
+        dataHandler.handleData("Q", "");
+        verifyNoInteractions(automat);
     }
 }

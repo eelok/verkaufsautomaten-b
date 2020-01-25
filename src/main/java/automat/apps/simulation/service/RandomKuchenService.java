@@ -35,7 +35,7 @@ public class RandomKuchenService {
 
     private Kuchen createKuchen() {
         return new KuchenImplementation(
-                new BigDecimal(15.99),
+                new BigDecimal("15.99"),
                 new HerstellerImplementation("Alex"),
                 Collections.singletonList(Allergen.Gluten),
                 1000,
@@ -45,7 +45,7 @@ public class RandomKuchenService {
 
     private Obsttorte createObsttorte() {
         return new ObsttorteImplementation(
-                new BigDecimal(22.10),
+                new BigDecimal("22.10"),
                 new HerstellerImplementation("Donna"),
                 Arrays.asList(Allergen.Gluten, Allergen.Erdnuss, Allergen.Haselnuss),
                 1000,
@@ -57,7 +57,7 @@ public class RandomKuchenService {
 
     private Obstkuchen createObstkuchen() {
         return new ObstkuchenImplementation(
-                new BigDecimal(19.30),
+                new BigDecimal("19.30"),
                 new HerstellerImplementation("Donna"),
                 Arrays.asList(Allergen.Gluten, Allergen.Erdnuss),
                 780,
@@ -67,10 +67,10 @@ public class RandomKuchenService {
 
     private Kremkuchen createKremkuchen() {
         return new KremkuchenImplementation(
-                new BigDecimal(15.60),
+                new BigDecimal("15.60"),
                 new HerstellerImplementation("Alex"),
-                Arrays.asList(Allergen.Sesamsamen, Allergen.Erdnuss),
-                690,
+                Arrays.asList(Allergen.Gluten, Allergen.Erdnuss, Allergen.Haselnuss),
+                1000,
                 Duration.ofDays(random.nextInt(10) + 1),
                 "Sahne");
     }

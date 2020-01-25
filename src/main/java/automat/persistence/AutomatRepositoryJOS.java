@@ -21,9 +21,7 @@ public class AutomatRepositoryJOS {
             Automat automatFromFile = (Automat) ois.readObject();
             ois.close();
             return automatFromFile;
-        } catch (IOException e) {
-            throw new IllegalArgumentException();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             throw new IllegalArgumentException();
         }
     }

@@ -22,23 +22,23 @@ class DeleteHerstellerInputListenerTest {
     @Mock
     private InputEvent event;
 
-    private  DeleteHerstellerInputListener deleteHerstellerInputListener;
+    private DeleteHerstellerInputListener deleteHerstellerInputListener;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         deleteHerstellerInputListener = new DeleteHerstellerInputListener(automat, printer);
     }
 
     @Test
-    void should_be_no_interaction_when_input_test_null(){
+    void should_be_no_interaction_when_input_test_null() {
         when(event.getText()).thenReturn(null);
         deleteHerstellerInputListener.onInputEvent(event);
 
-        verify(automat, times(0)).addHersteller(any());
+        verifyNoInteractions(automat);
     }
 
     @Test
-    void should_call_deleteHersteller(){
+    void should_call_deleteHersteller() {
         when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("alex");
 
@@ -48,7 +48,7 @@ class DeleteHerstellerInputListenerTest {
     }
 
     @Test
-    void should_call_println_when_hersteller_was_not_deleted(){
+    void should_call_println_when_hersteller_was_not_deleted() {
         when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("alex");
 

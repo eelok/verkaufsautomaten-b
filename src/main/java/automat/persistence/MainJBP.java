@@ -46,7 +46,7 @@ public class MainJBP {
             XMLEncoder encoder = new XMLEncoder(outputStream);
             automatRepositoryJBP.saveToFile(encoder, automat);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         try {
@@ -60,7 +60,7 @@ public class MainJBP {
             System.out.println(automatFromFile.getAllEingelagertenKuchen().toString());
             System.out.println("*******");
         } catch (FileNotFoundException e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }

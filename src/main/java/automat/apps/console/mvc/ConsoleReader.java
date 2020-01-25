@@ -2,7 +2,6 @@ package automat.apps.console.mvc;
 
 import java.util.Scanner;
 
-// todo можно ли не тестировать тк Scanner final
 public class ConsoleReader {
     private InputEventHandler handler;
 

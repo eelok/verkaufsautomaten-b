@@ -37,7 +37,7 @@ class AddManufacturerInputListenerTest {
 
         addManufacturerInputListener.onInputEvent(event);
 
-        verify(automat, times(0)).addHersteller(any());
+        verifyNoInteractions(automat);
     }
 
     @Test

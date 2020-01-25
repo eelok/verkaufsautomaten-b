@@ -1,7 +1,7 @@
 package automat.apps.console.service;
 
 public class StringUtils {
-
+//todo подумать мб  нужно переделать
     public boolean isOneWord(String inputText) {
         inputText = inputText.trim();
         if(inputText.startsWith(":")){

@@ -42,7 +42,7 @@ class AddKuchenInputListenerTest {
 
         addKuchenInputListener.onInputEvent(inputEvent);
 
-        verify(automat, times(0)).addKuchen(any(), any());
+        verifyNoInteractions(automat);
     }
 
     @Test
@@ -54,7 +54,7 @@ class AddKuchenInputListenerTest {
 
         addKuchenInputListener.onInputEvent(inputEvent);
 
-        verify(automat, times(0)).addKuchen(any(), any());
+        verifyNoInteractions(automat);
     }
 
 

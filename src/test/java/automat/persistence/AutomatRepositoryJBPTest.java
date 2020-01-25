@@ -1,8 +1,10 @@
 package automat.persistence;
 
 import automat.mainlib.Automat;
+import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -10,6 +12,7 @@ import java.beans.XMLEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class AutomatRepositoryJBPTest {
 
     private AutomatRepositoryJBP automatRepositoryJBP;

@@ -28,10 +28,6 @@ public class ConnectionHelper {
         return connectionHelperSingleton;
     }
 
-    public Socket getSocketConnection() {
-        return socketConnection;
-    }
-
     public ObjectOutputStream getClientOutputStream() {
         return clientOutputStream;
     }

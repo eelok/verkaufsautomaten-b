@@ -13,7 +13,8 @@ public class AuslagerungConsumer extends Thread {
                 this.storage.poll();
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
         }
     }
 }

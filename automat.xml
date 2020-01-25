@@ -27,7 +27,7 @@
      <object class="automat.mainlib.EinlagerungEntry">
       <void property="einlagerungsDatum">
        <object class="java.time.LocalDateTime" method="parse">
-        <string>2020-01-18T13:16:23.990</string>
+        <string>2020-01-25T21:15:34.079</string>
        </object>
       </void>
       <void property="kuchen">

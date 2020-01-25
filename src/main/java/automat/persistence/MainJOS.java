@@ -73,7 +73,7 @@ public class MainJOS {
             ObjectOutput out = new ObjectOutputStream(new FileOutputStream(fileName));
             automatRepositoryJOS.writeToFile(out, automat);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         try {
@@ -85,7 +85,7 @@ public class MainJOS {
             System.out.println("*********");
             System.out.println(automatFromFile.getAllEingelagertenKuchen().toString());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }

@@ -17,7 +17,8 @@ public class EinlagerungProducer extends Thread {
                 this.storage.put(randomKuchenService.getRandomKuchen());
             }
         } catch (InterruptedException e){
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
         }
     }
 }

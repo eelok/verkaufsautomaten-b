@@ -77,7 +77,7 @@ public class ObstkuchenImplementation implements Obstkuchen, Serializable {
     @Override
     public String toString() {
         return String.format(
-                "{%s, price= %s, hersteller: %s, allergenes: %s, naehrwert= %s, , haltbarkeit: %s, obstsorte: %s}",
+                "{%s, price= %s, hersteller: %s, allergenes: %s, naehrwert= %s, haltbarkeit: %s, obstsorte: %s}",
                 getType(),
                 getPrice(),
                 getHersteller().getName(),
