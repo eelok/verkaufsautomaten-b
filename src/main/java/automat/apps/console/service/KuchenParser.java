@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-//todo подумать мб нужно передалть
+
 public class KuchenParser {
 
     public Kuchen getKuchenInfo(String str) {
@@ -30,7 +30,7 @@ public class KuchenParser {
                     return new KremkuchenImplementation(
                             new BigDecimal(split[1].trim()),
                             new HerstellerImplementation(split[2].toLowerCase().trim()),
-                            getAllergeneInfo(split[3]),
+                            getAllergeneInfo(split[3].toUpperCase()),
                             Integer.parseInt(split[4].trim()),
                             Duration.ofHours(Long.parseLong(split[5].trim())),
                             split[6].trim()

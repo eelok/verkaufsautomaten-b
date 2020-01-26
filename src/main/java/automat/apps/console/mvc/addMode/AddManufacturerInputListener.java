@@ -25,10 +25,12 @@ public class AddManufacturerInputListener implements InputEventListener {
         if (event.getText() == null) {
             return;
         }
-        String userInput = event.getText().toLowerCase().trim();
-        if (stringUtils.isOneWord(userInput)) {
+        String userInput = event.getText().toLowerCase();
+        if(userInput.startsWith("manufacturer:")){
+            String name = "";
+            name = userInput.replace("manufacturer:", "");
             try {
-                automat.addHersteller(new HerstellerImplementation(userInput));
+                automat.addHersteller(new HerstellerImplementation(name.trim()));
             } catch (ManufacturerExistException ex) {
                 printer.println(ex.getMessage());
             }

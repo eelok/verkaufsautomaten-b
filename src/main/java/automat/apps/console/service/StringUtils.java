@@ -1,10 +1,10 @@
 package automat.apps.console.service;
 
 public class StringUtils {
-//todo подумать мб  нужно переделать
+    //todo подумать мб  нужно переделать
     public boolean isOneWord(String inputText) {
         inputText = inputText.trim();
-        if(inputText.startsWith(":")){
+        if (inputText.startsWith(":")) {
             return false;
         }
         for (int i = 0; i < inputText.length(); i++) {
@@ -15,10 +15,11 @@ public class StringUtils {
         return true;
     }
 
-    public int extractFachNumberFromString(String userInput){
+    public int extractFachNumberFromString(String userInput) {
         String number = userInput.replace("f", "");
         return Integer.parseInt(number);
     }
+
 
 }
 

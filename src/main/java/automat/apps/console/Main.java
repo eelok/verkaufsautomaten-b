@@ -38,7 +38,7 @@ public class Main {
         eventHandler.add(addModeInputListener);
         eventHandler.add(listModeInputListener);
         eventHandler.add(deleteModeInputListener);
-        printer.println("Expected input: :a <input mode> | :l <list mode> | :d <delete mode>");
+        printer.println("Expected input:\n:a -input mode\n:l -list mode\n:d -delete mode");
         consoleReader.start();
     }
 }

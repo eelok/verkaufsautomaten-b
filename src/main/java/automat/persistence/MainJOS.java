@@ -22,8 +22,8 @@ public class MainJOS {
         String fileName = "automat.txt";
 
         List<Allergen> allergens = new ArrayList<>();
-        allergens.add(Allergen.Erdnuss);
-        allergens.add(Allergen.Gluten);
+        allergens.add(Allergen.ERDNUSS);
+        allergens.add(Allergen.GLUTEN);
         Hersteller alex = new HerstellerImplementation("alex");
         Hersteller donna = new HerstellerImplementation("donna");
         automat.addHersteller(alex);
@@ -40,7 +40,7 @@ public class MainJOS {
         Kremkuchen kremkuchen = new KremkuchenImplementation(
                 new BigDecimal(15),
                 donna,
-                Arrays.asList(Allergen.Haselnuss, Allergen.Sesamsamen),
+                Arrays.asList(Allergen.HASELNUSS, Allergen.SESAMSAMEN),
                 500,
                 Duration.ofDays(1),
                 "sahne"
@@ -49,7 +49,7 @@ public class MainJOS {
         Obstkuchen obstkuchen = new ObstkuchenImplementation(
                 new BigDecimal(15),
                 donna,
-                Arrays.asList(Allergen.Gluten, Allergen.Sesamsamen),
+                Arrays.asList(Allergen.GLUTEN, Allergen.SESAMSAMEN),
                 800,
                 Duration.ofDays(2),
                 "Kirsche"
@@ -58,7 +58,7 @@ public class MainJOS {
         Obsttorte obsttorte = new ObsttorteImplementation(
                 new BigDecimal(15),
                 donna,
-                Arrays.asList(Allergen.Gluten, Allergen.Sesamsamen, Allergen.Haselnuss),
+                Arrays.asList(Allergen.GLUTEN, Allergen.SESAMSAMEN, Allergen.HASELNUSS),
                 800,
                 Duration.ofDays(2),
                 "Sahne",

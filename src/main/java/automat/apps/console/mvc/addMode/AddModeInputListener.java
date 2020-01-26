@@ -22,7 +22,7 @@ public class AddModeInputListener implements InputEventListener {
     public void onInputEvent(InputEvent event) {
         if (":a".equalsIgnoreCase(event.getText().trim())) {
             printer.println("add mode active");
-            printer.println("enter: manufacturer <name> | information about kuchen <Obstkuchen 2.5 Alex Gluten,Haselnuss 1400 24 Sahne>");
+            printer.println("Input example:\nManufacturer: Alex\nKuchen: Kremkuchen 2.5 Alex Gluten,Haselnuss,Gluten 1400 24 Sahne\n:q -back to main menu");
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new AddManufacturerInputListener(new StringUtils(), automat, printer));
             eventHandler.add(new AddKuchenInputListener(new KuchenParser(), automat, printer));

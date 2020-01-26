@@ -45,7 +45,7 @@ class AddModeInputListenerTest {
         addModeInputListener.onInputEvent(event);
 
         verify(printer).println("add mode active");
-        verify(printer).println("enter: manufacturer <name> | information about kuchen <Obstkuchen 2.5 Alex Gluten,Haselnuss 1400 24 Sahne>");
+        verify(printer).println("enter: manufacturer <name> | information about kuchen <K: Obstkuchen 2.5 Alex Gluten,Haselnuss 1400 24 Sahne>");
     }
 
 
