@@ -16,17 +16,20 @@ public class DeleteKuchenInputListener implements InputEventListener {
 
     @Override
     public void onInputEvent(InputEvent event) {
-        if(event.getText() == null){
+        if (event.getText() == null) {
             return;
         }
         String userInput = event.getText().trim().toLowerCase();
-        if(userInput.startsWith("kuchen:")){
-            String infoFroDeleteKuchen = userInput.replace("kuchen:", "");
-            String fachNumber = infoFroDeleteKuchen.trim();
-            int fnum = Integer.parseInt(fachNumber);
+        if (userInput.startsWith("kuchen:")) {
             try {
+                String infoFroDeleteKuchen = userInput.replace("kuchen:", "");
+                String fachNumber = infoFroDeleteKuchen.trim();
+                int fnum = Integer.parseInt(fachNumber);
                 automat.removeKuchenFromAutomat(fnum);
-            } catch (IllegalArgumentException ex){
+            } catch (NumberFormatException nfe) {
+                printer.println("Fachnummer should be a number");
+            }
+            catch (Exception ex) {
                 printer.println(ex.getMessage());
             }
         }
