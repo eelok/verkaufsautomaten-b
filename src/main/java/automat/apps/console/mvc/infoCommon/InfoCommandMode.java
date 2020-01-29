@@ -1,6 +1,8 @@
-package automat.apps.console.mvc;
+package automat.apps.console.mvc.infoCommon;
 
-import automat.apps.console.Printer;
+import automat.apps.console.service.Printer;
+import automat.apps.console.mvc.InputEvent;
+import automat.apps.console.mvc.InputEventListener;
 
 public class InfoCommandMode implements InputEventListener {
 
@@ -13,9 +15,13 @@ public class InfoCommandMode implements InputEventListener {
     @Override
     public void onInputEvent(InputEvent event) {
         if (!event.getText().equalsIgnoreCase(":a") && !event.getText().equalsIgnoreCase(":l") && !event.getText().equalsIgnoreCase(":d")){
-            printer.println("Expected input: :a <input mode> | :l <list mode> | :d <delete mode>");
+            printer.println(
+                    "Expected input:\n" +
+                    ":a -input mode\n" +
+                    ":l -list mode\n" +
+                    ":d -delete mode"
+            );
         }
-
     }
 }
 

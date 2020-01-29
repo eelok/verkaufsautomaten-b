@@ -1,27 +1,20 @@
 package automat.net.client.mode.deleteMode;
 
-import automat.apps.console.Printer;
+import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
-import automat.apps.console.service.StringUtils;
+
 import automat.net.client.connection.DataSender;
 
 public class DeleteModeInputListenerNet implements InputEventListener {
 
-    private StringUtils stringUtils;
     private Printer printer;
     private ConsoleReader consoleReader;
     private DataSender dataSender;
 
-    public DeleteModeInputListenerNet(
-            StringUtils stringUtils,
-            Printer printer,
-            ConsoleReader consoleReader,
-            DataSender dataSender
-    ) {
-        this.stringUtils = stringUtils;
+    public DeleteModeInputListenerNet(Printer printer, ConsoleReader consoleReader, DataSender dataSender) {
         this.printer = printer;
         this.consoleReader = consoleReader;
         this.dataSender = dataSender;
@@ -34,7 +27,7 @@ public class DeleteModeInputListenerNet implements InputEventListener {
             printer.println("Expected input: name of manufacturer / f<fachnummer>");
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new DeleteHerstellerInputListenerNet(printer, dataSender));
-            eventHandler.add(new DeleteKuchenInputListenerNet(stringUtils, printer, dataSender));
+            eventHandler.add(new DeleteKuchenInputListenerNet(printer, dataSender));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
         }

@@ -120,7 +120,7 @@ public class Automat implements Subject, Serializable {
         if (!herstellerExists(newKuchen.getHersteller().getName())) {
             throw new IllegalArgumentException(
                     String.format(
-                            "No such manufacturer: %s. Please add manufacturer: %s.",
+                            "No such manufacturer: %s Please add manufacturer: %s",
                             newKuchen.getHersteller().getName(), newKuchen.getHersteller().getName()
                     )
             );

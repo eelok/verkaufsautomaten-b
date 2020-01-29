@@ -1,8 +1,7 @@
 package automat.apps.console.mvc.deleteMode;
 
-import automat.apps.console.Printer;
+import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.InputEvent;
-import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
 import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,8 +18,7 @@ class DeleteKuchenInputListenerTest {
     private Automat automat;
     @Mock
     private Printer printer;
-    @Mock
-    private StringUtils stringUtiles;
+
     @Mock
     private InputEvent event;
 
@@ -28,7 +26,7 @@ class DeleteKuchenInputListenerTest {
 
     @BeforeEach
     void setUp(){
-        deleteKuchenInputListener = new DeleteKuchenInputListener(automat, stringUtiles, printer);
+        deleteKuchenInputListener = new DeleteKuchenInputListener(automat, printer);
     }
 
     @Test
@@ -44,7 +42,6 @@ class DeleteKuchenInputListenerTest {
         when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("f1");
         int fachNum = 1;
-        when(stringUtiles.extractFachNumberFromString(event.getText())).thenReturn(fachNum);
 
         deleteKuchenInputListener.onInputEvent(event);
 

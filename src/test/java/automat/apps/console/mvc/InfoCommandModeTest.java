@@ -1,9 +1,8 @@
 package automat.apps.console.mvc;
 
-import automat.apps.console.Printer;
-import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
+import automat.apps.console.service.Printer;
+import automat.apps.console.mvc.infoCommon.InfoCommandMode;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.mockito.Mockito.*;
 

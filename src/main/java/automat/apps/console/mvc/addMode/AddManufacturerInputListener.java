@@ -1,21 +1,18 @@
 package automat.apps.console.mvc.addMode;
 
-import automat.apps.console.Printer;
+import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
-import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
 import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.HerstellerImplementation;
 
 public class AddManufacturerInputListener implements InputEventListener {
 
-    private StringUtils stringUtils;
     private Automat automat;
     private Printer printer;
 
-    public AddManufacturerInputListener(StringUtils stringUtils, Automat automat, Printer printer) {
-        this.stringUtils = stringUtils;
+    public AddManufacturerInputListener(Automat automat, Printer printer) {
         this.automat = automat;
         this.printer = printer;
     }

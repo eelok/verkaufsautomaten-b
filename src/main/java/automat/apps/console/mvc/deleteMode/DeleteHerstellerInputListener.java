@@ -1,6 +1,6 @@
 package automat.apps.console.mvc.deleteMode;
 
-import automat.apps.console.Printer;
+import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 import automat.mainlib.Automat;
@@ -17,12 +17,15 @@ public class DeleteHerstellerInputListener implements InputEventListener {
 
     @Override
     public void onInputEvent(InputEvent event) {
-        if(event.getText() == null){
+        if (event.getText() == null) {
             return;
         }
-        if (!event.getText().matches("^f.[0-9]*$")) {
+        String userInput = event.getText().toLowerCase();
+        if (userInput.startsWith("manufacturer:")) {
+            String name = "";
+            name = userInput.replace("manufacturer:", "");
             try {
-                automat.deleteHersteller(event.getText().toLowerCase().trim());
+                automat.deleteHersteller(name.trim());
             } catch (IllegalArgumentException e) {
                 printer.println(e.getMessage());
             }
