@@ -93,6 +93,9 @@ public class Automat implements Subject, Serializable {
     }
 
     public boolean addHersteller(Hersteller hersteller) throws ManufacturerExistException {
+        if(hersteller.getName().isEmpty()){
+            throw new IllegalArgumentException("Name is empty, add name");
+        }
         if (herstellerExists(hersteller.getName())) {
             throw new ManufacturerExistException(String.format("Manufacturer %s already exists", hersteller.getName()));
         }
@@ -104,6 +107,9 @@ public class Automat implements Subject, Serializable {
     }
 
     public void deleteHersteller(String name) {
+        if(name.isEmpty()){
+            throw new IllegalArgumentException("name is empty");
+        }
         Hersteller hersteller = findHersteller(name);
         if (hersteller == null) {
             throw new IllegalArgumentException(String.format("Hersteller %s does not exist", name));

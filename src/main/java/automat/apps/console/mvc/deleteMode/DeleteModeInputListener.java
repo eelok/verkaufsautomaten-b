@@ -24,7 +24,11 @@ public class DeleteModeInputListener implements InputEventListener {
     public void onInputEvent(InputEvent event) {
         if (":d".equalsIgnoreCase(event.getText().trim())) {
             printer.println("delete mode active");
-            printer.println("Input example:\nManufacturer: Alex\nKuchen: <fachnummer>");
+            printer.println(
+                    "Input example:\n" +
+                    "Manufacturer: Alex\n" +
+                    "Kuchen: <fachnummer>\n" +
+                    ":q -back to main menu");
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new InfoForAddandDelete(printer));
             eventHandler.add(new DeleteHerstellerInputListener(automat, printer));
