@@ -325,13 +325,13 @@ class AutomatTest {
 
         when(kuchen.getHersteller()).thenReturn(alex);
         when(kremKuchen.getHersteller()).thenReturn(alex);
-        when(kuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.Gluten));
-        when(kremKuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
+        when(kuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.GLUTEN));
+        when(kremKuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.GLUTEN, Allergen.HASELNUSS));
 
         automat.addKuchen(kuchen, LocalDateTime.now());
         automat.addKuchen(kremKuchen, LocalDateTime.now());
 
-        assertThat(automat.getAllergenenInAutomat()).isEqualTo(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
+        assertThat(automat.getAllergenenInAutomat()).isEqualTo(Arrays.asList(Allergen.GLUTEN, Allergen.HASELNUSS));
     }
 
     @Test
@@ -346,13 +346,13 @@ class AutomatTest {
 
         when(kuchen.getHersteller()).thenReturn(alex);
         when(kremKuchen.getHersteller()).thenReturn(alex);
-        when(kuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.Gluten));
-        when(kremKuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.Gluten, Allergen.Haselnuss));
+        when(kuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.GLUTEN));
+        when(kremKuchen.getAllergens()).thenReturn(Arrays.asList(Allergen.GLUTEN, Allergen.HASELNUSS));
 
         automat.addKuchen(kuchen, LocalDateTime.now());
         automat.addKuchen(kremKuchen, LocalDateTime.now());
 
-        assertThat(automat.getAllergenenNotInAutomat()).isEqualTo(Arrays.asList(Allergen.Erdnuss, Allergen.Sesamsamen));
+        assertThat(automat.getAllergenenNotInAutomat()).isEqualTo(Arrays.asList(Allergen.ERDNUSS, Allergen.SESAMSAMEN));
     }
 
     @Test

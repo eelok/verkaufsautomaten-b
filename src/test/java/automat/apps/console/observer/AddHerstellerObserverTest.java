@@ -1,6 +1,6 @@
 package automat.apps.console.observer;
 
-import automat.apps.console.Printer;
+import automat.apps.console.service.Printer;
 import automat.mainlib.Automat;
 import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
 import org.junit.jupiter.api.Test;

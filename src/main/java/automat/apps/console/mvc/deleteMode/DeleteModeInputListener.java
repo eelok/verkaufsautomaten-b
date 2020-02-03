@@ -1,7 +1,7 @@
 package automat.apps.console.mvc.deleteMode;
 
-import automat.apps.console.Printer;
-import automat.apps.console.service.StringUtils;
+import automat.apps.console.service.Printer;
+import automat.apps.console.mvc.infoCommon.InfoForAddandDelete;
 import automat.mainlib.Automat;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEvent;
@@ -11,13 +11,11 @@ import automat.apps.console.mvc.InputEventListener;
 public class DeleteModeInputListener implements InputEventListener {
 
     private Automat automat;
-    private StringUtils stringUtils;
     private Printer printer;
     private ConsoleReader consoleReader;
 
-    public DeleteModeInputListener(Automat automat, StringUtils stringUtils, Printer printer, ConsoleReader consoleReader) {
+    public DeleteModeInputListener(Automat automat, Printer printer, ConsoleReader consoleReader) {
         this.automat = automat;
-        this.stringUtils = stringUtils;
         this.printer = printer;
         this.consoleReader = consoleReader;
     }
@@ -26,10 +24,15 @@ public class DeleteModeInputListener implements InputEventListener {
     public void onInputEvent(InputEvent event) {
         if (":d".equalsIgnoreCase(event.getText().trim())) {
             printer.println("delete mode active");
-            printer.println("Expected input: name of manufacturer / f<fachnummer>");
+            printer.println(
+                    "Input example:\n" +
+                    "Manufacturer: Alex\n" +
+                    "Kuchen: <fachnummer>\n" +
+                    ":q -back to main menu");
             InputEventHandler eventHandler = new InputEventHandler();
+            eventHandler.add(new InfoForAddandDelete(printer));
             eventHandler.add(new DeleteHerstellerInputListener(automat, printer));
-            eventHandler.add(new DeleteKuchenInputListener(automat, stringUtils, printer));
+            eventHandler.add(new DeleteKuchenInputListener(automat, printer));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
         }

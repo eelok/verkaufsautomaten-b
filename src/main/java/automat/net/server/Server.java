@@ -1,6 +1,6 @@
 package automat.net.server;
 
-import automat.apps.console.Printer;
+import automat.apps.console.service.Printer;
 import automat.apps.console.observer.AddHerstellerObserver;
 import automat.apps.console.observer.AddNewKuchenObserver;
 import automat.apps.console.observer.DeleteHerstellerObserver;

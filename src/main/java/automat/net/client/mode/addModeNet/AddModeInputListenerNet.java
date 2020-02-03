@@ -1,12 +1,11 @@
 package automat.net.client.mode.addModeNet;
 
-import automat.apps.console.Printer;
+import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventHandler;
 import automat.apps.console.mvc.InputEventListener;
 import automat.apps.console.service.KuchenParser;
-import automat.apps.console.service.StringUtils;
 import automat.net.client.connection.DataSender;
 
 public class AddModeInputListenerNet implements InputEventListener {
@@ -26,7 +25,7 @@ public class AddModeInputListenerNet implements InputEventListener {
         if (event.getText() != null && ":a".equalsIgnoreCase(event.getText())) {
             printer.println("add mode active");
             InputEventHandler eventHandler = new InputEventHandler();
-            eventHandler.add(new AddManufacturerInputListenerNet(new StringUtils(), dataSender));
+            eventHandler.add(new AddManufacturerInputListenerNet(dataSender));
             eventHandler.add(new AddKuchenInputListenerNet(new KuchenParser(), dataSender));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();

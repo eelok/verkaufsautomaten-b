@@ -27,7 +27,7 @@ class KuchenParserTest {
         assertThat(kuchenParser.getKuchenInfo(str)).isEqualTo(new KuchenImplementation(
                 BigDecimal.valueOf(10.5),
                 new HerstellerImplementation("donna"),
-                Arrays.asList(Allergen.Sesamsamen, Allergen.Haselnuss),
+                Arrays.asList(Allergen.SESAMSAMEN, Allergen.HASELNUSS),
                 1400,
                 Duration.ofHours(24)
         ));
@@ -40,7 +40,7 @@ class KuchenParserTest {
         assertThat(kuchenParser.getKuchenInfo(str)).isEqualTo(new KremkuchenImplementation(
                 BigDecimal.valueOf(2.50),
                 new HerstellerImplementation("alex"),
-                Arrays.asList(Allergen.Erdnuss, Allergen.Haselnuss),
+                Arrays.asList(Allergen.ERDNUSS, Allergen.HASELNUSS),
                 1400,
                 Duration.ofHours(24),
                 "Sahne"
@@ -54,7 +54,7 @@ class KuchenParserTest {
         assertThat(kuchenParser.getKuchenInfo(str)).isEqualTo(new ObstkuchenImplementation(
                 BigDecimal.valueOf(5.0),
                 new HerstellerImplementation("alex"),
-                Arrays.asList(Allergen.Gluten, Allergen.Haselnuss),
+                Arrays.asList(Allergen.GLUTEN, Allergen.HASELNUSS),
                 1400,
                 Duration.ofHours(48),
                 "Himbeeren"
@@ -68,7 +68,7 @@ class KuchenParserTest {
         assertThat(kuchenParser.getKuchenInfo(str)).isEqualTo(new ObsttorteImplementation(
         BigDecimal.valueOf(9.45),
                 new HerstellerImplementation("donna"),
-                Arrays.asList(Allergen.Gluten, Allergen.Haselnuss, Allergen.Erdnuss),
+                Arrays.asList(Allergen.GLUTEN, Allergen.HASELNUSS, Allergen.ERDNUSS),
                 1400,
                 Duration.ofHours(48),
                 "Himbeeren",

@@ -1,4 +1,4 @@
-package automat.apps.console;
+package automat.apps.console.service;
 
 public class Printer {
 

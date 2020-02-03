@@ -1,8 +1,7 @@
 package automat.apps.console.mvc.addMode;
 
-import automat.apps.console.Printer;
+import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.InputEvent;
-import automat.apps.console.service.StringUtils;
 import automat.mainlib.Automat;
 import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.HerstellerImplementation;
@@ -18,16 +17,14 @@ import static org.mockito.Mockito.*;
 class AddManufacturerInputListenerTest {
 
     private AddManufacturerInputListener addManufacturerInputListener;
-    private StringUtils stringUtils;
     private  Automat automat;
     private Printer printer;
 
     @BeforeEach
     void setUp(){
-        stringUtils = mock(StringUtils.class);
         automat = mock(Automat.class);
         printer = mock(Printer.class);
-        addManufacturerInputListener = new AddManufacturerInputListener(stringUtils, automat, printer);
+        addManufacturerInputListener = new AddManufacturerInputListener(automat, printer);
     }
 
     @Test
@@ -47,7 +44,6 @@ class AddManufacturerInputListenerTest {
 
         when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn(herstellerName);
-        when(stringUtils.isOneWord(event.getText())).thenReturn(true);
 
         addManufacturerInputListener.onInputEvent(event);
 
@@ -60,7 +56,6 @@ class AddManufacturerInputListenerTest {
         when(event.getSource()).thenReturn(new Object());
         String text = "alex";
         when(event.getText()).thenReturn(text);
-        when(stringUtils.isOneWord(text)).thenReturn(true);
 
         when(automat.addHersteller(new HerstellerImplementation("alex"))).thenThrow(new ManufacturerExistException("Manufacturer already exists"));
 

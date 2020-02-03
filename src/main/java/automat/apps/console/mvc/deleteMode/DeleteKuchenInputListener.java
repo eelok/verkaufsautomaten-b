@@ -1,32 +1,35 @@
 package automat.apps.console.mvc.deleteMode;
 
-import automat.apps.console.Printer;
-import automat.apps.console.service.StringUtils;
+import automat.apps.console.service.Printer;
 import automat.mainlib.Automat;
 import automat.apps.console.mvc.InputEvent;
 import automat.apps.console.mvc.InputEventListener;
 
 public class DeleteKuchenInputListener implements InputEventListener {
     private Automat automat;
-    private StringUtils stringUtils;
     private Printer printer;
 
-    public DeleteKuchenInputListener(Automat automat, StringUtils stringUtils, Printer printer) {
+    public DeleteKuchenInputListener(Automat automat, Printer printer) {
         this.automat = automat;
-        this.stringUtils = stringUtils;
         this.printer = printer;
     }
 
     @Override
     public void onInputEvent(InputEvent event) {
-        if(event.getText() == null){
+        if (event.getText() == null) {
             return;
         }
-        if(event.getText().matches("^f.[0-9]*$")){
-            int fachNumber = stringUtils.extractFachNumberFromString(event.getText());
+        String userInput = event.getText().trim().toLowerCase();
+        if (userInput.startsWith("kuchen:")) {
             try {
-                automat.removeKuchenFromAutomat(fachNumber);
-            } catch (IllegalArgumentException ex){
+                String infoFroDeleteKuchen = userInput.replace("kuchen:", "");
+                String fachNumber = infoFroDeleteKuchen.trim();
+                int fnum = Integer.parseInt(fachNumber);
+                automat.removeKuchenFromAutomat(fnum);
+            } catch (NumberFormatException nfe) {
+                printer.println("Fachnummer should be a number");
+            }
+            catch (Exception ex) {
                 printer.println(ex.getMessage());
             }
         }

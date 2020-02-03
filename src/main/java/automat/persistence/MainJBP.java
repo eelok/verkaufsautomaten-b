@@ -23,8 +23,8 @@ public class MainJBP {
         File automatXML = new File("automat.xml");
 
         List<Allergen> allergens = new ArrayList<>();
-        allergens.add(Allergen.Erdnuss);
-        allergens.add(Allergen.Gluten);
+        allergens.add(Allergen.ERDNUSS);
+        allergens.add(Allergen.GLUTEN);
 
         Hersteller alex = new HerstellerImplementation("alex");
         automat.addHersteller(alex);

@@ -37,7 +37,7 @@ public class RandomKuchenService {
         return new KuchenImplementation(
                 new BigDecimal("15.99"),
                 new HerstellerImplementation("Alex"),
-                Collections.singletonList(Allergen.Gluten),
+                Collections.singletonList(Allergen.GLUTEN),
                 1000,
                 Duration.ofDays(random.nextInt(10) + 1)
         );
@@ -47,7 +47,7 @@ public class RandomKuchenService {
         return new ObsttorteImplementation(
                 new BigDecimal("22.10"),
                 new HerstellerImplementation("Donna"),
-                Arrays.asList(Allergen.Gluten, Allergen.Erdnuss, Allergen.Haselnuss),
+                Arrays.asList(Allergen.GLUTEN, Allergen.ERDNUSS, Allergen.HASELNUSS),
                 1000,
                 Duration.ofDays(random.nextInt(10) + 1),
                 "Blaubeeren",
@@ -59,7 +59,7 @@ public class RandomKuchenService {
         return new ObstkuchenImplementation(
                 new BigDecimal("19.30"),
                 new HerstellerImplementation("Donna"),
-                Arrays.asList(Allergen.Gluten, Allergen.Erdnuss),
+                Arrays.asList(Allergen.GLUTEN, Allergen.ERDNUSS),
                 780,
                 Duration.ofDays(random.nextInt(10) + 1),
                 "Himbeeren");
@@ -69,7 +69,7 @@ public class RandomKuchenService {
         return new KremkuchenImplementation(
                 new BigDecimal("15.60"),
                 new HerstellerImplementation("Alex"),
-                Arrays.asList(Allergen.Gluten, Allergen.Erdnuss, Allergen.Haselnuss),
+                Arrays.asList(Allergen.GLUTEN, Allergen.ERDNUSS, Allergen.HASELNUSS),
                 1000,
                 Duration.ofDays(random.nextInt(10) + 1),
                 "Sahne");

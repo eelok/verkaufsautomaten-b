@@ -1,9 +1,8 @@
 package automat.net.client;
 
-import automat.apps.console.Printer;
+import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.InputEventHandler;
-import automat.apps.console.service.StringUtils;
 import automat.net.client.connection.ConnectionHelper;
 import automat.net.client.connection.DataSender;
 import automat.net.client.mode.InfoCommandModeNet;
@@ -22,10 +21,9 @@ public class Client {
         InputEventHandler eventHandler = new InputEventHandler();
         consoleReader.setHandler(eventHandler);
         Printer printer = new Printer();
-        StringUtils stringUtils = new StringUtils();
         AddModeInputListenerNet addModeInputListenerNet = new AddModeInputListenerNet(printer, new ConsoleReader(), dataSender);
         ListModeInputListenerNet listModeInputListenerNet = new ListModeInputListenerNet(printer, new ConsoleReader(), dataSender);
-        DeleteModeInputListenerNet deleteModeInputListenerNet = new DeleteModeInputListenerNet(stringUtils, printer, new ConsoleReader(), dataSender);
+        DeleteModeInputListenerNet deleteModeInputListenerNet = new DeleteModeInputListenerNet(printer, new ConsoleReader(), dataSender);
         InfoCommandModeNet InfoCommandModeNet = new InfoCommandModeNet(printer);
 
         eventHandler.add(InfoCommandModeNet);
