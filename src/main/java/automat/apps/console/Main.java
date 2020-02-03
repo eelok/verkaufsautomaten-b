@@ -49,7 +49,7 @@ public class Main {
                 "Expected input:\n" +
                 ":a -input mode\n" +
                 ":l -list mode\n" +
-                ":d -delete mode" +
+                ":d -delete mode\n" +
                 ":q -exit");
     }
 }
