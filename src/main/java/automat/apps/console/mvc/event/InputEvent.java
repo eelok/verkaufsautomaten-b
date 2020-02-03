@@ -1,4 +1,4 @@
-package automat.apps.console.mvc;
+package automat.apps.console.mvc.event;
 
 public class InputEvent extends java.util.EventObject {
     private String text;

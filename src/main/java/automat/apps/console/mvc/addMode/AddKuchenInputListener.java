@@ -1,8 +1,8 @@
 package automat.apps.console.mvc.addMode;
 
 import automat.apps.console.service.Printer;
-import automat.apps.console.mvc.InputEvent;
-import automat.apps.console.mvc.InputEventListener;
+import automat.apps.console.mvc.event.InputEvent;
+import automat.apps.console.mvc.event.InputEventListener;
 import automat.apps.console.service.KuchenParser;
 import automat.mainlib.Automat;
 import automat.mainlib.exceptions.AutomatIsFullException;

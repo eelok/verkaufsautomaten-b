@@ -2,9 +2,9 @@ package automat.net.client.mode.deleteMode;
 
 import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.ConsoleReader;
-import automat.apps.console.mvc.InputEvent;
-import automat.apps.console.mvc.InputEventHandler;
-import automat.apps.console.mvc.InputEventListener;
+import automat.apps.console.mvc.event.InputEvent;
+import automat.apps.console.mvc.event.InputEventHandler;
+import automat.apps.console.mvc.event.InputEventListener;
 
 import automat.net.client.connection.DataSender;
 

@@ -1,10 +1,7 @@
 package automat.apps.console;
 
 import automat.apps.console.mvc.ConsoleReader;
-import automat.apps.console.mvc.InputEvent;
-import automat.apps.console.mvc.InputEventListener;
-import automat.apps.console.mvc.infoCommon.InfoCommandMode;
-import automat.apps.console.mvc.InputEventHandler;
+import automat.apps.console.mvc.event.InputEventHandler;
 import automat.apps.console.mvc.addMode.AddModeInputListener;
 import automat.apps.console.mvc.deleteMode.DeleteModeInputListener;
 import automat.apps.console.mvc.listMode.ListModeInputListener;
@@ -32,9 +29,7 @@ public class Main {
         AddModeInputListener addModeInputListener = new AddModeInputListener(automat, printer, new ConsoleReader());
         ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, new ConsoleReader());
         DeleteModeInputListener deleteModeInputListener = new DeleteModeInputListener(automat, printer, new ConsoleReader());
-//        InfoCommandMode infoCommandMode = new InfoCommandMode(printer);
 
-//        eventHandler.add(infoCommandMode);
         eventHandler.add(addModeInputListener);
         eventHandler.add(listModeInputListener);
         eventHandler.add(deleteModeInputListener);

@@ -1,5 +1,8 @@
 package automat.apps.console.mvc;
 
+import automat.apps.console.mvc.event.InputEvent;
+import automat.apps.console.mvc.event.InputEventHandler;
+
 import java.util.Scanner;
 
 public class ConsoleReader {

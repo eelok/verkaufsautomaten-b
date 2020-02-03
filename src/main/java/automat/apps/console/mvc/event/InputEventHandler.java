@@ -1,4 +1,4 @@
-package automat.apps.console.mvc;
+package automat.apps.console.mvc.event;
 
 import java.util.LinkedList;
 import java.util.List;

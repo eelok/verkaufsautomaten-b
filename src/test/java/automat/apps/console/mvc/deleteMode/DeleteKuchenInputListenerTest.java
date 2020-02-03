@@ -1,7 +1,7 @@
 package automat.apps.console.mvc.deleteMode;
 
 import automat.apps.console.service.Printer;
-import automat.apps.console.mvc.InputEvent;
+import automat.apps.console.mvc.event.InputEvent;
 import automat.mainlib.Automat;
 import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
 import org.junit.jupiter.api.BeforeEach;

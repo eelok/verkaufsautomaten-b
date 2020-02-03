@@ -2,7 +2,7 @@ package automat.net.client;
 
 import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.ConsoleReader;
-import automat.apps.console.mvc.InputEventHandler;
+import automat.apps.console.mvc.event.InputEventHandler;
 import automat.net.client.connection.ConnectionHelper;
 import automat.net.client.connection.DataSender;
 import automat.net.client.mode.InfoCommandModeNet;

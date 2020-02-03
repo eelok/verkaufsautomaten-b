@@ -1,7 +1,7 @@
 package automat.net.client.mode.listModeNet;
 
-import automat.apps.console.mvc.InputEvent;
-import automat.apps.console.mvc.InputEventListener;
+import automat.apps.console.mvc.event.InputEvent;
+import automat.apps.console.mvc.event.InputEventListener;
 import automat.net.common.Command;
 import automat.net.client.connection.DataSender;
 
