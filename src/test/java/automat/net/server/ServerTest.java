@@ -31,7 +31,6 @@ class ServerTest {
 
     @Test
     void should_read_and_write_from_stream() throws IOException, ClassNotFoundException {
-        Server server = new Server(automat, dataHandler);
         ByteArrayOutputStream bos = new ByteArrayOutputStream(14);
         ObjectOutputStream outputStream = new ObjectOutputStream(bos);
 

@@ -93,7 +93,7 @@ public class Automat implements Subject, Serializable {
     }
 
     public boolean addHersteller(Hersteller hersteller) throws ManufacturerExistException {
-        if(hersteller.getName().isEmpty()){
+        if(hersteller.getName().trim().isEmpty()){
             throw new IllegalArgumentException("Name is empty, add name");
         }
         if (herstellerExists(hersteller.getName())) {
@@ -115,7 +115,9 @@ public class Automat implements Subject, Serializable {
             throw new IllegalArgumentException(String.format("Hersteller %s does not exist", name));
         }
         if (containsTheNameOfHerstellerInAllEingelagerteKuchen(name)) {
-            throw new IllegalArgumentException(String.format("Hersteller %s may not be deleted\nreason: a kuchen from %s is in Automat", name, name));
+            throw new IllegalArgumentException(String.format(
+                    "Hersteller %s may not be deleted\n" +
+                    "reason: a kuchen from %s is in Automat", name, name));
         }
         allHersteller.remove(hersteller);
         this.message = name;

@@ -11,10 +11,6 @@ public class DataSender {
       this.connectionHelper = connectionHelper;
     }
 
-    public ConnectionHelper getConnectionHelper() {
-        return connectionHelper;
-    }
-
     public void sendDataToServer(String inputData, Command command) throws IOException, ClassNotFoundException {
 
         String dataForTransport = command + "/" + inputData;

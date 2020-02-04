@@ -57,5 +57,34 @@ class DeleteHerstellerInputListenerTest {
         verify(printer).println("Hersteller does not exist");
     }
 
+    @Test
+    void should_call_println_when_hersteller_when_name_empty() {
+        when(event.getText()).thenReturn("manufacturer:");
+
+        doThrow(new IllegalArgumentException("name is empty")).when(automat).deleteHersteller(any(String.class));
+
+        deleteHerstellerInputListener.onInputEvent(event);
+
+        verify(printer).println("name is empty");
+    }
+
+    @Test
+    void should_call_println_when_hersteller_when_kuchen_from_hersteller_in_automat() {
+        when(event.getText()).thenReturn("manufacturer: alex");
+
+        doThrow(new IllegalArgumentException(
+                "Hersteller %s may not be deletedn\n"+
+                "reason: a kuchen from alex is in Automat"
+        ))
+                .when(automat).deleteHersteller(any(String.class));
+
+        deleteHerstellerInputListener.onInputEvent(event);
+
+        verify(printer).println(
+                "Hersteller %s may not be deletedn\n"+
+                "reason: a kuchen from alex is in Automat"
+        );
+    }
+
 
 }
