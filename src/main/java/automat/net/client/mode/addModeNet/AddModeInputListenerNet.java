@@ -31,7 +31,8 @@ public class AddModeInputListenerNet implements InputEventListener {
                             "Kuchen: Kremkuchen 2.5 Alex Gluten,Haselnuss 1400 24 Sahne\n" +
                             "Kuchen: Obstkuchen 5.0 Alex Gluten,Haselnuss,Sesamsamen 1000 36 Heidelbeeren\n"+
                             "Kuchen: Obsttorte 10.0 Alex Gluten,Haselnuss,Erdnuss 550 25 Heidelbeeren Butter\n"+
-                            ":q -back to main menu");
+                            ":q -back to main menu"
+            );
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new InfoForAddandDeleteNet(printer));
             eventHandler.add(new AddManufacturerInputListenerNet(dataSender));
