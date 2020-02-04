@@ -80,6 +80,8 @@ public class DataHandler {
                     String fachnummer = info.replace("kuchen:", "").trim();
                     EinlagerungEntry einlagerungEntry = automat.removeKuchenFromAutomat(Integer.parseInt(fachnummer));
                     return String.format("from server: %s from fach %s was deleted", einlagerungEntry.getKuchen().getType(), einlagerungEntry.getFachnummer());
+                } catch (NumberFormatException e){
+                    return "Fachnummer should be a number";
                 } catch (IllegalArgumentException message) {
                     return message.getMessage();
                 }

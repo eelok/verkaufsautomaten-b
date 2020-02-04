@@ -25,7 +25,7 @@ public class DeleteKuchenInputListenerNet implements InputEventListener {
         if(inputData.startsWith("kuchen:")){
             try {
                 dataSender.sendDataToServer(inputData, Command.DELETE_KUCHEN);
-            }catch (IllegalArgumentException | IOException | ClassNotFoundException ex){
+            }catch (IOException | ClassNotFoundException ex){
                 throw new RuntimeException(ex);
             }
         }
