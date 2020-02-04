@@ -22,8 +22,8 @@ public class DeleteKuchenInputListener implements InputEventListener {
         String userInput = event.getText().trim().toLowerCase();
         if (userInput.startsWith("kuchen:")) {
             try {
-                String fachNumber = userInput.replace("kuchen:", "").trim();
-                int fnum = Integer.parseInt(fachNumber);
+            String fachNumber = userInput.replace("kuchen:", "").trim();
+            int fnum = Integer.parseInt(fachNumber);
                 automat.removeKuchenFromAutomat(fnum);
             } catch (NumberFormatException nfe) {
                 printer.println("Fachnummer should be a number");

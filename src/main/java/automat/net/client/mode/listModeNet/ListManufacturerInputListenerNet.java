@@ -17,7 +17,7 @@ public class ListManufacturerInputListenerNet implements InputEventListener {
     @Override
     public void onInputEvent(InputEvent event) {
         String inputData = event.getText().trim();
-        if ("manufacturer".equalsIgnoreCase(inputData)) {
+        if ("manufacturer".equalsIgnoreCase(inputData.trim())) {
             try {
                 dataSender.sendDataToServer(inputData, Command.LIST_HERSTELLER);
             } catch (IOException | ClassNotFoundException e) {

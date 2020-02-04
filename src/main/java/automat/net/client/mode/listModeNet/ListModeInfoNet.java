@@ -15,7 +15,10 @@ public class ListModeInfoNet implements InputEventListener {
     @Override
     public void onInputEvent(InputEvent event) {
         if (!event.getText().equalsIgnoreCase("manufacturer") && !event.getText().equalsIgnoreCase("kuchen")) {
-            printer.println("List Mode input: expected format: manufacturer / kuchen / :q<back to main menu>");
+            printer.println("Input example:\n" +
+                    "manufacturer\n" +
+                    "kuchen\n" +
+                    ":q -back to main menu");
         }
     }
 }

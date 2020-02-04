@@ -1,11 +1,13 @@
 package automat.net.client;
 
+import automat.apps.console.mvc.event.InputEvent;
+import automat.apps.console.mvc.event.InputEventListener;
 import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.event.InputEventHandler;
 import automat.net.client.connection.ConnectionHelper;
 import automat.net.client.connection.DataSender;
-import automat.net.client.mode.InfoCommandModeNet;
+import automat.net.client.mode.infoCommonMode.InfoCommandModeNet;
 import automat.net.client.mode.addModeNet.AddModeInputListenerNet;
 import automat.net.client.mode.deleteMode.DeleteModeInputListenerNet;
 import automat.net.client.mode.listModeNet.ListModeInputListenerNet;
@@ -30,7 +32,19 @@ public class Client {
         eventHandler.add(addModeInputListenerNet);
         eventHandler.add(listModeInputListenerNet);
         eventHandler.add(deleteModeInputListenerNet);
-        printer.println("Expected input: :a <input mode> | :l <list mode> | :d <delete mode>");
+        eventHandler.add(event -> welcomeMessage(printer));
+        welcomeMessage(printer);
         consoleReader.start();
     }
+
+    private static void welcomeMessage(Printer printer) {
+        printer.println(
+                "You are in main menu\n" +
+                        "Expected input:\n" +
+                        ":a -input mode\n" +
+                        ":l -list mode\n" +
+                        ":d -delete mode\n" +
+                        ":q -exit");
+    }
+
 }

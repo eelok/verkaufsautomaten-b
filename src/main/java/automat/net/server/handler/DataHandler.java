@@ -35,42 +35,50 @@ public class DataHandler {
                 break;
             case ADD_HERSTELLER:
                 try {
-                    Hersteller hersteller = new HerstellerImplementation(info);
+                    String name = "";
+                    name = info.replace("manufacturer:", "").trim();
+                    Hersteller hersteller = new HerstellerImplementation(name);
                     automat.addHersteller(hersteller);
                     return String.format("from server: hersteller %s was added to automat", hersteller.getName());
-                } catch (ManufacturerExistException ex) {
+                } catch (ManufacturerExistException | IllegalArgumentException ex) {
                     return ex.getMessage();
                 }
             case ADD_KUCHEN:
-                Kuchen kuchenInfo = kuchenParser.getKuchenInfo(info);
+                info = info.replace("kuchen:", "");
                 try {
+                    Kuchen kuchenInfo = kuchenParser.getKuchenInfo(info);
                     automat.addKuchen(kuchenInfo, LocalDateTime.now());
                     return String.format("from server: kuchen of type %s was added to automat", kuchenInfo.getType());
                 } catch (AutomatIsFullException | IllegalArgumentException e) {
                     return e.getMessage();
+                } catch (ArrayIndexOutOfBoundsException exe) {
+                    return "wrong input";
                 }
             case LIST_HERSTELLER:
                 List<String> herstellerWithNumberOfKuchen = automat.getHerstellerWithNumberOfKuchen();
-                if(herstellerWithNumberOfKuchen.isEmpty()){
+                if (herstellerWithNumberOfKuchen.isEmpty()) {
                     return "form server: there is no manufacturer";
                 }
                 return "from server: " + herstellerWithNumberOfKuchen.toString();
             case LIST_KUCHEN:
                 List<String> allKuchenWithFachNum = automat.getAllKuchenWithFachNum();
-                if(allKuchenWithFachNum.isEmpty()){
+                if (allKuchenWithFachNum.isEmpty()) {
                     return "from server: No Kuchen Available in the Automat";
                 }
                 return "from server: " + allKuchenWithFachNum.toString();
             case DELETE_HERSTELLER:
                 try {
-                    automat.deleteHersteller(info);
-                    return String.format("from server: hersteller %s was deleted from automat", info);
+                    String name = "";
+                    name = info.replace("manufacturer:", "").trim();
+                    automat.deleteHersteller(name);
+                    return String.format("from server: hersteller %s was deleted from automat", name);
                 } catch (IllegalArgumentException ex) {
                     return ex.getMessage();
                 }
             case DELETE_KUCHEN:
                 try {
-                    EinlagerungEntry einlagerungEntry = automat.removeKuchenFromAutomat(Integer.parseInt(info));
+                    String fachnummer = info.replace("kuchen:", "").trim();
+                    EinlagerungEntry einlagerungEntry = automat.removeKuchenFromAutomat(Integer.parseInt(fachnummer));
                     return String.format("from server: %s from fach %s was deleted", einlagerungEntry.getKuchen().getType(), einlagerungEntry.getFachnummer());
                 } catch (IllegalArgumentException message) {
                     return message.getMessage();

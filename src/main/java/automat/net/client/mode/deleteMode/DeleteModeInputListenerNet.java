@@ -1,5 +1,6 @@
 package automat.net.client.mode.deleteMode;
 
+import automat.apps.console.mvc.infoCommonMode.InfoForAddandDelete;
 import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.event.InputEvent;
@@ -22,10 +23,16 @@ public class DeleteModeInputListenerNet implements InputEventListener {
 
     @Override
     public void onInputEvent(InputEvent event) {
-        if (event.getText() != null && ":d".equalsIgnoreCase(event.getText())) {
+        if (":d".equalsIgnoreCase(event.getText().trim())) {
             printer.println("delete mode active");
-            printer.println("Expected input: name of manufacturer / f<fachnummer>");
+            printer.println(
+                    "Input example:\n" +
+                    "Manufacturer: Alex\n" +
+                    "Kuchen: <fachnummer>\n" +
+                    ":q -back to main menu"
+            );
             InputEventHandler eventHandler = new InputEventHandler();
+            eventHandler.add(new InfoForAddandDelete(printer));
             eventHandler.add(new DeleteHerstellerInputListenerNet(printer, dataSender));
             eventHandler.add(new DeleteKuchenInputListenerNet(printer, dataSender));
             consoleReader.setHandler(eventHandler);

@@ -4,6 +4,9 @@ import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.event.InputEvent;
 import automat.apps.console.mvc.event.InputEventListener;
 import automat.net.client.connection.DataSender;
+import automat.net.common.Command;
+
+import java.io.IOException;
 
 public class DeleteKuchenInputListenerNet implements InputEventListener {
 
@@ -21,13 +24,12 @@ public class DeleteKuchenInputListenerNet implements InputEventListener {
             return;
         }
         String inputData = event.getText().toLowerCase().trim();
-        if(inputData.matches("^f.[0-9]*$")){
-//            int fachNumber = stringUtils.extractFachNumberFromString(inputData);
-//            try {
-//                dataSender.sendDataToServer(String.valueOf(fachNumber), Command.DELETE_KUCHEN);
-//            } catch (IllegalArgumentException | IOException | ClassNotFoundException ex){
-//                printer.println(ex.getMessage());
-//            }
+        if(inputData.startsWith("kuchen:")){
+            try {
+                dataSender.sendDataToServer(inputData, Command.DELETE_KUCHEN);
+            }catch (IllegalArgumentException | IOException | ClassNotFoundException ex){
+                throw new RuntimeException(ex);
+            }
         }
     }
 
