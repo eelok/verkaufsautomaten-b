@@ -4,6 +4,8 @@ import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.apps.console.observer.DeleteHerstellerObserver;
+import automat.mainlib.interfaceSubBeob.Beobachter;
+import automat.mainlib.interfaceSubBeob.Subject;
 import automat.mainlib.kuchen.Allergen;
 import automat.mainlib.kuchen.Kuchen;
 import automat.apps.console.observer.AddHerstellerObserver;
@@ -306,11 +308,6 @@ public class Automat implements Subject, Serializable {
     @Override
     public void meldeAn(Beobachter beobachter) {
         this.beobachterList.add(beobachter);
-    }
-
-    @Override
-    public void meldeAb(Beobachter beobachter) {
-        this.beobachterList.remove(beobachter);
     }
 
     @Override

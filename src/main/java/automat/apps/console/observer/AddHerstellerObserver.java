@@ -2,7 +2,7 @@ package automat.apps.console.observer;
 
 import automat.apps.console.service.Printer;
 import automat.mainlib.Automat;
-import automat.mainlib.Beobachter;
+import automat.mainlib.interfaceSubBeob.Beobachter;
 
 public class AddHerstellerObserver implements Beobachter {
 

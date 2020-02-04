@@ -1,14 +1,17 @@
 package automat.net.client.connection;
 
+import automat.apps.console.service.Printer;
 import automat.net.common.Command;
 
 import java.io.IOException;
 
 public class DataSender {
-    ConnectionHelper connectionHelper;
+    private ConnectionHelper connectionHelper;
+    private Printer printer;
 
-    public DataSender(ConnectionHelper connectionHelper) {
-      this.connectionHelper = connectionHelper;
+    public DataSender(ConnectionHelper connectionHelper, Printer printer) {
+        this.connectionHelper = connectionHelper;
+        this.printer = printer;
     }
 
     public void sendDataToServer(String inputData, Command command) throws IOException, ClassNotFoundException {
@@ -17,6 +20,6 @@ public class DataSender {
 
         connectionHelper.getClientOutputStream().writeObject(dataForTransport);
         Object replyFromServer = connectionHelper.getClientInputStream().readObject();
-        System.out.println(replyFromServer);
+        printer.println(replyFromServer.toString());
     }
 }

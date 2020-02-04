@@ -1,4 +1,4 @@
-package automat.mainlib;
+package automat.mainlib.interfaceSubBeob;
 
 public interface Beobachter {
 

@@ -15,11 +15,11 @@ public class Client {
     public static void main(String[] args) throws IOException {
         ConnectionHelper connectionHelper = ConnectionHelper.getConnectionHelperSingleton();
 
-        DataSender dataSender = new DataSender(connectionHelper);
+        Printer printer = new Printer();
+        DataSender dataSender = new DataSender(connectionHelper, printer);
         ConsoleReader consoleReader = new ConsoleReader();
         InputEventHandler eventHandler = new InputEventHandler();
         consoleReader.setHandler(eventHandler);
-        Printer printer = new Printer();
         AddModeInputListenerNet addModeInputListenerNet = new AddModeInputListenerNet(printer, new ConsoleReader(), dataSender);
         ListModeInputListenerNet listModeInputListenerNet = new ListModeInputListenerNet(printer, new ConsoleReader(), dataSender);
         DeleteModeInputListenerNet deleteModeInputListenerNet = new DeleteModeInputListenerNet(printer, new ConsoleReader(), dataSender);
