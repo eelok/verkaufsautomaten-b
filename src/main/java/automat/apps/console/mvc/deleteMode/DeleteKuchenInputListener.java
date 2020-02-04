@@ -27,8 +27,7 @@ public class DeleteKuchenInputListener implements InputEventListener {
                 automat.removeKuchenFromAutomat(fnum);
             } catch (NumberFormatException nfe) {
                 printer.println("Fachnummer should be a number");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 printer.println(ex.getMessage());
             }
         }

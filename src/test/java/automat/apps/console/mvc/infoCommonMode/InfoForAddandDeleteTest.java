@@ -1,4 +1,4 @@
-package automat.apps.console.mvc.infoCommon;
+package automat.apps.console.mvc.infoCommonMode;
 
 import automat.apps.console.mvc.event.InputEvent;
 import automat.apps.console.service.Printer;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

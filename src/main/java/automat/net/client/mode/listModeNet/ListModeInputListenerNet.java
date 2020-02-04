@@ -21,9 +21,14 @@ public class ListModeInputListenerNet implements InputEventListener {
 
     @Override
     public void onInputEvent(InputEvent event) {
-        if (event.getText() != null && ":l".equalsIgnoreCase(event.getText())) {
+        if (":l".equalsIgnoreCase(event.getText().trim())) {
             printer.println("list mode active");
-            printer.println("Enter command: manufacturer / kuchen / :q<back to main menu> ");
+            printer.println(
+                    "Input example:\n" +
+                    "manufacturer\n" +
+                    "kuchen\n" +
+                    ":q -back to main menu"
+            );
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new ListManufacturerInputListenerNet(dataSender));
             eventHandler.add(new ListKuchenInputListenerNet(dataSender));

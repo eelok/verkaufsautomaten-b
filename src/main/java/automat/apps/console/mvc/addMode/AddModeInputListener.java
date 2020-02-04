@@ -5,7 +5,7 @@ import automat.apps.console.mvc.event.InputEventHandler;
 import automat.apps.console.mvc.event.InputEventListener;
 import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.*;
-import automat.apps.console.mvc.infoCommon.InfoForAddandDelete;
+import automat.apps.console.mvc.infoCommonMode.InfoForAddandDelete;
 import automat.apps.console.service.KuchenParser;
 import automat.mainlib.Automat;
 

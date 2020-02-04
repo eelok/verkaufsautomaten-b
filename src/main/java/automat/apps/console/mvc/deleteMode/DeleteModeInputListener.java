@@ -1,7 +1,7 @@
 package automat.apps.console.mvc.deleteMode;
 
 import automat.apps.console.service.Printer;
-import automat.apps.console.mvc.infoCommon.InfoForAddandDelete;
+import automat.apps.console.mvc.infoCommonMode.InfoForAddandDelete;
 import automat.mainlib.Automat;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.event.InputEvent;

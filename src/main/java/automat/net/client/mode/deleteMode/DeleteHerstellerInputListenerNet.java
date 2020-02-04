@@ -1,20 +1,17 @@
 package automat.net.client.mode.deleteMode;
 
-import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.event.InputEvent;
 import automat.apps.console.mvc.event.InputEventListener;
-import automat.net.common.Command;
 import automat.net.client.connection.DataSender;
+import automat.net.common.Command;
 
 import java.io.IOException;
 
 public class DeleteHerstellerInputListenerNet implements InputEventListener {
 
-    private Printer printer;
     private DataSender dataSender;
 
-    public DeleteHerstellerInputListenerNet(Printer printer, DataSender dataSender) {
-        this.printer = printer;
+    public DeleteHerstellerInputListenerNet(DataSender dataSender) {
         this.dataSender = dataSender;
     }
 
@@ -24,15 +21,12 @@ public class DeleteHerstellerInputListenerNet implements InputEventListener {
             return;
         }
         String inputData = event.getText().toLowerCase().trim();
-        if (!inputData.matches("^f.[0-9]*$")) {
+        if (inputData.startsWith("manufacturer:")) {
             try {
                 dataSender.sendDataToServer(inputData, Command.DELETE_HERSTELLER);
-            } catch (IllegalArgumentException e) {
-                printer.println(e.getMessage());
             } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
         }
     }
-
 }

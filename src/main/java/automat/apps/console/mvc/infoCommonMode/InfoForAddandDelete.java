@@ -1,4 +1,4 @@
-package automat.apps.console.mvc.infoCommon;
+package automat.apps.console.mvc.infoCommonMode;
 
 import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.event.InputEvent;
