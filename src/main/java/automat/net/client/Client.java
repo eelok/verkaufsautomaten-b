@@ -7,7 +7,6 @@ import automat.net.client.connection.ConnectionHelper;
 import automat.net.client.connection.DataSender;
 import automat.net.client.mode.addModeNet.AddModeInputListenerNet;
 import automat.net.client.mode.deleteMode.DeleteModeInputListenerNet;
-import automat.net.client.mode.infoCommonMode.InfoCommandModeNet;
 import automat.net.client.mode.listModeNet.ListModeInputListenerNet;
 
 import java.io.IOException;
@@ -24,9 +23,7 @@ public class Client {
         AddModeInputListenerNet addModeInputListenerNet = new AddModeInputListenerNet(printer, new ConsoleReader(), dataSender);
         ListModeInputListenerNet listModeInputListenerNet = new ListModeInputListenerNet(printer, new ConsoleReader(), dataSender);
         DeleteModeInputListenerNet deleteModeInputListenerNet = new DeleteModeInputListenerNet(printer, new ConsoleReader(), dataSender);
-        InfoCommandModeNet InfoCommandModeNet = new InfoCommandModeNet(printer);
 
-        eventHandler.add(InfoCommandModeNet);
         eventHandler.add(addModeInputListenerNet);
         eventHandler.add(listModeInputListenerNet);
         eventHandler.add(deleteModeInputListenerNet);
