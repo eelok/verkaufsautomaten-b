@@ -33,8 +33,8 @@ public class DeleteModeInputListenerNet implements InputEventListener {
             );
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new InfoForAddandDelete(printer));
-            eventHandler.add(new DeleteHerstellerInputListenerNet(printer, dataSender));
-            eventHandler.add(new DeleteKuchenInputListenerNet(printer, dataSender));
+            eventHandler.add(new DeleteHerstellerInputListenerNet(dataSender));
+            eventHandler.add(new DeleteKuchenInputListenerNet(dataSender));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
         }

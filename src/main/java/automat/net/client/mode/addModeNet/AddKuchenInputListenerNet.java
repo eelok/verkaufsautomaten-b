@@ -3,22 +3,16 @@ package automat.net.client.mode.addModeNet;
 import automat.apps.console.mvc.event.InputEvent;
 import automat.apps.console.mvc.event.InputEventListener;
 import automat.apps.console.service.KuchenParser;
-import automat.mainlib.exceptions.AutomatIsFullException;
-import automat.mainlib.kuchen.Kuchen;
-import automat.net.common.Command;
 import automat.net.client.connection.DataSender;
+import automat.net.common.Command;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 public class AddKuchenInputListenerNet implements InputEventListener {
 
-    private KuchenParser kuchenParser;
     private DataSender dataSender;
 
-
-    public AddKuchenInputListenerNet(KuchenParser kuchenParser, DataSender dataSender) {
-        this.kuchenParser = kuchenParser;
+    public AddKuchenInputListenerNet(DataSender dataSender) {
         this.dataSender = dataSender;
     }
 

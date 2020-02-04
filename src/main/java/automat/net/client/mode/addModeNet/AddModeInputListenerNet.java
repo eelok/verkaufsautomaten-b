@@ -1,11 +1,10 @@
 package automat.net.client.mode.addModeNet;
 
-import automat.apps.console.service.Printer;
 import automat.apps.console.mvc.ConsoleReader;
 import automat.apps.console.mvc.event.InputEvent;
 import automat.apps.console.mvc.event.InputEventHandler;
 import automat.apps.console.mvc.event.InputEventListener;
-import automat.apps.console.service.KuchenParser;
+import automat.apps.console.service.Printer;
 import automat.net.client.connection.DataSender;
 import automat.net.client.mode.infoCommonMode.InfoForAddandDeleteNet;
 
@@ -36,7 +35,7 @@ public class AddModeInputListenerNet implements InputEventListener {
             InputEventHandler eventHandler = new InputEventHandler();
             eventHandler.add(new InfoForAddandDeleteNet(printer));
             eventHandler.add(new AddManufacturerInputListenerNet(dataSender));
-            eventHandler.add(new AddKuchenInputListenerNet(new KuchenParser(), dataSender));
+            eventHandler.add(new AddKuchenInputListenerNet(dataSender));
             consoleReader.setHandler(eventHandler);
             consoleReader.start();
         }

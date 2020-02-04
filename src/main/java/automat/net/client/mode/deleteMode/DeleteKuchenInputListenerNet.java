@@ -10,11 +10,9 @@ import java.io.IOException;
 
 public class DeleteKuchenInputListenerNet implements InputEventListener {
 
-    private Printer printer;
     private DataSender dataSender;
 
-    public DeleteKuchenInputListenerNet(Printer printer, DataSender dataSender) {
-        this.printer = printer;
+    public DeleteKuchenInputListenerNet(DataSender dataSender) {
         this.dataSender = dataSender;
     }
 
