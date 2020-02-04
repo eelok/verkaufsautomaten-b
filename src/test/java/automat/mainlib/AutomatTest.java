@@ -5,6 +5,7 @@ import automat.mainlib.exceptions.ManufacturerExistException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.hersteller.HerstellerImplementation;
 import automat.mainlib.kuchen.*;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -27,6 +28,7 @@ class AutomatTest {
     void should_add_hersteller() {
         Automat automat = new Automat(3);
         Hersteller newHersteller = mock(Hersteller.class);
+        when(newHersteller.getName()).thenReturn("tom");
 
         automat.addHersteller(newHersteller);
 
@@ -45,6 +47,24 @@ class AutomatTest {
         assertThatThrownBy(() -> automat.addHersteller(donna)).isInstanceOf(ManufacturerExistException.class);
     }
 
+    @Test
+    void should_throw_exception_when_add_hersteller_and_name_is_empty(){
+        Automat automat = new Automat(1);
+        String name = "";
+        assertThatThrownBy(() -> automat.addHersteller(new HerstellerImplementation(name)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Name is empty, add name");
+    }
+
+    @Test
+    void should_throw_exception_when_delete_hersteller_and_name_is_empty(){
+        Automat automat = new Automat(1);
+        String name = "";
+        assertThatThrownBy(() -> automat.deleteHersteller(name))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("name is empty");
+    }
+
 
     @Test
     void should_delete_the_hersteller() {
@@ -52,6 +72,7 @@ class AutomatTest {
         Hersteller alex = mock(Hersteller.class);
         Hersteller donna = mock(Hersteller.class);
         when(alex.getName()).thenReturn("alex");
+        when(donna.getName()).thenReturn("donna");
 
         automat.addHersteller(alex);
         automat.addHersteller(donna);
