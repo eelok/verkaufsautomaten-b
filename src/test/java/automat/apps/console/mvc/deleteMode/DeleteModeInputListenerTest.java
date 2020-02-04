@@ -44,12 +44,16 @@ class DeleteModeInputListenerTest {
     }
 
     @Test
-    void should_call_printlin(){
+    void should_call_println(){
         when(event.getText()).thenReturn(":d");
         deleteModeInputListener.onInputEvent(event);
 
         verify(printer).println("delete mode active");
-        verify(printer).println("Expected input: name of manufacturer / f<fachnummer>");
+        verify(printer).println(
+                "Input example:\n" +
+                "Manufacturer: Alex\n" +
+                "Kuchen: <fachnummer>\n" +
+                ":q -back to main menu");
     }
 
 }

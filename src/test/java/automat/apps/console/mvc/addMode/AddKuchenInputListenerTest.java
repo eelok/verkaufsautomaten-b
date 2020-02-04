@@ -11,6 +11,7 @@ import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 
 import java.time.LocalDateTime;
 
@@ -18,16 +19,17 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AddKuchenInputListenerTest {
+
     private AddKuchenInputListener addKuchenInputListener;
+    @Mock
     private KuchenParser kuchenParser;
+    @Mock
     private Automat automat;
+    @Mock
     private Printer printer;
 
     @BeforeEach
     void setUp() {
-        automat = mock(Automat.class);
-        kuchenParser = mock(KuchenParser.class);
-        printer = mock(Printer.class);
         addKuchenInputListener = new AddKuchenInputListener(kuchenParser, automat, printer);
     }
 

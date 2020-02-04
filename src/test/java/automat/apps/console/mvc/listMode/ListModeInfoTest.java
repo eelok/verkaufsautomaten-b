@@ -25,7 +25,11 @@ class ListModeInfoTest {
 
         listModeInfo.onInputEvent(event);
 
-        verify(printer).println("List Mode input: expected format: manufacturer / kuchen / :q<back to main menu>");
+        verify(printer).println(
+                "Input example:\n" +
+                "manufacturer\n" +
+                "kuchen\n" +
+                ":q -back to main menu");
     }
 
 }

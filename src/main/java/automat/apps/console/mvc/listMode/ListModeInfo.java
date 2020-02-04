@@ -15,7 +15,12 @@ public class ListModeInfo implements InputEventListener {
     @Override
     public void onInputEvent(InputEvent event) {
         if (!event.getText().equalsIgnoreCase("manufacturer") && !event.getText().equalsIgnoreCase("kuchen")) {
-            printer.println("Input example:\nmanufacturer\nkuchen\n:q -back to main menu");
+            printer.println(
+                    "Input example:\n" +
+                    "manufacturer\n" +
+                    "kuchen\n" +
+                    ":q -back to main menu"
+            );
         }
     }
 }

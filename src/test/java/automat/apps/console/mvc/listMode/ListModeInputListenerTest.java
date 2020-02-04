@@ -6,6 +6,7 @@ import automat.apps.console.mvc.event.InputEvent;
 import automat.apps.console.mvc.event.InputEventHandler;
 import automat.mainlib.Automat;
 import name.falgout.jeffrey.testing.junit.mockito.MockitoExtension;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -26,20 +27,30 @@ class ListModeInputListenerTest {
     @Mock
     private InputEvent event;
 
+    private ListModeInputListener listModeInputListener;
+
+    @BeforeEach
+    void setUp() {
+        listModeInputListener = new ListModeInputListener(automat, printer, consoleReader);
+    }
+
     @Test
-    void should_call_println(){
-        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, consoleReader);
+    void should_call_println() {
         when(event.getText()).thenReturn(":l");
 
         listModeInputListener.onInputEvent(event);
 
         verify(printer).println("list mode active");
-        verify(printer).println("Enter command: manufacturer / kuchen / :q<back to main menu> ");
+        verify(printer).println(
+                "Input example:\n" +
+                "manufacturer\n" +
+                "kuchen\n" +
+                ":q -back to main menu"
+        );
     }
 
     @Test
-    void should_call_consoleReader_methods(){
-        ListModeInputListener listModeInputListener = new ListModeInputListener(automat, printer, consoleReader);
+    void should_call_consoleReader_methods() {
         when(event.getText()).thenReturn(":l");
 
         listModeInputListener.onInputEvent(event);

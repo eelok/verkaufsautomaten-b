@@ -33,7 +33,6 @@ class ListKuchenInputListenerTest {
 
     @Test
     void should_call_println_when_allKuchenWithFachNum_is_empty(){
-        when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("kuchen");
 
         listKuchenInputListener.onInputEvent(event);
@@ -43,13 +42,12 @@ class ListKuchenInputListenerTest {
 
     @Test
     void should_call_println_when_allKuchenWithFachNum_is_not_empty(){
-        when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("kuchen");
-        when(automat.getAllKuchenWithFachNum()).thenReturn(Collections.singletonList("kremkuchen: f2"));
+        when(automat.getAllKuchenWithFachNum()).thenReturn(Collections.singletonList("kremkuchen: 2"));
 
         listKuchenInputListener.onInputEvent(event);
 
-        verify(printer).println("kremkuchen: f2");
+        verify(printer).println("kremkuchen: 2");
     }
 
 

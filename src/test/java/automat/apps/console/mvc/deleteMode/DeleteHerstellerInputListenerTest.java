@@ -30,7 +30,7 @@ class DeleteHerstellerInputListenerTest {
     }
 
     @Test
-    void should_be_no_interaction_when_input_test_null() {
+    void should_be_no_interaction_when_input_text_null() {
         when(event.getText()).thenReturn(null);
         deleteHerstellerInputListener.onInputEvent(event);
 
@@ -39,8 +39,7 @@ class DeleteHerstellerInputListenerTest {
 
     @Test
     void should_call_deleteHersteller() {
-        when(event.getSource()).thenReturn(new Object());
-        when(event.getText()).thenReturn("alex");
+        when(event.getText()).thenReturn("manufacturer: alex");
 
         deleteHerstellerInputListener.onInputEvent(event);
 
@@ -49,8 +48,7 @@ class DeleteHerstellerInputListenerTest {
 
     @Test
     void should_call_println_when_hersteller_was_not_deleted() {
-        when(event.getSource()).thenReturn(new Object());
-        when(event.getText()).thenReturn("alex");
+        when(event.getText()).thenReturn("manufacturer: alex");
 
         doThrow(new IllegalArgumentException("Hersteller does not exist")).when(automat).deleteHersteller(any(String.class));
 

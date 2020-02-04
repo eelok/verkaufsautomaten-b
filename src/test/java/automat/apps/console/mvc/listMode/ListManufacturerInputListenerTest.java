@@ -35,7 +35,6 @@ class ListManufacturerInputListenerTest {
 
     @Test
     void should_call_method_println_when_herstellerWithNumberOfKuchen_is_empty() {
-        when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("manufacturer");
 
         listManufacturerInputListener.onInputEvent(event);
@@ -45,7 +44,6 @@ class ListManufacturerInputListenerTest {
 
     @Test
     void should_call_herstellerWithNumberOfKuchen() {
-        when(event.getSource()).thenReturn(new Object());
         when(event.getText()).thenReturn("manufacturer");
         when(automat.getHerstellerWithNumberOfKuchen()).thenReturn(Collections.singletonList("alex: 1"));
 
