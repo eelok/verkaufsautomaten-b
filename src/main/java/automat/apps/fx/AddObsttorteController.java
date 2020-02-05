@@ -65,6 +65,7 @@ public class AddObsttorteController implements Initializable {
         this.automat = AutomatSingleton.getInstance();
         this.herstellerChoiceBox.setItems((ObservableList<Hersteller>) automat.getHerstellerList());
         this.herstellerChoiceBox.getSelectionModel().selectFirst();
+        setNameCheckbox();
         tempInput();
     }
 
@@ -131,5 +132,12 @@ public class AddObsttorteController implements Initializable {
         this.naehwerteUserInput.setText("689");
         kremsorteUserInput.setText("Sahne");
         obstsorteUserInput.setText("Himbeeren");
+    }
+
+    private void setNameCheckbox() {
+        this.glutenCheckBox.setText(Allergen.GLUTEN.name());
+        this.erdnussCheckBox.setText(Allergen.ERDNUSS.name());
+        this.sesamsamenCheckBox.setText(Allergen.SESAMSAMEN.name());
+        this.haselnussCheckBox.setText(Allergen.HASELNUSS.name());
     }
 }

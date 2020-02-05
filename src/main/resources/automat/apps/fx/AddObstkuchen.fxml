@@ -64,10 +64,10 @@
                 </Label>
                 <TextField fx:id="priceUserInput" prefHeight="30.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                 <ChoiceBox fx:id="herstellerChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <CheckBox fx:id="glutenCheckBox" mnemonicParsing="false" prefHeight="40.0" prefWidth="103.0" text="Gluten" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <CheckBox fx:id="erdnussCheckBox" mnemonicParsing="false" prefHeight="22.0" prefWidth="88.0" text="Erdnuss" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <CheckBox fx:id="sesamsamenCheckBox" mnemonicParsing="false" prefHeight="22.0" prefWidth="121.0" text="Sesamsamen" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <CheckBox fx:id="haselnussCheckBox" mnemonicParsing="false" prefHeight="40.0" prefWidth="88.0" text="Haselnuss" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <CheckBox fx:id="glutenCheckBox" mnemonicParsing="false" prefHeight="21.0" prefWidth="126.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <CheckBox fx:id="erdnussCheckBox" mnemonicParsing="false" prefHeight="21.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <CheckBox fx:id="sesamsamenCheckBox" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <CheckBox fx:id="haselnussCheckBox" mnemonicParsing="false" prefHeight="22.0" prefWidth="128.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <TextField fx:id="naehwerteUserInput" prefHeight="20.0" prefWidth="133.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                 <TextField fx:id="haltbarkeitUserInput" prefHeight="36.0" prefWidth="132.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                 <TextField fx:id="obstsorteUserInput" prefHeight="30.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />

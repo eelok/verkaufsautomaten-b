@@ -61,6 +61,7 @@ public class AddObstkuchenController implements Initializable {
         this.automat = AutomatSingleton.getInstance();
         this.herstellerChoiceBox.setItems((ObservableList<Hersteller>) automat.getHerstellerList());
         this.herstellerChoiceBox.getSelectionModel().selectFirst();
+        setNameCheckbox();
         this.tempInput();
     }
 
@@ -125,5 +126,12 @@ public class AddObstkuchenController implements Initializable {
         this.haltbarkeitUserInput.setText("3");
         this.naehwerteUserInput.setText("780");
         this.obstsorteUserInput.setText("Himbeeren");
+    }
+
+    private void setNameCheckbox() {
+        this.glutenCheckBox.setText(Allergen.GLUTEN.name());
+        this.erdnussCheckBox.setText(Allergen.ERDNUSS.name());
+        this.sesamsamenCheckBox.setText(Allergen.SESAMSAMEN.name());
+        this.haselnussCheckBox.setText(Allergen.HASELNUSS.name());
     }
 }

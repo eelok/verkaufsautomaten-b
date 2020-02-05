@@ -59,6 +59,7 @@ public class AddKuchenController implements Initializable {
         this.automat = AutomatSingleton.getInstance();
         this.herstellerChoiceBox.setItems((ObservableList<Hersteller>) automat.getHerstellerList());
         this.herstellerChoiceBox.getSelectionModel().selectFirst();
+        setNameCheckbox();
         tempInput();
     }
 
@@ -121,5 +122,12 @@ public class AddKuchenController implements Initializable {
         this.priceUserInput.setText("15.55");
         this.haltbarkeitUserInput.setText("4");
         this.naehwerteUserInput.setText("890");
+    }
+
+    private void setNameCheckbox() {
+        this.glutenCheckBox.setText(Allergen.GLUTEN.name());
+        this.erdnussCheckBox.setText(Allergen.ERDNUSS.name());
+        this.sesamsamenCheckBox.setText(Allergen.SESAMSAMEN.name());
+        this.haselnussCheckBox.setText(Allergen.HASELNUSS.name());
     }
 }
