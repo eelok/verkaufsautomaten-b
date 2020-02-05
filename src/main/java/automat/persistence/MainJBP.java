@@ -61,8 +61,8 @@ public class MainJBP {
         );
 
         List<Allergen> allergens2 = new ArrayList<>();
-        allergens.add(Allergen.HASELNUSS);
-        allergens.add(Allergen.SESAMSAMEN);
+        allergens2.add(Allergen.HASELNUSS);
+        allergens2.add(Allergen.SESAMSAMEN);
 
         Hersteller donna = new HerstellerImplementation("donna");
         automat.addHersteller(donna);

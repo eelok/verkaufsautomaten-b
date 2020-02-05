@@ -34,7 +34,7 @@
      <object class="automat.mainlib.EinlagerungEntry">
       <void property="einlagerungsDatum">
        <object class="java.time.LocalDateTime" method="parse">
-        <string>2020-02-05T14:49:42.156</string>
+        <string>2020-02-05T20:12:57.875</string>
        </object>
       </void>
       <void property="kuchen">
@@ -51,18 +51,6 @@
            <object class="java.lang.Enum" method="valueOf">
             <class>automat.mainlib.kuchen.Allergen</class>
             <string>GLUTEN</string>
-           </object>
-          </void>
-          <void method="add">
-           <object class="java.lang.Enum" method="valueOf">
-            <class>automat.mainlib.kuchen.Allergen</class>
-            <string>HASELNUSS</string>
-           </object>
-          </void>
-          <void method="add">
-           <object class="java.lang.Enum" method="valueOf">
-            <class>automat.mainlib.kuchen.Allergen</class>
-            <string>SESAMSAMEN</string>
            </object>
           </void>
          </object>
@@ -94,7 +82,7 @@
      <object class="automat.mainlib.EinlagerungEntry">
       <void property="einlagerungsDatum">
        <object class="java.time.LocalDateTime" method="parse">
-        <string>2020-02-05T14:49:42.161</string>
+        <string>2020-02-05T20:12:57.884</string>
        </object>
       </void>
       <void property="fachnummer">
@@ -135,7 +123,7 @@
      <object class="automat.mainlib.EinlagerungEntry">
       <void property="einlagerungsDatum">
        <object class="java.time.LocalDateTime" method="parse">
-        <string>2020-02-05T14:49:42.161</string>
+        <string>2020-02-05T20:12:57.884</string>
        </object>
       </void>
       <void property="fachnummer">
@@ -173,7 +161,7 @@
      <object class="automat.mainlib.EinlagerungEntry">
       <void property="einlagerungsDatum">
        <object class="java.time.LocalDateTime" method="parse">
-        <string>2020-02-05T14:49:42.161</string>
+        <string>2020-02-05T20:12:57.884</string>
        </object>
       </void>
       <void property="fachnummer">
@@ -182,7 +170,20 @@
       <void property="kuchen">
        <object class="automat.mainlib.kuchen.ObsttorteImplementation">
         <void property="allergens">
-         <object class="java.util.ArrayList"/>
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="java.lang.Enum" method="valueOf">
+            <class>automat.mainlib.kuchen.Allergen</class>
+            <string>HASELNUSS</string>
+           </object>
+          </void>
+          <void method="add">
+           <object class="java.lang.Enum" method="valueOf">
+            <class>automat.mainlib.kuchen.Allergen</class>
+            <string>SESAMSAMEN</string>
+           </object>
+          </void>
+         </object>
         </void>
         <void property="haltbarkeit">
          <object class="java.time.Duration" method="parse">
