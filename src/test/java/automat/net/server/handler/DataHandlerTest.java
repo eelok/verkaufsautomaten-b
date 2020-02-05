@@ -106,29 +106,16 @@ class DataHandlerTest {
 
         assertThat(dataHandler.handleData("ADD_KUCHEN", data)).isEqualTo("No such manufacturer: Donna. Please add manufacturer: Donna.");
     }
-//
-//    @Test///todo  исправить это тест
-//    void shoud_return_message_automat_is_full_when_kuchen_can_not_be_added(){
-//        Automat automat = new Automat(0);
-//        String data = "kremkuchen 2.5 Donna Sesamsamen,Haselnuss 1400 24 Sahne";
-//
-//        Hersteller donna = mock(HerstellerImplementation.class);
-//        when(donna.getName()).thenReturn("donna");
-//        automat.setHerstellerList(Arrays.asList(donna));
-//
-//        Kremkuchen kremkuchen = mock(KremkuchenImplementation.class);
-//        when(kremkuchen.getHersteller()).thenReturn(donna);
-//
-//        when(kuchenParser.getKuchenInfo(data)).thenReturn(kremkuchen);
-//        when(automat.addKuchen(kremkuchen, LocalDateTime.now()))
-//                .thenThrow(new AutomatIsFullException("Der Automat ist voll"));
-//
-////
-////        doThrow(new AutomatIsFullException("Der Automat ist voll"))
-////                .when(automat).addKuchen(kremkuchen, LocalDateTime.now());
-//
-//        assertThat(dataHandler.handleData("ADD_KUCHEN", data)).isEqualTo("Der Automat ist voll");
-//    }
+
+    @Test
+    void shoud_return_message_when_wrong_kuchen_input_and_kuchen_can_not_be_added(){
+        Automat automat = new Automat(1);
+        String data = "kremkuchen 2.5 Donna Sesamsamen,Haselnuss 1400 24 Sahne";
+
+        when(kuchenParser.getKuchenInfo(data)).thenThrow(ArrayIndexOutOfBoundsException.class);
+
+        assertThat(dataHandler.handleData("ADD_KUCHEN", data)).isEqualTo("wrong input");
+    }
 
     @Test
     void should_return_list_hersteller_with_num_of_kuchen_when_command_LIST_HERSTELLER() {
@@ -214,13 +201,11 @@ class DataHandlerTest {
                 .isEqualTo("fachnummer does not exist");
     }
 
-//    @Test
-//    void should_return_fachnum_should_be_a_number_when_kuchen_can_not_be_deleted_command_DELETE_KUCHEN() {
-//        doThrow(NumberFormatException.class)
-//                .when(automat).removeKuchenFromAutomat(Integer.parseInt("<3>"));
-//        assertThat(dataHandler.handleData("DELETE_KUCHEN", "<3>"))
-//                .isEqualTo("Fachnummer should be a number");
-//    }
+    @Test
+    void should_return_fachnum_should_be_a_number_when_kuchen_can_not_be_deleted_command_DELETE_KUCHEN() {
+        assertThat(dataHandler.handleData("DELETE_KUCHEN", "<3>"))
+                .isEqualTo("Fachnummer should be a number");
+    }
 
     @Test
     void should_be_no_interaction_when_command_q() {

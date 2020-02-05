@@ -11,6 +11,7 @@ import org.mockito.Mock;
 
 import java.io.IOException;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,6 +45,18 @@ class AddManufacturerInputListenerNetTest {
         addManufacturerInputListenerNet.onInputEvent(event);
 
         verify(dataSender).sendDataToServer(textForInput, Command.ADD_HERSTELLER);
+    }
+
+    @Test
+    void should_throws_exception() throws IOException, ClassNotFoundException {
+        InputEvent event = mock(InputEvent.class);
+        String textToSend = "manufacturer:";
+        when(event.getText()).thenReturn(textToSend);
+
+        doThrow(new IOException()).when(dataSender).sendDataToServer(textToSend, Command.ADD_HERSTELLER);
+
+        assertThatThrownBy(() -> addManufacturerInputListenerNet.onInputEvent(event))
+                .isInstanceOf(RuntimeException.class);
     }
 
 }

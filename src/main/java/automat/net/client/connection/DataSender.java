@@ -15,7 +15,6 @@ public class DataSender {
     }
 
     public void sendDataToServer(String inputData, Command command) throws IOException, ClassNotFoundException {
-
         String dataForTransport = command + "/" + inputData;
 
         connectionHelper.getClientOutputStream().writeObject(dataForTransport);
