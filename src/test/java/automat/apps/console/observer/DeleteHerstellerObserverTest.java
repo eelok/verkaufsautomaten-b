@@ -10,7 +10,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class DeleteHerstellerObserverTest {
 
-
     @Test
     void should_call_method_println(){
         Automat automat = mock(Automat.class);

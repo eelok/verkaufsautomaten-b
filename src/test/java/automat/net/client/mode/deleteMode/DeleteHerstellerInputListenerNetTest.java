@@ -57,5 +57,4 @@ class DeleteHerstellerInputListenerNetTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
-
 }

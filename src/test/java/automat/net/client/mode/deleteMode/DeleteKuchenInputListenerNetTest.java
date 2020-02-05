@@ -57,5 +57,4 @@ class DeleteKuchenInputListenerNetTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
-
 }

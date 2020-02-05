@@ -11,7 +11,6 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class RemoveKuchenObserverTest {
 
-
     @Test
     void should_call_println(){
         Automat automat = mock(Automat.class);
@@ -22,6 +21,4 @@ class RemoveKuchenObserverTest {
 
         verify(printer).println(String.format("%s was deleted", automat.getMessage()));
     }
-
-
 }
