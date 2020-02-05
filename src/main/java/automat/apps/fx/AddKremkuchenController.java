@@ -62,6 +62,7 @@ public class AddKremkuchenController implements Initializable {
         this.automat = AutomatSingleton.getInstance();
         this.herstellerChoiceBox.setItems((ObservableList<Hersteller>) automat.getHerstellerList());
         this.herstellerChoiceBox.getSelectionModel().selectFirst();
+        setNameCheckbox();
         tempInput();
     }
 
@@ -126,4 +127,12 @@ public class AddKremkuchenController implements Initializable {
         this.naehwerteUserInput.setText("990");
         kremsorteUserInput.setText("Sahne");
     }
+
+    private void setNameCheckbox() {
+        this.glutenCheckBox.setText(Allergen.GLUTEN.name());
+        this.erdnussCheckBox.setText(Allergen.ERDNUSS.name());
+        this.sesamsamenCheckBox.setText(Allergen.SESAMSAMEN.name());
+        this.haselnussCheckBox.setText(Allergen.HASELNUSS.name());
+    }
+
 }
