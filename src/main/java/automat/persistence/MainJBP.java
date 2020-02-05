@@ -12,19 +12,22 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainJBP {
 
     public static void main(String[] args) {
         AutomatRepositoryJBP automatRepositoryJBP = new AutomatRepositoryJBP();
-        Automat automat = new Automat(2);
+        Automat automat = new Automat(4);
         automat.setName("kuchen automat");
         File automatXML = new File("automat.xml");
 
         List<Allergen> allergens = new ArrayList<>();
         allergens.add(Allergen.ERDNUSS);
         allergens.add(Allergen.GLUTEN);
+
+
 
         Hersteller alex = new HerstellerImplementation("alex");
         automat.addHersteller(alex);
@@ -39,8 +42,44 @@ public class MainJBP {
                 "heidelbeeren"
         );
 
-        automat.addKuchen(kuchen, LocalDateTime.now());
+        Kremkuchen kremkuchen = new KremkuchenImplementation(
+                new BigDecimal("25.5"),
+                alex,
+                allergens,
+                890,
+                Duration.ofDays(3),
+                "sahne"
+        );
 
+        Obstkuchen obstkuchen = new ObstkuchenImplementation(
+                new BigDecimal(15),
+                alex,
+                allergens,
+                800,
+                Duration.ofDays(2),
+                "Kirsche"
+        );
+
+        List<Allergen> allergens2 = new ArrayList<>();
+        allergens.add(Allergen.HASELNUSS);
+        allergens.add(Allergen.SESAMSAMEN);
+
+        Hersteller donna = new HerstellerImplementation("donna");
+        automat.addHersteller(donna);
+
+        Obsttorte obsttorte = new ObsttorteImplementation(
+                new BigDecimal(15),
+                alex,
+                allergens2,
+                800,
+                Duration.ofDays(2),
+                "Sahne",
+                "Kirsche"
+        );
+        automat.addKuchen(kremkuchen, LocalDateTime.now());
+        automat.addKuchen(kuchen, LocalDateTime.now());
+        automat.addKuchen(obstkuchen, LocalDateTime.now());
+        automat.addKuchen(obsttorte, LocalDateTime.now());
         try {
             OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(automatXML));
             XMLEncoder encoder = new XMLEncoder(outputStream);

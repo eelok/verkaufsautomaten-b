@@ -10,6 +10,13 @@
       </void>
      </object>
     </void>
+    <void method="add">
+     <object class="automat.mainlib.hersteller.HerstellerImplementation">
+      <void property="name">
+       <string>donna</string>
+      </void>
+     </object>
+    </void>
    </object>
   </void>
   <void property="message">
@@ -19,7 +26,7 @@
    <string>kuchen automat</string>
   </void>
   <void property="platzImAutomat">
-   <int>2</int>
+   <int>4</int>
   </void>
   <void property="storage">
    <object class="java.util.ArrayList">
@@ -27,26 +34,76 @@
      <object class="automat.mainlib.EinlagerungEntry">
       <void property="einlagerungsDatum">
        <object class="java.time.LocalDateTime" method="parse">
-        <string>2020-01-25T21:15:34.079</string>
+        <string>2020-02-05T14:49:42.156</string>
        </object>
+      </void>
+      <void property="kuchen">
+       <object class="automat.mainlib.kuchen.KremkuchenImplementation">
+        <void property="allergens">
+         <object class="java.util.ArrayList" id="ArrayList0">
+          <void method="add">
+           <object class="java.lang.Enum" method="valueOf">
+            <class>automat.mainlib.kuchen.Allergen</class>
+            <string>ERDNUSS</string>
+           </object>
+          </void>
+          <void method="add">
+           <object class="java.lang.Enum" method="valueOf">
+            <class>automat.mainlib.kuchen.Allergen</class>
+            <string>GLUTEN</string>
+           </object>
+          </void>
+          <void method="add">
+           <object class="java.lang.Enum" method="valueOf">
+            <class>automat.mainlib.kuchen.Allergen</class>
+            <string>HASELNUSS</string>
+           </object>
+          </void>
+          <void method="add">
+           <object class="java.lang.Enum" method="valueOf">
+            <class>automat.mainlib.kuchen.Allergen</class>
+            <string>SESAMSAMEN</string>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="haltbarkeit">
+         <object class="java.time.Duration" method="parse">
+          <string>PT72H</string>
+         </object>
+        </void>
+        <void property="hersteller">
+         <object idref="HerstellerImplementation0"/>
+        </void>
+        <void property="kremsorte">
+         <string>sahne</string>
+        </void>
+        <void property="naehrwert">
+         <int>890</int>
+        </void>
+        <void property="price">
+         <object class="java.math.BigDecimal">
+          <string>25.5</string>
+         </object>
+        </void>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="automat.mainlib.EinlagerungEntry">
+      <void property="einlagerungsDatum">
+       <object class="java.time.LocalDateTime" method="parse">
+        <string>2020-02-05T14:49:42.161</string>
+       </object>
+      </void>
+      <void property="fachnummer">
+       <int>1</int>
       </void>
       <void property="kuchen">
        <object class="automat.mainlib.kuchen.ObsttorteImplementation">
         <void property="allergens">
-         <object class="java.util.ArrayList">
-          <void method="add">
-           <object class="java.lang.Enum" method="valueOf">
-            <class>automat.mainlib.kuchen.Allergen</class>
-            <string>Erdnuss</string>
-           </object>
-          </void>
-          <void method="add">
-           <object class="java.lang.Enum" method="valueOf">
-            <class>automat.mainlib.kuchen.Allergen</class>
-            <string>Gluten</string>
-           </object>
-          </void>
-         </object>
+         <object idref="ArrayList0"/>
         </void>
         <void property="haltbarkeit">
          <object class="java.time.Duration" method="parse">
@@ -68,6 +125,85 @@
         <void property="price">
          <object class="java.math.BigDecimal">
           <string>20</string>
+         </object>
+        </void>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="automat.mainlib.EinlagerungEntry">
+      <void property="einlagerungsDatum">
+       <object class="java.time.LocalDateTime" method="parse">
+        <string>2020-02-05T14:49:42.161</string>
+       </object>
+      </void>
+      <void property="fachnummer">
+       <int>2</int>
+      </void>
+      <void property="kuchen">
+       <object class="automat.mainlib.kuchen.ObstkuchenImplementation">
+        <void property="allergens">
+         <object idref="ArrayList0"/>
+        </void>
+        <void property="haltbarkeit">
+         <object class="java.time.Duration" method="parse">
+          <string>PT48H</string>
+         </object>
+        </void>
+        <void property="hersteller">
+         <object idref="HerstellerImplementation0"/>
+        </void>
+        <void property="naehrwert">
+         <int>800</int>
+        </void>
+        <void property="obstsorte">
+         <string>Kirsche</string>
+        </void>
+        <void property="price">
+         <object class="java.math.BigDecimal">
+          <string>15</string>
+         </object>
+        </void>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="automat.mainlib.EinlagerungEntry">
+      <void property="einlagerungsDatum">
+       <object class="java.time.LocalDateTime" method="parse">
+        <string>2020-02-05T14:49:42.161</string>
+       </object>
+      </void>
+      <void property="fachnummer">
+       <int>3</int>
+      </void>
+      <void property="kuchen">
+       <object class="automat.mainlib.kuchen.ObsttorteImplementation">
+        <void property="allergens">
+         <object class="java.util.ArrayList"/>
+        </void>
+        <void property="haltbarkeit">
+         <object class="java.time.Duration" method="parse">
+          <string>PT48H</string>
+         </object>
+        </void>
+        <void property="hersteller">
+         <object idref="HerstellerImplementation0"/>
+        </void>
+        <void property="kremsorte">
+         <string>Kirsche</string>
+        </void>
+        <void property="naehrwert">
+         <int>800</int>
+        </void>
+        <void property="obstsorte">
+         <string>Sahne</string>
+        </void>
+        <void property="price">
+         <object class="java.math.BigDecimal">
+          <string>15</string>
          </object>
         </void>
        </object>

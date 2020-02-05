@@ -202,7 +202,10 @@ public class AutomatController implements Initializable {
         addNewHerstellerInList(userInputHerstellerName);
     }
 
-
+    /**
+     * https://code.makery.ch/ru/library/javafx-tutorial/part2/
+     * Teil : PersonOverviewController
+     */
     @FXML
     private void initCellValueInKuchenTable() {
         this.herstellerCol.setCellValueFactory(cellData ->
