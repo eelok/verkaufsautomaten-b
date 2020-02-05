@@ -1,6 +1,5 @@
 package automat.apps.fx;
 
-
 import automat.apps.fx.model.Obstkuchen;
 import automat.mainlib.Automat;
 import automat.mainlib.exceptions.AutomatIsFullException;

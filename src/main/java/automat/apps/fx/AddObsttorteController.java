@@ -5,7 +5,6 @@ import automat.mainlib.Automat;
 import automat.mainlib.exceptions.AutomatIsFullException;
 import automat.mainlib.hersteller.Hersteller;
 import automat.mainlib.kuchen.Allergen;
-import automat.mainlib.kuchen.ObsttorteImplementation;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
