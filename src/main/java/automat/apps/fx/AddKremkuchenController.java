@@ -75,10 +75,15 @@ public class AddKremkuchenController implements Initializable {
         String kremsorte = kremsorteUserInput.getText().trim();
 
         Hersteller selectedItem = this.herstellerChoiceBox.getSelectionModel().getSelectedItem();
-        List<Allergen> allergens = Arrays.asList(erdnussCheckBox, glutenCheckBox, haselnussCheckBox, sesamsamenCheckBox).stream()
-                .filter(CheckBox::isSelected)
-                .map(checkBox -> Allergen.valueOf(checkBox.getText()))
-                .collect(Collectors.toList());
+
+        List<Allergen> allergens = new ArrayList<>();
+        List<CheckBox> checkBoxes = Arrays.asList(erdnussCheckBox, glutenCheckBox, haselnussCheckBox, sesamsamenCheckBox);
+        for (CheckBox checkBox : checkBoxes) {
+            if (checkBox.isSelected()) {
+                Allergen allergen = Allergen.valueOf(checkBox.getText());
+                allergens.add(allergen);
+            }
+        }
 
         try {
             automat.addKuchen(

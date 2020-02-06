@@ -150,9 +150,10 @@ public class Automat implements Subject, Serializable {
                 .collect(Collectors.toList());
     }
 
+    //https://stackoverflow.com/questions/35740543/check-instanceof-in-stream wurde als Beispiel benutzt
     public List<Kuchen> getKuchenOfType(Class<? extends Kuchen> typeOfKuchen) {
         return getAllEingelagertenKuchen().stream()
-                .filter(kuchen -> typeOfKuchen.isInstance(kuchen))
+                .filter(typeOfKuchen::isInstance)
                 .collect(Collectors.toList());
     }
 
@@ -219,7 +220,7 @@ public class Automat implements Subject, Serializable {
                 .collect(Collectors.toList());
     }
 
-//https://www.baeldung.com/java-collection-min-max 3. punkt wurde als Beispiel benutzt
+    //https://www.baeldung.com/java-collection-min-max 3. punkt wurde als Beispiel benutzt
     public EinlagerungEntry findKuchenWithSmallestHaltbarkeit() {
         return storage.stream()
                 .min(Comparator.comparing(einlagerungEntry -> einlagerungEntry.getKuchen().getHaltbarkeit()))
