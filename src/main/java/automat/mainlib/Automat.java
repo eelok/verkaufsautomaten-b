@@ -153,7 +153,7 @@ public class Automat implements Subject, Serializable {
     //https://stackoverflow.com/questions/35740543/check-instanceof-in-stream wurde als Beispiel benutzt
     public List<Kuchen> getKuchenOfType(Class<? extends Kuchen> typeOfKuchen) {
         return getAllEingelagertenKuchen().stream()
-                .filter(typeOfKuchen::isInstance)
+                .filter(kuchen -> typeOfKuchen.isInstance(kuchen))
                 .collect(Collectors.toList());
     }
 
