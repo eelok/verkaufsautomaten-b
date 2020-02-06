@@ -166,7 +166,7 @@ public class Automat implements Subject, Serializable {
         return storage.get(findIndexOfEinlagerungsEntry(theKuchen)).getFachnummer();
     }
 
-    // https://beginnersbook.com/2017/10/java-8-calculate-days-between-two-dates/ wurde als Beispel benutzt
+    // https://beginnersbook.com/2017/10/java-8-calculate-days-between-two-dates/ wurde als Beispiel benutzt
     public Duration getRestHaltbarkeitZuBestimmtenKuchen(Kuchen theKuchen, LocalDateTime now) {
         int indexOfEinlagerungsEntry = findIndexOfEinlagerungsEntry(theKuchen);
         LocalDateTime datumVonEinlagerung = storage.get(indexOfEinlagerungsEntry).getEinlagerungsDatum();
@@ -219,7 +219,7 @@ public class Automat implements Subject, Serializable {
                 .collect(Collectors.toList());
     }
 
-//https://www.baeldung.com/java-collection-min-max punkt 3 wurde als Beispiel benutzt
+//https://www.baeldung.com/java-collection-min-max 3. punkt wurde als Beispiel benutzt
     public EinlagerungEntry findKuchenWithSmallestHaltbarkeit() {
         return storage.stream()
                 .min(Comparator.comparing(einlagerungEntry -> einlagerungEntry.getKuchen().getHaltbarkeit()))
