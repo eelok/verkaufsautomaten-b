@@ -202,7 +202,16 @@ public class AutomatController implements Initializable {
         addNewHerstellerInList(userInputHerstellerName);
     }
 
-
+    /**
+     * https://code.makery.ch/ru/library/javafx-tutorial/part2/
+     * von dem Tutorial wurde die Initialisierung von Tabelle als Beispiel verwendet
+     * Teil : PersonOverviewController
+     *     private void initialize() {
+     *         // Инициализация таблицы адресатов с двумя столбцами.
+     *         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+     *         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+     *     }
+     */
     @FXML
     private void initCellValueInKuchenTable() {
         this.herstellerCol.setCellValueFactory(cellData ->

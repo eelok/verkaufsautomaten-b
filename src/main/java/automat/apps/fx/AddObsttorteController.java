@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -78,10 +79,14 @@ public class AddObsttorteController implements Initializable {
 
         Hersteller selectedItem = this.herstellerChoiceBox.getSelectionModel().getSelectedItem();
 
-        List<Allergen> allergens = Arrays.asList(erdnussCheckBox, glutenCheckBox, haselnussCheckBox, sesamsamenCheckBox).stream()
-                .filter(checkBox -> checkBox.isSelected())
-                .map(checkBox -> Allergen.valueOf(checkBox.getText()))
-                .collect(Collectors.toList());
+        List<Allergen> allergens = new ArrayList<>();
+        List<CheckBox> checkBoxes = Arrays.asList(erdnussCheckBox, glutenCheckBox, haselnussCheckBox, sesamsamenCheckBox);
+        for (CheckBox checkBox : checkBoxes) {
+            if (checkBox.isSelected()) {
+                Allergen allergen = Allergen.valueOf(checkBox.getText());
+                allergens.add(allergen);
+            }
+        }
         try {
             automat.addKuchen(
                     new Obsttorte(
