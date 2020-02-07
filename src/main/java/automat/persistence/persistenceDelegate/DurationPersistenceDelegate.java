@@ -3,7 +3,6 @@ package automat.persistence.persistenceDelegate;
 import java.beans.Encoder;
 import java.beans.Expression;
 import java.beans.PersistenceDelegate;
-import java.math.BigDecimal;
 import java.time.Duration;
 
 public class DurationPersistenceDelegate extends PersistenceDelegate {
