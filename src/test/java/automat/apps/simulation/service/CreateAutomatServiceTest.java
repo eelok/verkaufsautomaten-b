@@ -5,11 +5,9 @@ import automat.mainlib.hersteller.HerstellerImplementation;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CreateAutomatServiceTest {
 
-    ///todo дать посмотреть тест
     @Test
     void should_return_automat(){
         CreateAutomatService createAutomatService = new CreateAutomatService();
@@ -18,7 +16,6 @@ class CreateAutomatServiceTest {
         expected.addHersteller(new HerstellerImplementation("Alex"));
         expected.addHersteller(new HerstellerImplementation("Donna"));
         assertThat(createAutomatService.createAutomat(0)).isEqualTo(expected);
-
     }
 
 }
