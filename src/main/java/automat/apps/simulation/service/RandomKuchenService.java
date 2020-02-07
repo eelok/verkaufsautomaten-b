@@ -20,16 +20,15 @@ public class RandomKuchenService {
     public Kuchen getRandomKuchen() {
         int index = random.nextInt(TypeOfKuchen.values().length);
         switch (TypeOfKuchen.values()[index]) {
-            case Kuchen:
-                return createKuchen();
             case Kremkuchen:
                 return createKremkuchen();
             case Obstkuchen:
                 return createObstkuchen();
             case Obsttorte:
                 return createObsttorte();
+            case Kuchen:
             default:
-                return null;
+                return createKuchen();
         }
     }
 
